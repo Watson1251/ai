@@ -1,0 +1,33 @@
+version: "3.8"  # Specify the Docker Compose version
+
+services:
+
+  node-app:
+    build:
+      context: .
+      dockerfile: ./node/Dockerfile.node
+    ports:
+      - "3000:3000"     # node
+      - "27018:27017"   # mongodb
+      - "4200:4200"     # angular
+    # volumes:
+      # - ./node/platform:/platform
+    depends_on:
+      - python-app
+    networks:
+      - app-network
+
+  # python-app:
+  #   build:
+  #     context: .
+  #     dockerfile: ./python/Dockerfile.python
+  #   ports:
+  #     - "8000:8000"     # fastAPI
+  #   volumes:
+  #     - ./python/engine:/engine
+  #   networks:
+  #     - app-network
+
+networks:
+  app-network:
+    driver: bridge

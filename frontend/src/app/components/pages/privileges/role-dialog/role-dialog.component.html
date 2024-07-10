@@ -1,0 +1,14 @@
+<div class="container-fluid" dir="rtl">
+  <h1 mat-dialog-title>{{title}}</h1>
+  <div mat-dialog-content *ngIf="!isDelete">
+    <mat-form-field>
+      <mat-label>{{label}}</mat-label>
+      <input matInput cdkFocusInitial [formControl]="formValidator" (keyup.enter)="onYesClick()">
+      <mat-error *ngIf="isInvalid()">{{errorMessage}}</mat-error>
+    </mat-form-field>
+  </div>
+  <div mat-dialog-actions>
+    <button mat-button (click)="onYesClick()">{{submitButton}}</button>
+    <button mat-button (click)="onNoClick()">{{cancelButton}}</button>
+  </div>
+</div>

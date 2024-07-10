@@ -1,0 +1,55 @@
+# Use the official Ubuntu 20.04 image as the base image
+FROM ubuntu:20.04
+
+# Set environment variables
+ENV DEBIAN_FRONTEND=noninteractive
+
+# Update and install necessary packages
+RUN apt-get update && \
+    apt-get install -y \
+    build-essential \
+    curl \
+    wget \
+    git \
+    lsb-release \
+    gnupg2 \
+    software-properties-common \
+    python3.8 \
+    python3.8-dev \
+    python3-pip \
+    libgl1-mesa-glx \
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/*
+
+# Install the latest Miniconda (flexible with Python version)
+RUN wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh -O /tmp/miniconda.sh && \
+    bash /tmp/miniconda.sh -b -p /opt/conda && \
+    rm /tmp/miniconda.sh
+
+# Set PATH to include conda
+ENV PATH=/opt/conda/bin:$PATH
+
+# Create a conda environment named "deep" with Python 3.8
+RUN conda create -y --name deep python=3.8
+
+# Copy the platform directory to the Docker image
+COPY ./python/engine /engine
+
+# Activate the "deep" environment and install Python packages
+RUN /bin/bash -c "source activate deep && \
+    cd /engine/df_video && \
+    pip install -r requirements.txt"
+
+# Make sure the "deep" environment is activated in every shell
+RUN echo "source /opt/conda/bin/activate deep" >> ~/.bashrc
+
+# Copy the platform directory to the Docker image
+COPY ./python/python-services.sh /python-services.sh
+
+WORKDIR /engine
+
+# Expose FastAPI application port
+EXPOSE 8000
+
+# Run the startup script
+CMD ["/python-services.sh", "/bin/bash"]

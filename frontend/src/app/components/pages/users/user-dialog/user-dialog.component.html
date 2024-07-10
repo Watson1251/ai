@@ -1,0 +1,59 @@
+<div class="container-fluid" dir="rtl">
+  <h1 mat-dialog-title>{{title}}</h1>
+  <div mat-dialog-content *ngIf="!isDelete" class="container-fluid">
+
+    <form [formGroup]="formValidator">
+
+      <div class="row">
+
+        <mat-form-field appearance="outline">
+          <mat-label>{{nameLabel}}</mat-label>
+          <input matInput cdkFocusInitial formControlName="name" (keyup.enter)="onYesClick()">
+          <mat-error *ngIf="isInvalid('name')">{{nameError}}</mat-error>
+        </mat-form-field>
+
+      </div>
+
+      <div class="row">
+
+        <mat-form-field appearance="outline">
+          <mat-label>{{usernameLabel}}</mat-label>
+          <input matInput cdkFocusInitial formControlName="username" (keyup.enter)="onYesClick()">
+          <mat-error *ngIf="isInvalid('username')">{{ isUsernameFound ? "اسم المستخدم موجود بقائمة المستخدمين" : usernameError}}</mat-error>
+        </mat-form-field>
+
+      </div>
+
+      <div class="row" style="padding-bottom: 10px;">
+
+        <mat-form-field appearance="outline"  hintLabel="الحد الأدنى 6 حروف">
+          <mat-label>{{passwordLabel}}</mat-label>
+          <input matInput #password cdkFocusInitial formControlName="password" (keyup.enter)="onYesClick()"
+          [type]="isPasswordHide ? 'password' : 'text'">
+          <mat-icon matSuffix (click)="isPasswordHide = !isPasswordHide">{{isPasswordHide ? 'visibility_off' : 'visibility'}}</mat-icon>
+          <mat-hint align="end">{{password.value.length}}</mat-hint>
+          <mat-error *ngIf="isInvalid('password')">{{passwordError}}</mat-error>
+        </mat-form-field>
+
+      </div>
+
+      <div class="row">
+
+        <mat-form-field>
+          <mat-label>{{roleLabel}}</mat-label>
+          <mat-select formControlName="role">
+            <mat-option *ngFor="let role of data.roles" [value]="role.role">{{role.role}}</mat-option>
+          </mat-select>
+          <mat-error *ngIf="isInvalid('role')">{{roleError}}</mat-error>
+        </mat-form-field>
+
+      </div>
+
+    </form>
+
+  </div>
+  <div mat-dialog-actions>
+    <button mat-button (click)="onYesClick()">{{submitButton}}</button>
+    <button mat-button (click)="onNoClick()">{{cancelButton}}</button>
+  </div>
+</div>

@@ -1,0 +1,22 @@
+# Other dependencies
+fastapi
+uvicorn
+requests
+# Add other dependencies here
+
+# CPU-only versions of PyTorch and related packages
+torch
+torchvision
+torchaudio
+-f https://download.pytorch.org/whl/torch_stable.html
+
+# facenet-pytorch
+facenet_pytorch
+
+# Additional dependencies
+pandas
+cv
+opencv-python
+Pillow
+albumentations
+timm

@@ -1,0 +1,12 @@
+.container-fluid {
+  padding: 25px;
+}
+
+h1 {
+  font-family: var(--arabic-font) !important;
+  font-weight: bold !important;
+}
+
+mat-label, input, mat-error, button, ::ng-deep .mdc-form-field {
+  font-family: var(--arabic-font) !important;
+}

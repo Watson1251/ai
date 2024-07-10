@@ -1,0 +1,45 @@
+
+<nb-layout windowMode>
+
+  <nb-layout-column class="d-flex justify-content-center align-items-center">
+    <nb-card>
+      <nb-card-header>تسجيل الدخول</nb-card-header>
+    
+      <nb-card-body class="d-flex justify-content-center align-items-center">
+        <form (submit)="onLogin(loginForm)" #loginForm="ngForm">
+
+          <div class="container">
+    
+            <div class="row">
+    
+              <mat-form-field appearance="outline">
+                <mat-label>اسم المستخدم</mat-label>
+                <input matInput cdkFocusInitial ngModel required name="username" #usernameInput="ngModel">
+                <mat-error *ngIf="usernameInput.invalid">الرجاء كتابة اسم المستخدم في الحقل</mat-error>
+              </mat-form-field>
+    
+            </div>
+    
+            <div class="row">
+    
+              <mat-form-field appearance="outline">
+                <mat-label>كلمة المرور</mat-label>
+                <input matInput ngModel required name="password" #passwordInput="ngModel" [type]="isPasswordHide ? 'password' : 'text'">
+                <mat-icon matSuffix (click)="isPasswordHide = !isPasswordHide">{{isPasswordHide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                <mat-error *ngIf="passwordInput.invalid">الرجاء كتابة كلمة المرور في الحقل</mat-error>
+              </mat-form-field>
+    
+            </div>
+    
+            <div class="row">
+              <button mat-raised-button color="accent" type="submit" *ngIf="!isLoading">دخول</button>
+            </div>
+    
+          </div>
+    
+        </form>
+      </nb-card-body>
+    </nb-card>
+  </nb-layout-column>
+  
+</nb-layout>

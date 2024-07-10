@@ -1,0 +1,85 @@
+@import "../../../@theme/styles/themes";
+
+@include nb-install-component() {
+  nb-card {
+    transform: translate3d(0, 0, 0);
+  }
+
+  nb-card-header {
+    font-family: var(--arabic-font);
+  }
+
+  .mat-icon {
+    font-size: 20px !important;
+    width: 20px;
+    height: 20px;
+  }
+
+  .mat-mdc-icon-button.mat-mdc-button-base {
+    top: 5px;
+  }
+
+  .mat-mdc-fab.mat-accent,
+  .mat-mdc-mini-fab.mat-accent {
+    --mdc-fab-container-color: var(--main-color);
+    --mdc-fab-icon-color: #fff;
+    --mat-mdc-fab-color: #fff;
+    font-family: var(--arabic-font);
+  }
+
+  .add-button {
+    color: green;
+  }
+
+  .edit-button {
+    color: blue;
+  }
+
+  .delete-button {
+    color: red;
+  }
+
+  .search-field {
+    width: 100%;
+  }
+
+  .no-items-container {
+    display: grid;
+    justify-content: center;
+    align-content: center;
+  }
+
+  .no-items-label {
+    color: grey;
+    font-family: var(--arabic-font);
+    margin-bottom: 20px;
+  }
+
+  th {
+    font-family: var(--arabic-font);
+    font-weight: bold;
+  }
+
+  td,
+  mat-label,
+  mat-paginator {
+    font-family: var(--arabic-font);
+  }
+
+  .mat-mdc-checkbox.mat-accent {
+    --mdc-checkbox-selected-focus-icon-color: var(--main-color);
+    --mdc-checkbox-selected-hover-icon-color: var(--main-color);
+    --mdc-checkbox-selected-icon-color: var(--main-color);
+    --mdc-checkbox-selected-pressed-icon-color: var(--main-color);
+  }
+
+  .mat-column-select {
+    width: 80px;
+    max-width: 80px;
+  }
+
+  .mat-column-id {
+    width: 50px;
+    max-width: 50px;
+  }
+}
