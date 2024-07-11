@@ -1,0 +1,52 @@
+# Use the official Ubuntu 20.04 image as the base image
+FROM ubuntu:20.04
+
+# Set environment variables
+ENV DEBIAN_FRONTEND=noninteractive
+
+# Update and install necessary packages
+RUN apt-get update && \
+    apt-get install -y \
+    build-essential \
+    curl \
+    wget \
+    git \
+    lsb-release \
+    gnupg2 \
+    software-properties-common \
+    mongodb \
+    python3.8 \
+    python3.8-dev \
+    python3-pip \
+    libgl1-mesa-glx \
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/*
+
+# Install NVM
+RUN curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash
+
+# Set NVM environment variables
+ENV NVM_DIR=/root/.nvm
+ENV NODE_VERSION_14=14
+ENV NODE_VERSION_16=16
+ENV NODE_VERSION_18=18
+
+# Install Node.js versions and set default
+RUN . "$NVM_DIR/nvm.sh" && \
+    nvm install $NODE_VERSION_14 && \
+    nvm install $NODE_VERSION_16 && \
+    nvm install $NODE_VERSION_18 && \
+    nvm alias default $NODE_VERSION_18 && \
+    nvm use default
+
+# Copy the platform directory to the Docker image
+COPY docker/DockerHelpers/db-services.sh /db-services.sh
+
+# Create MongoDB data directory
+RUN mkdir -p /data/db && chown -R mongodb:mongodb /data/db
+
+# Expose MongoDB port
+EXPOSE 27017
+
+# Run the startup script
+CMD ["/db-services.sh", "/bin/bash"]

@@ -1,0 +1,5 @@
+docker save -o <path_to_tar_archive> <image_name>
+docker save -o my_image.tar my_image:latest
+
+docker load -i <path_to_tar_archive>
+docker load -i node-app-image.tar

@@ -1,0 +1,58 @@
+@import '~material-design-icons/iconfont/material-icons.css';
+
+@font-face {
+  font-family: "traditional-arabic";
+  src: local("traditional-arabic"),
+    url(./fonts/traditional-arabic.ttf) format("truetype");
+}
+
+@font-face {
+  font-family: "decotype";
+  src: local("decotype"), url("./fonts/deco.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "din";
+  src: local("din"), url("./fonts/din.ttf") format("truetype");
+}
+
+.nb-theme-default nb-menu .menu-item a {
+  font-family: var(--arabic-font) !important;
+}
+
+.nb-theme-default nb-menu .menu-item .menu-icon {
+  margin: 0 0 0 0.5rem;
+}
+
+:root {
+  --arabic-font: "din", Arial, sans-serif;
+
+  --main-color: rgba(119, 59, 3, 0.714);
+  --secondary-color: rgba(119, 59, 3, 0.3);
+  --toolbar-focus-color: #576dee;
+}
+
+/* Snackbar css */
+.mat-mdc-snack-bar-container .mdc-snackbar__label {
+  font-family: var(--arabic-font) !important;
+}
+.mat-mdc-snack-bar-container .mat-mdc-button.mat-mdc-snack-bar-action:not(:disabled) {
+  font-family: var(--arabic-font) !important;
+  font-weight: bolder !important;
+  color: rgb(255, 255, 255) !important;;
+}
+.mat-mdc-snack-bar-container {
+  &.success {
+    --mdc-snackbar-container-color: rgba(71, 136, 25, 0.662);
+    --mat-snack-bar-button-color: rgb(255, 255, 255) !important;
+    --mdc-snackbar-supporting-text-color: rgb(255, 255, 255) !important;
+    white-space: pre-wrap;
+  }
+  &.failure {
+    --mdc-snackbar-container-color: rgba(136, 47, 25, 0.662);
+    --mat-snack-bar-button-color: rgb(255, 255, 255) !important;
+    --mdc-snackbar-supporting-text-color: rgb(255, 255, 255) !important;
+    white-space: pre-wrap;
+  }
+  direction: rtl;
+}

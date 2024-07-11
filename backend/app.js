@@ -15,7 +15,7 @@ const app = express();
 mongoose.set('strictQuery', false);
 mongoose
   .connect(
-    "mongodb://127.0.0.1:27017", {
+    "mongodb://db:27017", {
       useNewUrlParser: true,
       useUnifiedTopology: true,
       useCreateIndex: true
@@ -43,6 +43,7 @@ app.use((req, res, next) => {
     "Access-Control-Allow-Methods",
     "GET, POST, PATCH, PUT, DELETE, OPTIONS"
   );
+  res.setHeader("Access-Control-Allow-Credentials", "true");
   next();
 });
 
@@ -52,5 +53,8 @@ app.use("/api/users", usersRoutes);
 app.use("/api/file-upload", fileUploadRoutes);
 app.use("/api/deep-fake", deepFakeRoutes);
 app.use("/api/auth", authRoutes);
+app.use((req, res, next) => {
+  res.sendFile(path.join(__dirname, "angular", "index.html"));
+});
 
 module.exports = app;

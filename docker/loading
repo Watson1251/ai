@@ -1,1 +1,0 @@
-docker load -i node-app-image.tar
