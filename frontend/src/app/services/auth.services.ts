@@ -71,7 +71,6 @@ export class AuthService {
           }
         },
         error => {
-          console.log(error);
           this.authStatusListener.next(false);
           this.snackbarService.openSnackBar('خطأ في اسم المستخدم أو كلمة المرور', 'failure');
         }

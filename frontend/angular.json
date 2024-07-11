@@ -41,7 +41,6 @@
               "node_modules/socicon/css/socicon.css",
               "node_modules/nebular-icons/scss/nebular-icons.scss",
               "node_modules/pace-js/templates/pace-theme-flash.tmpl.css",
-              "node_modules/leaflet/dist/leaflet.css",
               "node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
               "src/app/@theme/styles/styles.scss",
               "src/assets/local_styles.css"

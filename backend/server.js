@@ -1,6 +1,7 @@
 const app = require("./app");
 const debug = require("debug")("node-angular");
 const http = require("http");
+const os = require("os");
 
 const normalizePort = val => {
   var port = parseInt(val, 10);
@@ -37,10 +38,26 @@ const onError = error => {
   }
 };
 
+const getInternalIp = () => {
+  const interfaces = os.networkInterfaces();
+  for (const name of Object.keys(interfaces)) {
+    for (const iface of interfaces[name]) {
+      if (iface.family === 'IPv4' && !iface.internal) {
+        return iface.address;
+      }
+    }
+  }
+  return '127.0.0.1';
+};
+
 const onListening = () => {
   const addr = server.address();
   const bind = typeof addr === "string" ? "pipe " + addr : "port " + port;
   debug("Listening on " + bind);
+
+  const internalIp = getInternalIp();
+
+  console.log(`Internal URL: http://${internalIp}:${port}/api`);
 };
 
 const port = normalizePort(process.env.PORT || "3000");

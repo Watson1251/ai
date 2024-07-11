@@ -71,7 +71,7 @@ exports.updatePermission = (req, res, next) => {
 
   Permission.updateOne({ _id: permission._id }, permission)
     .then(result => {
-      if (result.modifiedCount > 0) {
+      if (result.n > 0) {
         res.status(200).json({ message: "Update successful!" });
       } else {
         res.status(401).json({ message: "Update failed!" });
