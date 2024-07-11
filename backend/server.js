@@ -56,8 +56,7 @@ const onListening = () => {
   debug("Listening on " + bind);
 
   const internalIp = getInternalIp();
-
-  console.log(`Internal URL: http://${internalIp}:${port}/api`);
+  console.log(`Serving at:\t http://${internalIp}:${port}`);
 };
 
 const port = normalizePort(process.env.PORT || "3000");

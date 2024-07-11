@@ -2,6 +2,9 @@ const path = require("path");
 const express = require("express");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
+const dotenv = require("dotenv");
+
+dotenv.config(); // Load environment variables from .env file
 
 const rolesRoutes = require("./routes/roles.route");
 const permissionsRoutes = require("./routes/permissions.route");
@@ -12,17 +15,19 @@ const authRoutes = require("./routes/auth.route");
 
 const app = express();
 
+const mongoUrl = process.env.MONGODB_URL || "mongodb://localhost:27017";
+
 mongoose.set('strictQuery', false);
 mongoose
   .connect(
-    "mongodb://db:27017", {
+      mongoUrl, {
       useNewUrlParser: true,
       useUnifiedTopology: true,
       useCreateIndex: true
     }
   )
   .then(() => {
-    console.log("Connected to database!");
+    console.log(`Database at:\t ${mongoUrl}`);
   })
   .catch((error) => {
     console.log(error);

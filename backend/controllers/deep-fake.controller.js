@@ -1,58 +1,25 @@
 const FileUpload = require("../models/file-upload.model");
-const pathLib = require('path');
-var XMLHttpRequest = require('xhr2');
+const dotenv = require("dotenv");
+const axios = require('axios');
 
-const pythonIP = "http://python-app:8000/";
+dotenv.config();
+
+const pythonUrl = process.env.DF_URL || "http://localhost:5000/process";
 
 exports.predictVideo = (req, res, next) => {
   FileUpload.findById(req.body.fileId)
-    .then(file => {
+    .then(async file => {
       if (file) {
+        const data = {
+          path: file.filepath
+        };
 
         try {
-          var xhr = new XMLHttpRequest();
-          const path = file.filepath;
-          
-          var result = [];
-      
-          xhr.open("POST", pythonIP + "predict/");
-          xhr.setRequestHeader("Accept", "application/json");
-          xhr.setRequestHeader("Content-Type", "application/json");
-      
-          xhr.onreadystatechange = function () {
-            if (xhr.readyState === 4) {
-      
-              const statusCode = xhr.status;
-              const json = JSON.parse(xhr.responseText);
-      
-              if ((statusCode == 200 || statusCode == 201) && json['code'] == 0) {
-      
-                res.status(201).json({
-                  message: `Engine predicted successfuly.`,
-                  result: json.result
-                });
-      
-              } else {
-
-                throw "Failed to predict!";
-                
-              }
-            }
-          };
-      
-          let data = {
-            'path': path
-          };
-          const stringifiedData = JSON.stringify(data);
-          xhr.send(stringifiedData);
-      
-        } catch(e) {
-          console.log(e);
-          res.status(500).json({
-            message: "Failed to predict!",
-            result: result
-          });
-      
+          const response = await axios.post(pythonUrl, data); // Adjust based on your Python engine URL
+          console.log("Received response from Python:", response.data);
+          res.json(response.data);
+        } catch(error) {
+          throw error.message;
         }
 
       } else {
@@ -60,7 +27,7 @@ exports.predictVideo = (req, res, next) => {
       }
     })
     .catch(error => {
-      console.error(error.message);
+      console.error(error);
       res.status(500).json({
         message: error.message
       });

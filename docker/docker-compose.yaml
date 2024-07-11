@@ -19,6 +19,9 @@ services:
       - "3000:3000"
     depends_on:
       - db
+    environment:
+      - MONGODB_URL=mongodb://db:27017
+      - DF_URL=http://python-app:5000/
     networks:
       - app-network
 
