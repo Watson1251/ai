@@ -13,13 +13,14 @@ models = []
 logging.basicConfig(level=logging.INFO)
 
 # Ensure no GPU is used
-os.environ["CUDA_VISIBLE_DEVICES"] = ""
+# os.environ["CUDA_VISIBLE_DEVICES"] = ""
 
 app = Flask(__name__)
 
 
 def load_models():
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+    print(f"[+] Loading Model... Device: {device}")
 
     model_paths = ["weights/" + model for model in [
         "final_111_DeepFakeClassifier_tf_efficientnet_b7_ns_0_36",
@@ -31,7 +32,7 @@ def load_models():
         "final_999_DeepFakeClassifier_tf_efficientnet_b7_ns_0_23"
     ]]
     for path in model_paths:
-        model = DeepFakeClassifier(encoder="tf_efficientnet_b7_ns")
+        model = DeepFakeClassifier(encoder="tf_efficientnet_b7_ns").to(device)
         logging.info("Loading state dict {}".format(path))
         checkpoint = torch.load(path, map_location=device)
         state_dict = checkpoint.get("state_dict", checkpoint)
@@ -51,6 +52,9 @@ def predict(path):
 
     y_pred = predict_on_video(face_extractor=face_extractor, video_path=path, input_size=input_size, batch_size=frames_per_video, models=models, strategy=strategy, apply_compression=False)
     
+    # Ensure the prediction is JSON serializable
+    y_pred = y_pred.astype(float).tolist() * 100
+    
     return y_pred
 
 @app.route('/process', methods=['POST'])  # Ensure no trailing slash
@@ -68,11 +72,12 @@ def process_data():
             'message': 'Processed data successfully',
             'result': prediction
         }
+
     except Exception as e:
-        logging.error(f"Error during prediction: {e}")
+        logging.error(f"{e}")
 
         result = {
-            'message': f"Error during prediction: {e}"
+            'message': f"{e}"
         }
     
 
@@ -83,9 +88,5 @@ def process_data():
 load_models()
 
 if __name__ == "__main__":
-    path = "/Users/abdulrahman/Downloads/obama.mp4"
-    prediction = predict(path)
-    print(prediction)
-    # app.run(host='0.0.0.0', port=8000)
-    # uvicorn.run(app, host="0.0.0.0", port=8000)
-    # print("Listening...")
+    app.run()
+    logging.info("Flask app is running.")

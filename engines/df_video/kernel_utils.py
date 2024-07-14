@@ -199,6 +199,7 @@ class VideoReader:
 class FaceExtractor:
     def __init__(self, video_read_fn):
         device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+        # print(f"[+] Face Extractor... Device: {device}")
         self.video_read_fn = video_read_fn
         self.detector = MTCNN(margin=0, thresholds=[0.7, 0.8, 0.8], device=device)
 
@@ -323,22 +324,24 @@ def predict_on_video(face_extractor, video_path, batch_size, input_size, models,
                         pass
             if n > 0:
                 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+                # print(f"[+] DeepFake Detector... Device: {device}")
                 x = torch.tensor(x, device=device).float()
                 # Preprocess the images.
                 x = x.permute((0, 3, 1, 2))
                 for i in range(len(x)):
                     x[i] = normalize_transform(x[i] / 255.)
-                # Convert to half precision if needed
-                x = x.half() if device.type == 'cuda' else x.float()
+                # Ensure the tensor is of the same type as the model weights
+                x = x.to(device)
                 # Make a prediction, then take the average.
                 with torch.no_grad():
                     preds = []
                     for model in models:
+                        model = model.to(device)
                         y_pred = model(x[:n])
                         y_pred = torch.sigmoid(y_pred.squeeze())
                         bpred = y_pred[:n].cpu().numpy()
                         preds.append(strategy(bpred))
-                        print(preds)
+                        
                     return np.mean(preds)
     except Exception as e:
         print("Prediction error on video %s: %s" % (video_path, str(e)))

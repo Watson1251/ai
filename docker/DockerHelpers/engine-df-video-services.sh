@@ -5,7 +5,7 @@ source /opt/conda/bin/activate deep
 
 # Run the deepfake processing script
 cd df_video/
-uvicorn main:app --reload --host 0.0.0.0 --port 8000 &
+bash ./run.sh
 
 # Keep the script running
 tail -f /dev/null

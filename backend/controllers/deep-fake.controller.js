@@ -15,8 +15,7 @@ exports.predictVideo = (req, res, next) => {
         };
 
         try {
-          const response = await axios.post(pythonUrl, data); // Adjust based on your Python engine URL
-          console.log("Received response from Python:", response.data);
+          const response = await axios.post(pythonUrl, data);
           res.json(response.data);
         } catch(error) {
           throw error.message;

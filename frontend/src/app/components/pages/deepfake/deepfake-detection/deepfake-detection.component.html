@@ -91,16 +91,17 @@
                 <th mat-sort-row *matHeaderCellDef>نسبة التزييف</th>
                 <td mat-cell *matCellDef="let row">
                   <mat-spinner *ngIf="!row.filePreview.isAnalyzed" class="small-spinner"></mat-spinner>
-                  <div style="white-space: pre-wrap;">{{ results[row.filename].accuracy }}</div>
+                  <!-- <div style="white-space: pre-wrap;">{{ results[row.filename].accuracy }}</div> -->
+                  <div style="white-space: pre-wrap;">{{ row.filePreview.accuracy }}</div>
                 </td>
               </ng-container>
     
               <!-- result Column -->
               <ng-container matColumnDef="result">
                 <th mat-sort-row *matHeaderCellDef>النتيجة</th>
-                <td mat-cell *matCellDef="let row" [ngClass]="{'fake': results[row.filename].result === 'مزيف', 'real': results[row.filename].result === 'حقيقي'}">
+                <td mat-cell *matCellDef="let row" [ngClass]="{'fake': row.filePreview.result === 'مزيف', 'real': row.filePreview.result === 'حقيقي'}">
                   <mat-spinner *ngIf="!row.filePreview.isAnalyzed" class="small-spinner"></mat-spinner>
-                  {{ results[row.filename].result }}
+                  {{ row.filePreview.result }}
                 </td>
               </ng-container>
     

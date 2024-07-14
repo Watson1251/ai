@@ -1,25 +1,10 @@
-# Other dependencies
-flask
-uvicorn
-requests
-
-# CPU-only versions of PyTorch and related packages
-# torch
-# torchvision
-# torchaudio
-# -f https://download.pytorch.org/whl/torch_stable.html
-
-# facenet-pytorch
 facenet-pytorch
-albumentations==1.0.0
-timm==0.4.12
-pytorch_toolbelt
-tensorboard
-
-# Additional dependencies
-pandas
-cv
+torch
 opencv-python
 Pillow
 albumentations
 timm
+flask
+uvicorn
+gunicorn
+requests

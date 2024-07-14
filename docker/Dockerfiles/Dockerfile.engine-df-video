@@ -1,5 +1,5 @@
 # Use the official Ubuntu 20.04 image as the base image
-FROM ubuntu:20.04
+FROM nvidia/cuda:12.0.1-base-ubuntu20.04
 
 # Set environment variables
 ENV DEBIAN_FRONTEND=noninteractive
@@ -21,6 +21,9 @@ RUN apt-get update && \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 
+# Verify CUDA installation
+# RUN nvidia-smi && nvcc --version
+
 # Install the latest Miniconda (flexible with Python version)
 RUN wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh -O /tmp/miniconda.sh && \
     bash /tmp/miniconda.sh -b -p /opt/conda && \
@@ -33,23 +36,21 @@ ENV PATH=/opt/conda/bin:$PATH
 RUN conda create -y --name deep python=3.8
 
 # Copy the platform directory to the Docker image
-COPY ./python/engine /engine
+COPY docker/DockerHelpers/engine-df-video-services.sh /engine-df-video-services.sh
+COPY engines/df_video /df_video
+
+WORKDIR /df_video
 
 # Activate the "deep" environment and install Python packages
 RUN /bin/bash -c "source activate deep && \
-    cd /engine/df_video && \
+    cd /df_video && \
     pip install -r requirements.txt"
 
 # Make sure the "deep" environment is activated in every shell
 RUN echo "source /opt/conda/bin/activate deep" >> ~/.bashrc
 
-# Copy the platform directory to the Docker image
-COPY ./python/python-services.sh /python-services.sh
-
-WORKDIR /engine
-
 # Expose FastAPI application port
 EXPOSE 8000
 
 # Run the startup script
-CMD ["/python-services.sh", "/bin/bash"]
+CMD ["/engine-df-video-services.sh", "/bin/bash"]

@@ -19,9 +19,30 @@ services:
       - "3000:3000"
     depends_on:
       - db
+      - engine-df-video
     environment:
       - MONGODB_URL=mongodb://db:27017
       - DF_URL=http://python-app:5000/
+    networks:
+      - app-network
+
+  engine-df-video:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfiles/Dockerfile.engine-df-video
+    ports:
+      - "8000:8000"
+    # depends_on:
+    #   - db
+    # environment:
+    #   - MONGODB_URL=mongodb://db:27017
+    #   - DF_URL=http://python-app:5000/
+    runtime: nvidia
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - capabilities: [gpu]
     networks:
       - app-network
 

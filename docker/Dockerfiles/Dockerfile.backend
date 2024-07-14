@@ -48,7 +48,6 @@ RUN . "$NVM_DIR/nvm.sh" && \
 COPY docker/DockerHelpers/backend-services.sh /backend-services.sh
 COPY backend /backend
 
-# Install npm packages for the application using Node.js 14
 WORKDIR /backend
 
 # RUN /bin/bash -c ". $NVM_DIR/nvm.sh && nvm use 14 && npm install"
