@@ -45,4 +45,7 @@ Thumbs.db
 
 /backend/uploads
 
-./weights/*
+/weights/*
+/__pycache__
+/training/__pycache__
+/training/zoo/__pycache__

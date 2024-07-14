@@ -3,11 +3,8 @@ import torch
 import os
 from kernel_utils import VideoReader, FaceExtractor, confident_strategy, predict_on_video
 from training.zoo.classifiers import DeepFakeClassifier
-from fastapi import Request, FastAPI
-import uvicorn
+from flask import Flask, request, jsonify
 import logging
-
-app = FastAPI()
 
 # GLOBAL VARIABLE
 models = []
@@ -18,8 +15,11 @@ logging.basicConfig(level=logging.INFO)
 # Ensure no GPU is used
 os.environ["CUDA_VISIBLE_DEVICES"] = ""
 
+app = Flask(__name__)
+
+
 def load_models():
-    device = torch.device("cpu")  # Force using CPU
+    device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
     model_paths = ["weights/" + model for model in [
         "final_111_DeepFakeClassifier_tf_efficientnet_b7_ns_0_36",
@@ -49,30 +49,43 @@ def predict(path):
     input_size = 380
     strategy = confident_strategy
 
-    y_pred = predict_on_video(face_extractor=face_extractor, video_path=path, input_size=input_size, batch_size=frames_per_video, models=models, strategy=strategy, apply_compression=False, device=torch.device("cpu"))
+    y_pred = predict_on_video(face_extractor=face_extractor, video_path=path, input_size=input_size, batch_size=frames_per_video, models=models, strategy=strategy, apply_compression=False)
     
     return y_pred
+
+@app.route('/process', methods=['POST'])  # Ensure no trailing slash
+def process_data():
+    result = {}
+    try:
+        
+        data = request.get_json()
+        
+        path = data['path']
+
+        prediction = predict(path)
+
+        result = {
+            'message': 'Processed data successfully',
+            'result': prediction
+        }
+    except Exception as e:
+        logging.error(f"Error during prediction: {e}")
+
+        result = {
+            'message': f"Error during prediction: {e}"
+        }
+    
+
+    return jsonify(result)
+
 
 # load models
 load_models()
 
-@app.post("/predict/")
-async def recognize(request: Request):
-    try:
-        json = await request.json()
-        path = json['path']
-        prediction = predict(path)
-        result = {
-            'code': 0,
-            'result': str(prediction * 100)
-        }
-        return result
-    except Exception as e:
-        logging.error(f"Error during prediction: {e}")
-        return {
-            'code': 1,
-            'message': 'Prediction failed'
-        }
-
 if __name__ == "__main__":
-    uvicorn.run(app, host="127.0.0.1", port=8000)
+    path = "/Users/abdulrahman/Downloads/obama.mp4"
+    prediction = predict(path)
+    print(prediction)
+    # app.run(host='0.0.0.0', port=8000)
+    # uvicorn.run(app, host="0.0.0.0", port=8000)
+    # print("Listening...")

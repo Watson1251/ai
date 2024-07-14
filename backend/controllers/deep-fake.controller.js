@@ -4,7 +4,7 @@ const axios = require('axios');
 
 dotenv.config();
 
-const pythonUrl = process.env.DF_URL || "http://localhost:5000/process";
+const pythonUrl = process.env.DF_URL || "http://0.0.0.0:8000/process";
 
 exports.predictVideo = (req, res, next) => {
   FileUpload.findById(req.body.fileId)

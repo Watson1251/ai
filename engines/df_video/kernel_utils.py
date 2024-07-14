@@ -50,7 +50,7 @@ class VideoReader:
         frame_count = int(capture.get(cv2.CAP_PROP_FRAME_COUNT))
         if frame_count <= 0: return None
 
-        frame_idxs = np.linspace(0, frame_count - 1, num_frames, endpoint=True, dtype=np.int32)
+        frame_idxs = np.linspace(0, frame_count - 1, num_frames, endpoint=True, dtype=np.int64)
         if jitter > 0:
             np.random.seed(seed)
             jitter_offsets = np.random.randint(-jitter, jitter, len(frame_idxs))
@@ -198,8 +198,9 @@ class VideoReader:
 
 class FaceExtractor:
     def __init__(self, video_read_fn):
+        device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
         self.video_read_fn = video_read_fn
-        self.detector = MTCNN(margin=0, thresholds=[0.7, 0.8, 0.8], device="cuda")
+        self.detector = MTCNN(margin=0, thresholds=[0.7, 0.8, 0.8], device=device)
 
     def process_videos(self, input_dir, filenames, video_idxs):
         videos_read = []
@@ -302,8 +303,7 @@ def isotropically_resize_image(img, size, interpolation_down=cv2.INTER_AREA, int
     return resized
 
 
-def predict_on_video(face_extractor, video_path, batch_size, input_size, models, strategy=np.mean,
-                     apply_compression=False):
+def predict_on_video(face_extractor, video_path, batch_size, input_size, models, strategy=np.mean, apply_compression=False):
     batch_size *= 4
     try:
         faces = face_extractor.process_video(video_path)
@@ -322,19 +322,23 @@ def predict_on_video(face_extractor, video_path, batch_size, input_size, models,
                     else:
                         pass
             if n > 0:
-                x = torch.tensor(x, device="cuda").float()
+                device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+                x = torch.tensor(x, device=device).float()
                 # Preprocess the images.
                 x = x.permute((0, 3, 1, 2))
                 for i in range(len(x)):
                     x[i] = normalize_transform(x[i] / 255.)
+                # Convert to half precision if needed
+                x = x.half() if device.type == 'cuda' else x.float()
                 # Make a prediction, then take the average.
                 with torch.no_grad():
                     preds = []
                     for model in models:
-                        y_pred = model(x[:n].half())
+                        y_pred = model(x[:n])
                         y_pred = torch.sigmoid(y_pred.squeeze())
                         bpred = y_pred[:n].cpu().numpy()
                         preds.append(strategy(bpred))
+                        print(preds)
                     return np.mean(preds)
     except Exception as e:
         print("Prediction error on video %s: %s" % (video_path, str(e)))
@@ -342,10 +346,10 @@ def predict_on_video(face_extractor, video_path, batch_size, input_size, models,
     return 0.5
 
 
+
 def predict_on_video_set(face_extractor, videos, input_size, num_workers, test_dir, frames_per_video, models,
                          strategy=np.mean,
                          apply_compression=False):
-    
     def process_file(i):
         filename = videos[i]
         y_pred = predict_on_video(face_extractor=face_extractor, video_path=os.path.join(test_dir, filename),
@@ -357,4 +361,3 @@ def predict_on_video_set(face_extractor, videos, input_size, num_workers, test_d
     with ThreadPoolExecutor(max_workers=num_workers) as ex:
         predictions = ex.map(process_file, range(len(videos)))
     return list(predictions)
-

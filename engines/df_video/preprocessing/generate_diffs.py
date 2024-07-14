@@ -44,7 +44,7 @@ def save_diffs(pair, root_dir):
                 try:
                     d, a = compare_ssim(img1, img2, multichannel=True, full=True)
                     a = 1 - a
-                    diff = (a * 255).astype(np.uint8)
+                    diff = (a * 255).astype(int)
                     diff = cv2.cvtColor(diff, cv2.COLOR_BGR2GRAY)
                     cv2.imwrite(diff_path, diff)
                 except:

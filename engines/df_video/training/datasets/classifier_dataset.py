@@ -58,7 +58,7 @@ def blackout_convex_hull(img):
         landmarks = np.array([[p.x, p.y] for p in sp.parts()])
         outline = landmarks[[*range(17), *range(26, 16, -1)]]
         Y, X = skimage.draw.polygon(outline[:, 1], outline[:, 0])
-        cropped_img = np.zeros(img.shape[:2], dtype=np.uint8)
+        cropped_img = np.zeros(img.shape[:2], dtype=int)
         cropped_img[Y, X] = 1
         # if random.random() > 0.5:
         #     img[cropped_img == 0] = 0
@@ -191,7 +191,7 @@ def blend_original(img):
     landmarks = np.array([[p.x, p.y] for p in sp.parts()])
     outline = landmarks[[*range(17), *range(26, 16, -1)]]
     Y, X = skimage.draw.polygon(outline[:, 1], outline[:, 0])
-    raw_mask = np.zeros(img.shape[:2], dtype=np.uint8)
+    raw_mask = np.zeros(img.shape[:2], dtype=int)
     raw_mask[Y, X] = 1
     face = img * np.expand_dims(raw_mask, -1)
 
@@ -258,7 +258,7 @@ class DeepFakeClassifierDataset(Dataset):
                 img_path = os.path.join(self.data_root, self.crops_dir, video, img_file)
                 image = cv2.imread(img_path, cv2.IMREAD_COLOR)
                 image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
-                mask = np.zeros(image.shape[:2], dtype=np.uint8)
+                mask = np.zeros(image.shape[:2], dtype=int)
                 diff_path = os.path.join(self.data_root, "diffs", video, img_file[:-4] + "_diff.png")
                 try:
                     msk = cv2.imread(diff_path, cv2.IMREAD_GRAYSCALE)
@@ -276,7 +276,7 @@ class DeepFakeClassifierDataset(Dataset):
                         blackout_convex_hull(image)
                     elif random.random() < 0.1:
                         binary_mask = mask > 0.4 * 255
-                        masks = prepare_bit_masks((binary_mask * 1).astype(np.uint8))
+                        masks = prepare_bit_masks((binary_mask * 1).astype(int))
                         tries = 6
                         current_try = 1
                         while current_try < tries:

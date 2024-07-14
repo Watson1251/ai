@@ -14,6 +14,7 @@ cv2.setNumThreads(0)
 from PIL import Image
 from facenet_pytorch.models.mtcnn import MTCNN
 from torch.utils.data import Dataset
+import torch
 
 
 class VideoFaceDetector(ABC):
@@ -35,6 +36,7 @@ class FacenetDetector(VideoFaceDetector):
 
     def __init__(self, device="cuda:0") -> None:
         super().__init__()
+        device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
         self.detector = MTCNN(margin=0,thresholds=[0.85, 0.95, 0.95], device=device)
 
     def _detect_faces(self, frames) -> List:
