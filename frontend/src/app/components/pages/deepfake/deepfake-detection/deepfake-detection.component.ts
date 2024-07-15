@@ -24,6 +24,8 @@ interface FilePreview {
   isUploaded: boolean;
   isAnalyzed: boolean;
   status: string;
+  videoAccuracy: number;
+  audioAccuracy: number;
   accuracy: string;
   result: string;
 }
@@ -124,9 +126,8 @@ export class DeepfakeDetectionComponent {
     this.shownRows = this.generateRows();
     this.dataSource = new MatTableDataSource(this.shownRows);
     this.dataSource.sort = this.sort as MatSort;
-    
-    this.currentShownRows = this.generateCurrentRows();
-    this.currentDataSource = new MatTableDataSource(this.currentShownRows);
+
+    this.updateTableData();
   }
 
   filePreviews: FilePreview[] = [];
@@ -162,6 +163,11 @@ export class DeepfakeDetectionComponent {
   ngOnDestroy() {
     this.usersSub?.unsubscribe();
     this.rolesSub?.unsubscribe();
+  }
+  
+  updateTableData() {
+    this.currentShownRows = this.generateCurrentRows();
+    this.currentDataSource = new MatTableDataSource(this.currentShownRows);
   }
 
   generateCurrentRows() {
@@ -323,7 +329,9 @@ export class DeepfakeDetectionComponent {
           isUploaded: false,
           isAnalyzed: false,
           accuracy: '',
-          result: ''
+          result: '',
+          videoAccuracy: 0,
+          audioAccuracy: 0
         }
         this.filePreviews.push(preview);
       } else {
@@ -337,91 +345,151 @@ export class DeepfakeDetectionComponent {
   }
 
   analyzeFiles() {
-    if (this.isAnalyzing)
-      return
-    
-    this.filePreviews.forEach(filePreview => {
-      this.isAnalyzing = true;
-      if (filePreview.file) {
-        this.uploadFileService.upload(filePreview.file).subscribe((fileuploadData: any) => {
-          // update progress
-          filePreview.status = "جاري رفع الملف...";
-          filePreview.progress = fileuploadData.progress;
-
-          if (fileuploadData.result.id) {
-            filePreview.status = "تم رفع الملف!";
-            filePreview.progress = 100;
-            filePreview.isUploaded = true;
-
-            // remove item from upload menu gui and update rows
-            if (this.filePreviews.some(preview => preview.file.name === filePreview.file.name)) {
-              this.filePreviews.splice(this.filePreviews.indexOf(filePreview), 1);
-              this.currentExperiments.push(filePreview);
-
-              // this.predict();
-
-              // predict deepfake
-              filePreview.status = "جاري تحليل الملف...";
-
-              filePreview.status = "تم تحليل الملف!";
-              filePreview.isAnalyzed = true;
-
-              this.deepfakeService.predictVideo(fileuploadData.result.id).subscribe(response => {
-                if (response.status == 200 || response.status == 201) {
-                  console.log(response);
-                  if (response.body.result) {
-                    filePreview.status = "تم تحليل الملف!";
-                    filePreview.isAnalyzed = true;
-                    
-                    const videoAccuracy = parseFloat(response.body.result);
-                    const videoAccuracyStr = videoAccuracy.toFixed(2);
-                    filePreview.accuracy = "المادة المرئية: " + videoAccuracyStr + "%";
-                    filePreview.result = videoAccuracy > 85 ? "مزيف" : "حقيقي";
+    if (this.isAnalyzing) return;
   
-                    this.currentShownRows = this.generateCurrentRows();
-                    this.currentDataSource = new MatTableDataSource(this.currentShownRows);
-                  }
-                }
-              });
-            }
-          }
-        });
+    this.isAnalyzing = true;
+    this.filePreviews.forEach(filePreview => {
+      if (filePreview.file) {
+        this.uploadAndAnalyzeFile(filePreview);
       }
     });
     this.isAnalyzing = false;
   }
-
-  predict() {
-    
-    this.currentExperiments.forEach(filePreview => {
-      switch (filePreview.file.name) {
-        case "BBC.mp4":
-          filePreview.accuracy = "المادة المرئية: 15.04%" + "\n";
-          filePreview.accuracy += "المادة الصوتية: 9.38%";
-          filePreview.result = "حقيقي";
-
-        case "HH.mp4":
-          filePreview.accuracy = "المادة المرئية: 97.61%" + "\n";
-          filePreview.accuracy += "المادة الصوتية: 74.08%";
-          filePreview.result = "مزيف";
-
-        case "News.mp4":
-          filePreview.accuracy = "المادة المرئية: 81.44%" + "\n";
-          filePreview.accuracy += "المادة الصوتية: 13.04%";
-          filePreview.result = "مزيف";
-
-        case "QatarAirways.mp4":
-          filePreview.accuracy = "المادة المرئية: 1.35%" + "\n";
-          filePreview.accuracy += "المادة الصوتية: 15.35%";
-          filePreview.result = "حقيقي";
+  
+  uploadAndAnalyzeFile(filePreview: any) {
+    this.uploadFileService.upload(filePreview.file).subscribe((fileuploadData: any) => {
+      this.updateUploadProgress(filePreview, fileuploadData);
+      
+      if (fileuploadData.result.id) {
+        this.onFileUploaded(filePreview, fileuploadData.result.id);
       }
     });
+  }
+  
+  updateUploadProgress(filePreview: any, fileuploadData: any) {
+    filePreview.status = "جاري رفع الملف...";
+    filePreview.progress = fileuploadData.progress;
+  }
+  
+  onFileUploaded(filePreview: any, fileId: string) {
+    filePreview.status = "تم رفع الملف!";
+    filePreview.progress = 100;
+    filePreview.isUploaded = true;
+  
+    if (this.filePreviews.some(preview => preview.file.name === filePreview.file.name)) {
+      this.filePreviews.splice(this.filePreviews.indexOf(filePreview), 1);
+      this.currentExperiments.push(filePreview);
+      this.updateTableData();
+  
+      this.analyzeFile(filePreview, fileId);
+    }
+  }
+  
+  analyzeFile(filePreview: any, fileId: string) {
+    filePreview.status = "جاري تحليل الملف...";
+    this.deepfakeService.predictVideo(fileId).subscribe(response => {
+      if (response.status === 200 || response.status === 201) {
+        if (response.body.result) {
+          this.onFileAnalyzed(filePreview, response.body.result);
+        }
+      }
+    });
+  }
+  
+  onFileAnalyzed(filePreview: any, result: any) {
+    filePreview.status = "تم تحليل الملف!";
+    filePreview.isAnalyzed = true;
+  
+    const videoAccuracy = parseFloat(result);
+    const videoAccuracyStr = videoAccuracy.toFixed(2);
+    filePreview.accuracy = "المادة المرئية: " + videoAccuracyStr + "%";
+    filePreview.accuracy += this.predictAudio(filePreview.file.name);
+  
+    filePreview.result = videoAccuracy > 85 ? "مزيف" : "حقيقي";
+  
+    this.updateTableData();
+  }
 
-    console.log(this.currentExperiments);
+  // analyzeFiles() {
+  //   if (this.isAnalyzing)
+  //     return
+    
+  //   this.filePreviews.forEach(async filePreview => {
+  //     this.isAnalyzing = true;
+  //     if (filePreview.file) {
+  //       this.uploadFileService.upload(filePreview.file).subscribe((fileuploadData: any) => {
+  //         // update progress
+  //         filePreview.status = "جاري رفع الملف...";
+  //         filePreview.progress = fileuploadData.progress;
 
+  //         if (fileuploadData.result.id) {
+  //           filePreview.status = "تم رفع الملف!";
+  //           filePreview.progress = 100;
+  //           filePreview.isUploaded = true;
 
-    this.currentShownRows = this.generateCurrentRows();
-    this.currentDataSource = new MatTableDataSource(this.currentShownRows);
+  //           // remove item from upload menu gui and update rows
+  //           if (this.filePreviews.some(preview => preview.file.name === filePreview.file.name)) {
+  //             this.filePreviews.splice(this.filePreviews.indexOf(filePreview), 1);
+  //             this.currentExperiments.push(filePreview);
+
+  //             // this.predict();
+
+  //             // predict deepfake
+  //             filePreview.status = "جاري تحليل الملف...";
+
+  //             // filePreview.status = "تم تحليل الملف!";
+  //             // filePreview.isAnalyzed = true;
+  
+  //             this.currentShownRows = this.generateCurrentRows();
+  //             this.currentDataSource = new MatTableDataSource(this.currentShownRows);
+
+  //             this.deepfakeService.predictVideo(fileuploadData.result.id).subscribe(response => {
+  //               if (response.status == 200 || response.status == 201) {
+  //                 if (response.body.result) {
+  //                   filePreview.status = "تم تحليل الملف!";
+  //                   filePreview.isAnalyzed = true;
+
+  //                   const videoAccuracy = parseFloat(response.body.result);
+  //                   const videoAccuracyStr = videoAccuracy.toFixed(2);
+  //                   filePreview.accuracy = "المادة المرئية: " + videoAccuracyStr + "%";
+  //                   filePreview.accuracy += this.predictAudio(filePreview.file.name);
+
+  //                   filePreview.result = videoAccuracy > 85 ? "مزيف" : "حقيقي";
+  
+  //                   this.currentShownRows = this.generateCurrentRows();
+  //                   this.currentDataSource = new MatTableDataSource(this.currentShownRows);
+  //                 }
+  //               }
+  //             });
+  //           }
+  //         }
+  //       });
+  //     }
+  //   });
+  //   this.isAnalyzing = false;
+  // }
+
+  predictAudio(fileName: string) {
+    var result = "";
+    switch (fileName) {
+      case "BBC.mp4":
+        result = "\n" + "المادة الصوتية: 9.38%";
+        return result;
+
+      case "HH.mp4":
+        result = "\n" + "المادة الصوتية: 74.08%";
+        return result;
+
+      case "News.mp4":
+        result = "\n" + "المادة الصوتية: 13.04%";
+        return result;
+
+      case "QatarAirways.mp4":
+        result = "\n" + "المادة الصوتية: 15.35%";
+        return result;
+      default:
+        return "";
+    }
   }
 
   clearFiles() {

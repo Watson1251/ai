@@ -103,12 +103,9 @@ exports.updateUser = (req, res, next) => {
     if (req.body.password != '') {
       user["password"] = hash;
     }
-
-    console.log(user);
-
+    
     User.updateOne({ _id: user._id }, {$set: user})
     .then(result => {
-      console.log(result)
       if (result.n > 0) {
         res.status(200).json({ message: "Update successful!" });
       } else {
