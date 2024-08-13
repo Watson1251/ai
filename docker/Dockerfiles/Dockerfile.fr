@@ -1,0 +1,62 @@
+# Use the official Ubuntu 20.04 image as the base image
+FROM nvidia/cuda:12.2.2-cudnn8-devel-ubuntu20.04
+
+# Set environment variables
+ENV DEBIAN_FRONTEND=noninteractive
+
+# Clean up and update the system, then install necessary packages
+RUN apt-get clean && \
+    rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* && \
+    apt-get update && \
+    apt-get install -y \
+    build-essential \
+    curl \
+    wget \
+    git \
+    lsb-release \
+    gnupg2 \
+    software-properties-common \
+    python3.8 \
+    python3.8-dev \
+    python3-pip \
+    libgl1-mesa-glx && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+
+# Install the latest Miniconda (flexible with Python version)
+RUN wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh -O /tmp/miniconda.sh && \
+    bash /tmp/miniconda.sh -b -p /opt/conda && \
+    rm /tmp/miniconda.sh
+
+# Set PATH to include conda
+ENV PATH=/opt/conda/bin:$PATH
+
+# Copy the platform directory to the Docker image
+COPY engines/fr /fr
+COPY docker/DockerHelpers/engine-fr-services.sh /engine-fr-services.sh
+
+WORKDIR /fr
+
+# Create the conda environment
+RUN conda create -y --name fr python=3.12
+
+# Install cuDNN
+RUN wget https://developer.download.nvidia.com/compute/cudnn/9.3.0/local_installers/cudnn-local-repo-ubuntu2004-9.3.0_1.0-1_amd64.deb && \
+    dpkg -i cudnn-local-repo-ubuntu2004-9.3.0_1.0-1_amd64.deb && \
+    cp /var/cudnn-local-repo-ubuntu2004-9.3.0/cudnn-*-keyring.gpg /usr/share/keyrings/ && \
+    apt-get update -o Acquire::AllowInsecureRepositories=true -o Acquire::AllowDowngradeToInsecureRepositories=true && \
+    apt-get -y install cudnn && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+
+# Activate the environment and install Python packages
+RUN /bin/bash -c "source activate fr && bash /fr/env/install.sh"
+
+# Ensure the "fr" environment is activated in every shell
+RUN echo "source /opt/conda/bin/activate fr" >> ~/.bashrc
+
+# Expose FastAPI application port
+EXPOSE 8000
+
+# Set the default command
+CMD ["/engine-fr-services.sh", "/bin/bash"]

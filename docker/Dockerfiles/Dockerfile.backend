@@ -50,7 +50,7 @@ COPY backend /backend
 
 WORKDIR /backend
 
-# RUN /bin/bash -c ". $NVM_DIR/nvm.sh && nvm use 14 && npm install"
+RUN /bin/bash -c ". $NVM_DIR/nvm.sh && nvm use 14 && npm install"
 
 # Expose default node port
 EXPOSE 3000

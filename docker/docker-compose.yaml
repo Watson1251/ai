@@ -19,32 +19,51 @@ services:
       - "3000:3000"
     depends_on:
       - db
-      - engine-df-video
+      # - engine-df-video
     environment:
       - MONGODB_URL=mongodb://db:27017
       - DF_URL=http://python-app:5000/
     networks:
       - app-network
-
-  engine-df-video:
+  
+  fr-engine:
     build:
       context: ..
-      dockerfile: docker/Dockerfiles/Dockerfile.engine-df-video
-    ports:
-      - "8000:8000"
-    # depends_on:
-    #   - db
-    # environment:
-    #   - MONGODB_URL=mongodb://db:27017
-    #   - DF_URL=http://python-app:5000/
-    runtime: nvidia
+      dockerfile: docker/Dockerfiles/Dockerfile.fr
+    volumes:
+      - ../engines/fr:/fr
     deploy:
       resources:
         reservations:
           devices:
-            - capabilities: [gpu]
+            - driver: nvidia
+              capabilities: [gpu]
+    runtime: nvidia
+    environment:
+      - NVIDIA_VISIBLE_DEVICES=all
+      - NVIDIA_DRIVER_CAPABILITIES=compute,utility
     networks:
       - app-network
+
+  # engine-df-video:
+  #   build:
+  #     context: ..
+  #     dockerfile: docker/Dockerfiles/Dockerfile.engine-df-video
+  #   ports:
+  #     - "8000:8000"
+  #   # depends_on:
+  #   #   - db
+  #   # environment:
+  #   #   - MONGODB_URL=mongodb://db:27017
+  #   #   - DF_URL=http://python-app:5000/
+  #   runtime: nvidia
+  #   deploy:
+  #     resources:
+  #       reservations:
+  #         devices:
+  #           - capabilities: [gpu]
+  #   networks:
+  #     - app-network
 
 networks:
   app-network:
