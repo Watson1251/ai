@@ -24,8 +24,7 @@ class MilvusManager:
         if utility.has_collection(self.collection_name):
             return Collection(self.collection_name)
         else:
-            collection = Collection(self.collection_name, schema)
-            return collection
+            return Collection(self.collection_name, schema)
     
     def insert_data(self, embeddings, image_paths):
         self.collection.insert([embeddings, image_paths])
