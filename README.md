@@ -2,6 +2,44 @@
     git clone https://github.com/Watson1251/ai.git
     cd ai
 
+This repo has dockers that use gpus. Make sure the following requirements are met:
+
+#####
+1.  [Nvidia Container Toolkit](https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/latest/install-guide.html) is installed. To check for it in the system:
+
+#####
+    docker info | grep -i runtime
+
+#####
+You should see an output similar to this: 
+
+#####
+    Runtimes: nvidia runc
+    Default Runtime: nvidia
+
+
+#####
+2.  Make sure that `"default-runtime": "nvidia"` is found in the `NVIDIA Docker Daemon Configuration` conf file:
+
+#####
+    sudo nano /etc/docker/daemon.json
+
+#####
+The contents of the conf file should look something like this: 
+
+#####
+```
+{
+  "default-runtime": "nvidia",
+  "runtimes": {
+    "nvidia": {
+      "path": "nvidia-container-runtime",
+      "runtimeArgs": []
+    }
+  }
+}
+```
+
 #### Face Recognition Engine
 1. Build and run dockers
 
@@ -44,10 +82,10 @@
 ```
 
 #### 1. `main.py`
-Function            | Description
--------------       | -------------
-`main()`            | <ul><li>Has db configurations</li><li>Initializes other classes</li></ul>
-`search_face()`     | Handles test images and shows results
+Function                        | Description
+-------------                   | -------------
+`main()`                        | <ul><li>Has db configurations</li><li>Initializes other classes</li></ul>
+`search_face()`                 | Handles test images and shows results
 
 #### 2. `milvus_manager.py`
 Function                        | Description
