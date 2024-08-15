@@ -44,10 +44,10 @@ def main():
     img2 = '/fr/lookalike.jpg'
     
     # Ingest the dataset
-    data_loader.process_dataset(dataset_path)
+    # data_loader.process_dataset(dataset_path)
     
     # Search for a face
-    # search_face(milvus_manager, face_recognition, img2)
+    search_face(milvus_manager, face_recognition, img2)
 
 if __name__ == "__main__":
     main()
