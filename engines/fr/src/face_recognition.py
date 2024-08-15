@@ -14,7 +14,13 @@ class FaceRecognition:
         embedding = None
         try:
             embedding = DeepFace.represent(image_path, model_name=self.recognition_model, detector_backend=self.detector, align=self.align)
-            embedding = np.array(embedding[0]["embedding"]).tolist()
+            embedding = np.array(embedding[0]["embedding"])
+            
+            # Normalize the embedding to have a unit norm
+            embedding = embedding / np.linalg.norm(embedding)
+            
+            # Convert to list if needed
+            embedding = embedding.tolist()
         except Exception as e:
             pass
         return embedding

@@ -3,6 +3,7 @@ from milvus_manager import MilvusManager
 from face_recognition import FaceRecognition
 from data_loader import DataLoader
 
+
 def search_face(milvus_manager, face_recognition, image_path, top_k=10):
     embedding = face_recognition.extract_embedding(image_path)
     if embedding is None:
@@ -10,8 +11,14 @@ def search_face(milvus_manager, face_recognition, image_path, top_k=10):
         return
     results = milvus_manager.search(embedding, top_k)
 
-    # Print table header
-    print(f"{'Index':<6} {'Distance':<10} {'ID':<30} {'Path'}")
+    # Determine the similarity metric from MilvusManager's configuration
+    metric_type = milvus_manager.search_params['metric_type']
+
+    # Print the appropriate table header based on the metric
+    if metric_type == "IP":
+        print(f"{'Index':<6} {'Similarity Score':<20} {'ID':<30} {'Path'}")
+    elif metric_type == "L2":
+        print(f"{'Index':<6} {'L2 Distance':<20} {'ID':<30} {'Path'}")
 
     # Initialize the index variable
     index = 1
@@ -20,7 +27,13 @@ def search_face(milvus_manager, face_recognition, image_path, top_k=10):
         for id_, score in zip(hits.ids, hits.distances):
             img_path = milvus_manager.get_image_path(id_)
             img_id = os.path.splitext(os.path.basename(img_path))[0]  # Extract the image name without the extension
-            print(f"{index:<6} {score:<10.2f} {img_id:<30} {img_path}")
+            
+            if metric_type == "IP":
+                similarity_score = score  # Directly use the score
+            else:  # For L2, just use the score directly
+                similarity_score = score
+
+            print(f"{index:<6} {similarity_score:<20.4f} {img_id:<30} {img_path}")
             index += 1  # Increment the index for each row
 
 
