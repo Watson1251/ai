@@ -47,7 +47,7 @@ def main():
     # data_loader.process_dataset(dataset_path)
     
     # Search for a face
-    search_face(milvus_manager, face_recognition, img2)
+    search_face(milvus_manager, face_recognition, img2, top_k=50)
 
 if __name__ == "__main__":
     main()
