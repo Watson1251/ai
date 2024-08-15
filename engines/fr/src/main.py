@@ -8,29 +8,37 @@ def search_face(milvus_manager, face_recognition, image_path, top_k=10):
         print("Failed to extract embedding.")
         return
     results = milvus_manager.search(embedding, top_k)
-    
-    for idx, (hit_id, distance) in enumerate(zip(results.ids, results.distances), start=1):
-        img_path = milvus_manager.get_image_path(hit_id)
-        print(f"[{idx}] Distance: {distance:.4f}, Image Path: {img_path}")
+
+    # Print table header
+    print(f"{'Index':<6} {'Distance':<10} {'Path'}")
+
+    for idx, hits in enumerate(results):
+        for id_, score in zip(hits.ids, hits.distances):
+            img_path = milvus_manager.get_image_path(id_)
+            print(f"{idx+1:<6} {score:<10.2f} {img_path}")
+
 
 def main():
-    # Set up index and search parameters
-    index_params = {
-        "index_type": "IVF_PQ",
-        "params": {"nlist": 32768, "m": 64},
-        "metric_type": "L2"
-    }
-
-    search_params = {
-        "metric_type": "L2",
-        "params": {"nprobe": 128}
-    }
 
     # model configuration
     detector = "retinaface"
     align = True
     recognition_model = 'Facenet512'
     embedding_dim = 512
+    similarity_metric = "L2"
+    # similarity_metric = "IP" # Use Inner Product (Cosine Similarity) for similarity search
+
+    # Set up index and search parameters
+    index_params = {
+        "index_type": "IVF_PQ",
+        "params": {"nlist": 32768, "m": 64},
+        "metric_type": similarity_metric
+    }
+
+    search_params = {
+        "metric_type": similarity_metric,
+        "params": {"nprobe": 128}
+    }
 
     # Initialize components
     milvus_manager = MilvusManager(index_params=index_params, search_params=search_params, model_dim=embedding_dim)
@@ -43,10 +51,10 @@ def main():
     img2 = '/fr/lookalike.jpg'
     
     # Ingest the dataset
-    data_loader.process_dataset(dataset_path)
+    # data_loader.process_dataset(dataset_path)
     
     # Search for a face
-    # search_face(milvus_manager, face_recognition, img2, top_k=50)
+    search_face(milvus_manager, face_recognition, img2, top_k=50)
 
 if __name__ == "__main__":
     main()
