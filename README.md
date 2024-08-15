@@ -107,3 +107,8 @@ Function                        | Description
 -------------                   | -------------
 `__init__()`                    | Sets Deepface configerations
 `extract_embedding()`           | Deepface - extracts embeddings
+
+
+#### Milvus DB
+To access the milvus db web interface, use the following link: [http://localhost:3050/](http://localhost:3050/)
+The milvus address is: `standalone:19530`

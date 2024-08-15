@@ -8,11 +8,10 @@ def search_face(milvus_manager, face_recognition, image_path, top_k=10):
         print("Failed to extract embedding.")
         return
     results = milvus_manager.search(embedding, top_k)
-    for hits in results:
-        for idx, score in zip(hits.ids, hits.distances):
-            print(f"Face ID: {idx}, Distance: {score}")
-            img_path = milvus_manager.get_image_path(idx)
-            print(img_path)
+    
+    for idx, (hit_id, distance) in enumerate(zip(results.ids, results.distances), start=1):
+        img_path = milvus_manager.get_image_path(hit_id)
+        print(f"[{idx}] Distance: {distance:.4f}, Image Path: {img_path}")
 
 def main():
     # Set up index and search parameters
@@ -44,10 +43,10 @@ def main():
     img2 = '/fr/lookalike.jpg'
     
     # Ingest the dataset
-    # data_loader.process_dataset(dataset_path)
+    data_loader.process_dataset(dataset_path)
     
     # Search for a face
-    search_face(milvus_manager, face_recognition, img2, top_k=50)
+    # search_face(milvus_manager, face_recognition, img2, top_k=50)
 
 if __name__ == "__main__":
     main()
