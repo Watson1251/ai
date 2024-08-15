@@ -1,3 +1,4 @@
+import os
 from milvus_manager import MilvusManager
 from face_recognition import FaceRecognition
 from data_loader import DataLoader
@@ -10,12 +11,17 @@ def search_face(milvus_manager, face_recognition, image_path, top_k=10):
     results = milvus_manager.search(embedding, top_k)
 
     # Print table header
-    print(f"{'Index':<6} {'Distance':<10} {'Path'}")
+    print(f"{'Index':<6} {'Distance':<10} {'ID':<30} {'Path'}")
 
-    for idx, hits in enumerate(results):
+    # Initialize the index variable
+    index = 1
+
+    for hits in results:
         for id_, score in zip(hits.ids, hits.distances):
             img_path = milvus_manager.get_image_path(id_)
-            print(f"{idx+1:<6} {score:<10.2f} {img_path}")
+            img_id = os.path.splitext(os.path.basename(img_path))[0]  # Extract the image name without the extension
+            print(f"{index:<6} {score:<10.2f} {img_id:<30} {img_path}")
+            index += 1  # Increment the index for each row
 
 
 def main():
