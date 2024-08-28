@@ -30,6 +30,7 @@ services:
     build:
       context: ..
       dockerfile: docker/Dockerfiles/Dockerfile.fr
+    shm_size: '10gb'
     volumes:
       - ../engines/fr:/fr
     deploy:

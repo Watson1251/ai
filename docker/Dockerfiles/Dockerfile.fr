@@ -1,5 +1,5 @@
 # Use the official Ubuntu 20.04 image as the base image
-FROM nvidia/cuda:12.6.0-cudnn-devel-ubuntu20.04
+FROM nvidia/cuda:12.2.2-cudnn8-devel-ubuntu20.04
 
 # Set environment variables
 ENV DEBIAN_FRONTEND=noninteractive
@@ -20,6 +20,7 @@ RUN apt-get clean && \
     python3.8-dev \
     python3-pip \
     libgl1-mesa-glx && \
+    cmake && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
@@ -41,19 +42,22 @@ WORKDIR /fr
 RUN conda create -y --name fr python=3.12
 
 # Install cuDNN
-RUN wget https://developer.download.nvidia.com/compute/cudnn/9.3.0/local_installers/cudnn-local-repo-ubuntu2004-9.3.0_1.0-1_amd64.deb && \
-    dpkg -i cudnn-local-repo-ubuntu2004-9.3.0_1.0-1_amd64.deb && \
-    cp /var/cudnn-local-repo-ubuntu2004-9.3.0/cudnn-*-keyring.gpg /usr/share/keyrings/ && \
-    apt-get update -o Acquire::AllowInsecureRepositories=true -o Acquire::AllowDowngradeToInsecureRepositories=true && \
-    apt-get -y install cudnn && \
-    apt-get clean && \
-    rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+# RUN wget https://developer.download.nvidia.com/compute/cudnn/9.3.0/local_installers/cudnn-local-repo-ubuntu2004-9.3.0_1.0-1_amd64.deb && \
+#     dpkg -i cudnn-local-repo-ubuntu2004-9.3.0_1.0-1_amd64.deb && \
+#     cp /var/cudnn-local-repo-ubuntu2004-9.3.0/cudnn-*-keyring.gpg /usr/share/keyrings/ && \
+#     apt-get update -o Acquire::AllowInsecureRepositories=true -o Acquire::AllowDowngradeToInsecureRepositories=true && \
+#     apt-get -y install cudnn && \
+#     apt-get clean && \
+#     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 # Activate the environment and install Python packages
 RUN /bin/bash -c "source activate fr && bash /fr/env/install.sh"
 
 # Ensure the "fr" environment is activated in every shell
 RUN echo "source /opt/conda/bin/activate fr" >> ~/.bashrc
+
+# Download all deepface's models
+RUN /bin/bash -c "python src/download.py"
 
 # Expose FastAPI application port
 EXPOSE 8000

@@ -24,7 +24,7 @@ class DataProcessor:
 
     def process_image(self, image_path):
         try:
-            # embedding = self.face_recognition.extract_embedding(image_path)
+            embedding = self.face_recognition.extract_embedding(image_path)
             print(f"Processing {image_path} (Process ID: {os.getpid()})")
         except Exception as e:
             print(f"Error processing {image_path}: {e} (Process ID: {os.getpid()})")
@@ -55,9 +55,9 @@ class DataLoader:
     
     def handle_multiprocessing(self, image_paths):
 
-        # Determine the number of CPUs to use (90% of available CPUs)
+        # Determine the number of CPUs to use (80% of available CPUs)
         available_cpus = multiprocessing.cpu_count()
-        num_cpus_to_use = max(1, int(available_cpus * 0.9))  # Ensure at least 1 CPU is used
+        num_cpus_to_use = max(1, int(available_cpus * 0.8))  # Ensure at least 1 CPU is used
         
         print(f"image_paths: {len(image_paths)}")
         print(f"num_of_cpus: {num_cpus_to_use}/{available_cpus} CPUs")
@@ -83,7 +83,7 @@ class DataLoader:
 
     def process_dataset(self, dataset_path):
         image_paths = self.get_image_paths(dataset_path)
-        # self.handle_multiprocessing(image_paths)
+        self.handle_multiprocessing(image_paths)
 
         # do split the paths into all available cpus, and call this function in parallel
         image_path = image_paths[0]
