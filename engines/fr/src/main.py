@@ -65,7 +65,7 @@ def main():
     data_loader = DataLoader(milvus_manager, face_recognition)
 
     # Example usage
-    dataset_path = '/fr/Previous/dataset'
+    dataset_path = '/fr/dataset'
     img1 = '/fr/obama.jpg'
     img2 = '/fr/lookalike.jpg'
 

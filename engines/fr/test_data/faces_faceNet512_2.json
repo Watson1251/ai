@@ -1,0 +1,2159 @@
+{
+    "Khalfan_Alaisari.jpg": {
+        "ground_truth": "khalfanalaisari",
+        "top_results": [
+            {
+                "rank": 1,
+                "db_name": "khalfanalaisari",
+                "image_path": "/fr/test_data/train/Khalfan_Alaisari.jpg",
+                "score": 547.1787719726562
+            }
+        ],
+        "exponential_score": 5.0
+    },
+    "Madiha_Alshibanya_5.jpg": {
+        "ground_truth": "madihaalshibanya",
+        "top_results": [
+            {
+                "rank": 1,
+                "db_name": "madihaalshibanya",
+                "image_path": "/fr/test_data/train/Madiha_Alshibanya.jpg",
+                "score": 300.1651306152344
+            }
+        ],
+        "exponential_score": 5.0
+    },
+    "Hassan_Alshuraiqi_2.jpg": {
+        "ground_truth": "hassanalshuraiqi",
+        "top_results": [
+            {
+                "rank": 1,
+                "db_name": "hassanalshuraiqi",
+                "image_path": "/fr/test_data/train/Hassan_Alshuraiqi.png",
+                "score": 313.232666015625
+            }
+        ],
+        "exponential_score": 5.0
+    },
+    "Sultan_Elomani_1.jpeg": {
+        "ground_truth": "sultanelomani",
+        "top_results": [
+            {
+                "rank": 1,
+                "db_name": "sultanelomani",
+                "image_path": "/fr/test_data/train/Sultan_Elomani.jpeg",
+                "score": 389.909912109375
+            }
+        ],
+        "exponential_score": 5.0
+    },
+    "SultanMajidAlAbri.jpg": {
+        "ground_truth": "sultanmajidalabri",
+        "top_results": [
+            {
+                "rank": 1,
+                "db_name": "sultanmajidalabri",
+                "image_path": "/fr/test_data/train/SultanMajidAlAbri.jpg",
+                "score": 396.6144714355469
+            }
+        ],
+        "exponential_score": 5.0
+    },
+    "Alsayid_Badar_Albusaidi_3.jpeg": {
+        "ground_truth": "alsayidbadaralbusaidi",
+        "top_results": [
+            {
+                "rank": 1,
+                "db_name": "alsayidbadaralbusaidi",
+                "image_path": "/fr/test_data/train/Alsayid_Badar_Albusaidi.jpg",
+                "score": 143.28643798828125
+            }
+        ],
+        "exponential_score": 5.0
+    },
+    "MahaAlLamki.jpg": {
+        "ground_truth": "mahaallamki",
+        "top_results": [
+            {
+                "rank": 1,
+                "db_name": "mahaallamki",
+                "image_path": "/fr/test_data/train/MahaAlLamki.jpg",
+                "score": 252.18739318847656
+            }
+        ],
+        "exponential_score": 5.0
+    },
+    "Rahma_Almhroqi_3.jpg": {
+        "ground_truth": "rahmaalmhroqi",
+        "top_results": [
+            {
+                "rank": 1,
+                "db_name": "rahmaalmhroqi",
+                "image_path": "/fr/test_data/train/Rahma_Almhroqi.jpg",
+                "score": 98.74938201904297
+            }
+        ],
+        "exponential_score": 5.0
+    },
+    "Saied_ALsaqrai_4.jpg": {
+        "ground_truth": "saiedalsaqrai",
+        "top_results": [
+            {
+                "rank": 1,
+                "db_name": "saiedalsaqrai",
+                "image_path": "/fr/test_data/train/Saied_ALsaqrai.jpg",
+                "score": 226.001953125
+            }
+        ],
+        "exponential_score": 5.0
+    },
+    "Rahma_Almhroqi_6.jpg": {
+        "ground_truth": "rahmaalmhroqi",
+        "top_results": [
+            {
+                "rank": 1,
+                "db_name": "rahmaalmhroqi",
+                "image_path": "/fr/test_data/train/Rahma_Almhroqi.jpg",
+                "score": 180.8380584716797
+            }
+        ],
+        "exponential_score": 5.0
+    },
+    "JokhaAlShukaili_2.jpg": {
+        "ground_truth": "jokhaalshukaili",
+        "top_results": [
+            {
+                "rank": 1,
+                "db_name": "jokhaalshukaili",
+                "image_path": "/fr/test_data/train/JokhaAlShukaili.jpg",
+                "score": 195.58538818359375
+            }
+        ],
+        "exponential_score": 5.0
+    },
+    "Alsayid_Badar_Albusaidi_2.jpg": {
+        "ground_truth": "alsayidbadaralbusaidi",
+        "top_results": [
+            {
+                "rank": 1,
+                "db_name": "alsayidbadaralbusaidi",
+                "image_path": "/fr/test_data/train/Alsayid_Badar_Albusaidi.jpg",
+                "score": 132.4630126953125
+            }
+        ],
+        "exponential_score": 5.0
+    },
+    "Saied_ALsaqrai_2.jpg": {
+        "ground_truth": "saiedalsaqrai",
+        "top_results": [
+            {
+                "rank": 1,
+                "db_name": "saiedalsaqrai",
+                "image_path": "/fr/test_data/train/Saied_ALsaqrai.jpg",
+                "score": 141.20867919921875
+            }
+        ],
+        "exponential_score": 5.0
+    },
+    "Hunaina_AlMughairy_2.jpg": {
+        "ground_truth": "hunainaalmughairy",
+        "top_results": [
+            {
+                "rank": 1,
+                "db_name": "hunainaalmughairy",
+                "image_path": "/fr/test_data/train/Hunaina_AlMughairy.jpg",
+                "score": 213.35476684570312
+            }
+        ],
+        "exponential_score": 5.0
+    },
+    "Tawakkol_Karman.jpg": {
+        "ground_truth": "tawakkolkarman",
+        "top_results": [
+            {
+                "rank": 1,
+                "db_name": "",
+                "image_path": "/fr/Previous/dataset/5671/5671.jpg",
+                "score": 434.0008239746094
+            },
+            {
+                "rank": 2,
+                "db_name": "",
+                "image_path": "/fr/Previous/dataset/5758/5758.jpg",
+                "score": 499.65802001953125
+            },
+            {
+                "rank": 3,
+                "db_name": "",
+                "image_path": "/fr/Previous/dataset/7080/7080.jpg",
+                "score": 530.4251708984375
+            },
+            {
+                "rank": 4,
+                "db_name": "",
+                "image_path": "/fr/Previous/dataset/6223/6223.jpg",
+                "score": 532.740966796875
+            },
+            {
+                "rank": 5,
+                "db_name": "",
+                "image_path": "/fr/Previous/dataset/6305/6305.jpg",
+                "score": 547.3097534179688
+            }
+        ],
+        "exponential_score": 0.24893534183931973
+    },
+    "obama_5.jpg": {
+        "ground_truth": "obama",
+        "top_results": [
+            {
+                "rank": 1,
+                "db_name": "obama",
+                "image_path": "/fr/test_data/train/obama.jpeg",
+                "score": 295.4316711425781
+            }
+        ],
+        "exponential_score": 5.0
+    },
+    "Sultan_Elomani.jpeg": {
+        "ground_truth": "sultanelomani",
+        "top_results": [
+            {
+                "rank": 1,
+                "db_name": "",
+                "image_path": "/fr/Previous/dataset/6931/6931.jpg",
+                "score": 537.1434326171875
+            },
+            {
+                "rank": 2,
+                "db_name": "",
+                "image_path": "/fr/Previous/dataset/7434/7434.jpg",
+                "score": 547.5020751953125
+            },
+            {
+                "rank": 3,
+                "db_name": "",
+                "image_path": "/fr/Previous/dataset/0506235674/0506235674.jpg",
+                "score": 562.8592529296875
+            },
+            {
+                "rank": 4,
+                "db_name": "",
+                "image_path": "/fr/Previous/dataset/5726/5726.jpg",
+                "score": 564.7996826171875
+            },
+            {
+                "rank": 5,
+                "db_name": "",
+                "image_path": "/fr/Previous/dataset/7319/7319.jpg",
+                "score": 570.4359741210938
+            },
+            {
+                "rank": "Not in top 10",
+                "db_name": null,
+                "image_path": null,
+                "score": 0
+            }
+        ],
+        "exponential_score": 0
+    },
+    "HamoudFaisalAlBusaidi.jpeg": {
+        "ground_truth": "hamoudfaisalalbusaidi",
+        "top_results": [
+            {
+                "rank": 1,
+                "db_name": "hamoudfaisalalbusaidi",
+                "image_path": "/fr/test_data/train/HamoudFaisalAlBusaidi.jpg",
+                "score": 237.75302124023438
+            }
+        ],
+        "exponential_score": 5.0
+    },
+    "SalimQattan_4.jpg": {
+        "ground_truth": "salimqattan",
+        "top_results": [
+            {
+                "rank": 1,
+                "db_name": "salimqattan",
+                "image_path": "/fr/test_data/train/SalimQattan.jpg",
+                "score": 355.3118896484375
+            }
+        ],
+        "exponential_score": 5.0
+    },
+    "Abdullah_Albakri_2.jpg": {
+        "ground_truth": "abdullahalbakri",
+        "top_results": [
+            {
+                "rank": 1,
+                "db_name": "abdullahalbakri",
+                "image_path": "/fr/test_data/train/Abdullah_Albakri.jpg",
+                "score": 243.34103393554688
+            }
+        ],
+        "exponential_score": 5.0
+    },
+    "YahyaMahfoodhAlMandhari_2.jpg": {
+        "ground_truth": "yahyamahfoodhalmandhari",
+        "top_results": [
+            {
+                "rank": 1,
+                "db_name": "ahmedalsaiedi",
+                "image_path": "/fr/test_data/train/Ahmed_Alsaiedi.jpg",
+                "score": 352.8143615722656
+            },
+            {
+                "rank": 2,
+                "db_name": "yahyamahfoodhalmandhari",
+                "image_path": "/fr/test_data/train/YahyaMahfoodhAlMandhari.jpg",
+                "score": 376.7850646972656
+            }
+        ],
+        "exponential_score": 3.032653298563167
+    },
+    "Abdullah_Albakri.jpg": {
+        "ground_truth": "abdullahalbakri",
+        "top_results": [
+            {
+                "rank": 1,
+                "db_name": "abdullahalbakri",
+                "image_path": "/fr/test_data/train/Abdullah_Albakri.jpg",
+                "score": 356.20025634765625
+            }
+        ],
+        "exponential_score": 5.0
+    },
+    "Mishary_Alafasy.jpeg": {
+        "ground_truth": "misharyalafasy",
+        "top_results": [
+            {
+                "rank": 1,
+                "db_name": "misharyalafasy",
+                "image_path": "/fr/test_data/train/Mishary_Alafasy.jpeg",
+                "score": 346.6794128417969
+            }
+        ],
+        "exponential_score": 5.0
+    },
+    "Sultan_Alhabsi_5.png": {
+        "ground_truth": "sultanalhabsi",
+        "top_results": [
+            {
+                "rank": 1,
+                "db_name": "sultanalhabsi",
+                "image_path": "/fr/test_data/train/Sultan_Alhabsi.jpg",
+                "score": 177.1416015625
+            }
+        ],
+        "exponential_score": 5.0
+    },
+    "Madiha_Alshibanya_4.jpg": {
+        "ground_truth": "madihaalshibanya",
+        "top_results": [
+            {
+                "rank": 1,
+                "db_name": "hemadiha",
+                "image_path": "/fr/Previous/dataset/he_madiha/he_madiha.jpg",
+                "score": 333.83746337890625
+            },
+            {
+                "rank": 2,
+                "db_name": "madihaalshibanya",
+                "image_path": "/fr/test_data/train/Madiha_Alshibanya.jpg",
+                "score": 377.7936706542969
+            }
+        ],
+        "exponential_score": 3.032653298563167
+    },
+    "BasmaAlSaid.jpg": {
+        "ground_truth": "basmaalsaid",
+        "top_results": [
+            {
+                "rank": 1,
+                "db_name": "basmaalsaid",
+                "image_path": "/fr/test_data/train/BasmaAlSaid.jpg",
+                "score": 136.833251953125
+            }
+        ],
+        "exponential_score": 5.0
+    },
+    "TawfeeqAlLawati.jpg": {
+        "ground_truth": "tawfeeqallawati",
+        "top_results": [
+            {
+                "rank": 1,
+                "db_name": "",
+                "image_path": "/fr/Previous/dataset/6038/6038.jpg",
+                "score": 418.05242919921875
+            },
+            {
+                "rank": 2,
+                "db_name": "saiedalsaqrai",
+                "image_path": "/fr/test_data/train/Saied_ALsaqrai.jpg",
+                "score": 433.40667724609375
+            },
+            {
+                "rank": 3,
+                "db_name": "",
+                "image_path": "/fr/Previous/dataset/6543/6543.jpg",
+                "score": 527.0520629882812
+            },
+            {
+                "rank": 4,
+                "db_name": "",
+                "image_path": "/fr/Previous/dataset/7305/7305.jpg",
+                "score": 538.4155883789062
+            },
+            {
+                "rank": 5,
+                "db_name": "ahmedalsaiedi",
+                "image_path": "/fr/test_data/train/Ahmed_Alsaiedi.jpg",
+                "score": 548.2579345703125
+            }
+        ],
+        "exponential_score": 0.0915781944436709
+    },
+    "Ali_Alhabsi_1.jpeg": {
+        "ground_truth": "alialhabsi",
+        "top_results": [
+            {
+                "rank": 1,
+                "db_name": "alialhabsi",
+                "image_path": "/fr/Previous/dataset/Ali_Al_Habsi/Ali_Al_Habsi.jpg",
+                "score": 349.074462890625
+            }
+        ],
+        "exponential_score": 5.0
+    },
+    "Mohammedalbarwani.jpg": {
+        "ground_truth": "mohammedalbarwani",
+        "top_results": [
+            {
+                "rank": 1,
+                "db_name": "mohammedalbarwani",
+                "image_path": "/fr/test_data/train/Mohammedalbarwani.jpg",
+                "score": 152.26722717285156
+            }
+        ],
+        "exponential_score": 5.0
+    },
+    "Alsayid_khalid_Albusaidi_3.jpg": {
+        "ground_truth": "alsayidkhalidalbusaidi",
+        "top_results": [
+            {
+                "rank": 1,
+                "db_name": "alsayidkhalidalbusaidi",
+                "image_path": "/fr/test_data/train/Alsayid_khalid_Albusaidi.jpg",
+                "score": 144.10781860351562
+            }
+        ],
+        "exponential_score": 5.0
+    },
+    "Muhammed_Almukaini_7.jpg": {
+        "ground_truth": "muhammedalmukaini",
+        "top_results": [
+            {
+                "rank": 1,
+                "db_name": "muhammedalmukaini",
+                "image_path": "/fr/test_data/train/Muhammed_Almukaini.jpg",
+                "score": 346.66015625
+            }
+        ],
+        "exponential_score": 5.0
+    },
+    "SalahAlZadjali_3.jpg": {
+        "ground_truth": "salahalzadjali",
+        "top_results": [
+            {
+                "rank": 1,
+                "db_name": "salahalzadjali",
+                "image_path": "/fr/test_data/train/SalahAlZadjali.jpg",
+                "score": 285.031494140625
+            }
+        ],
+        "exponential_score": 5.0
+    },
+    "Muhammed_Almukaini_4.jpeg": {
+        "ground_truth": "muhammedalmukaini",
+        "top_results": [
+            {
+                "rank": 1,
+                "db_name": "",
+                "image_path": "/fr/Previous/dataset/3389604430/3389604430.jpg",
+                "score": 454.25970458984375
+            },
+            {
+                "rank": 2,
+                "db_name": "",
+                "image_path": "/fr/Previous/dataset/3576635576/3576635576.jpg",
+                "score": 454.25970458984375
+            },
+            {
+                "rank": 3,
+                "db_name": "",
+                "image_path": "/fr/Previous/dataset/2838905883/2838905883.jpg",
+                "score": 454.25970458984375
+            },
+            {
+                "rank": 4,
+                "db_name": "",
+                "image_path": "/fr/Previous/dataset/7268887945/7268887945.jpg",
+                "score": 469.6814270019531
+            },
+            {
+                "rank": 5,
+                "db_name": "",
+                "image_path": "/fr/Previous/dataset/8493522092/8493522092.jpg",
+                "score": 469.6814270019531
+            },
+            {
+                "rank": "Not in top 10",
+                "db_name": null,
+                "image_path": null,
+                "score": 0
+            }
+        ],
+        "exponential_score": 0
+    },
+    "AliSoudAlBimani.jpg": {
+        "ground_truth": "alisoudalbimani",
+        "top_results": [
+            {
+                "rank": 1,
+                "db_name": "alisoudalbimani",
+                "image_path": "/fr/test_data/train/AliSoudAlBimani.jpg",
+                "score": 206.48638916015625
+            }
+        ],
+        "exponential_score": 5.0
+    },
+    "Muhammed_Almukaini_8.jpg": {
+        "ground_truth": "muhammedalmukaini",
+        "top_results": [
+            {
+                "rank": 1,
+                "db_name": "muhammedalmukaini",
+                "image_path": "/fr/test_data/train/Muhammed_Almukaini.jpg",
+                "score": 370.71905517578125
+            }
+        ],
+        "exponential_score": 5.0
+    },
+    "Alsayid_khalid_Albusaidi_4.jpg": {
+        "ground_truth": "alsayidkhalidalbusaidi",
+        "top_results": [
+            {
+                "rank": 1,
+                "db_name": "alsayidkhalidalbusaidi",
+                "image_path": "/fr/test_data/train/Alsayid_khalid_Albusaidi.jpg",
+                "score": 131.74806213378906
+            }
+        ],
+        "exponential_score": 5.0
+    },
+    "Hunaina_AlMughairy_3.jpeg": {
+        "ground_truth": "hunainaalmughairy",
+        "top_results": [
+            {
+                "rank": 1,
+                "db_name": "hunainaalmughairy",
+                "image_path": "/fr/test_data/train/Hunaina_AlMughairy.jpg",
+                "score": 223.1786651611328
+            }
+        ],
+        "exponential_score": 5.0
+    },
+    "MohdAbdullahAlHinai_2.jpg": {
+        "ground_truth": "mohdabdullahalhinai",
+        "top_results": [
+            {
+                "rank": 1,
+                "db_name": "mohdabdullahalhinai",
+                "image_path": "/fr/test_data/train/MohdAbdullahAlHinai.jpg",
+                "score": 9.625324249267578
+            }
+        ],
+        "exponential_score": 5.0
+    },
+    "AliSoudAlBimani_6.jpg": {
+        "ground_truth": "alisoudalbimani",
+        "top_results": [
+            {
+                "rank": 1,
+                "db_name": "alisoudalbimani",
+                "image_path": "/fr/test_data/train/AliSoudAlBimani.jpg",
+                "score": 249.6320037841797
+            }
+        ],
+        "exponential_score": 5.0
+    },
+    "Mohammedalbarwani_2.jpg": {
+        "ground_truth": "mohammedalbarwani",
+        "top_results": [
+            {
+                "rank": 1,
+                "db_name": "mohammedalbarwani",
+                "image_path": "/fr/test_data/train/Mohammedalbarwani.jpg",
+                "score": 212.47860717773438
+            }
+        ],
+        "exponential_score": 5.0
+    },
+    "Alsayid_Badar_Albusaidi_5.jpg": {
+        "ground_truth": "alsayidbadaralbusaidi",
+        "top_results": [
+            {
+                "rank": 1,
+                "db_name": "alsayidbadaralbusaidi",
+                "image_path": "/fr/test_data/train/Alsayid_Badar_Albusaidi.jpg",
+                "score": 169.69927978515625
+            }
+        ],
+        "exponential_score": 5.0
+    },
+    "TawfeeqAlLawati_3.jpg": {
+        "ground_truth": "tawfeeqallawati",
+        "top_results": [
+            {
+                "rank": 1,
+                "db_name": "tawfeeqallawati",
+                "image_path": "/fr/test_data/train/TawfeeqAlLawati.jpg",
+                "score": 348.0284423828125
+            }
+        ],
+        "exponential_score": 5.0
+    },
+    "Madiha_Alshibanya.jpg": {
+        "ground_truth": "madihaalshibanya",
+        "top_results": [
+            {
+                "rank": 1,
+                "db_name": "madihaalshibanya",
+                "image_path": "/fr/test_data/train/Madiha_Alshibanya.jpg",
+                "score": 284.9754943847656
+            }
+        ],
+        "exponential_score": 5.0
+    },
+    "Tawakkol_Karman_6.jpg": {
+        "ground_truth": "tawakkolkarman",
+        "top_results": [
+            {
+                "rank": 1,
+                "db_name": "",
+                "image_path": "/fr/Previous/dataset/6015/6015.jpg",
+                "score": 444.0052490234375
+            },
+            {
+                "rank": 2,
+                "db_name": "",
+                "image_path": "/fr/Previous/dataset/6262/6262.jpg",
+                "score": 453.5838623046875
+            },
+            {
+                "rank": 3,
+                "db_name": "tawakkolkarman",
+                "image_path": "/fr/test_data/train/Tawakkol_Karman.jpeg",
+                "score": 461.85675048828125
+            }
+        ],
+        "exponential_score": 1.8393972058572117
+    },
+    "AliSoudAlBimani_3.jpg": {
+        "ground_truth": "alisoudalbimani",
+        "top_results": [
+            {
+                "rank": 1,
+                "db_name": "alisoudalbimani",
+                "image_path": "/fr/test_data/train/AliSoudAlBimani.jpg",
+                "score": 402.98919677734375
+            }
+        ],
+        "exponential_score": 5.0
+    },
+    "DrLamyaAlHaj_3.jpg": {
+        "ground_truth": "drlamyaalhaj",
+        "top_results": [
+            {
+                "rank": 1,
+                "db_name": "drlamyaalhaj",
+                "image_path": "/fr/test_data/train/DrLamyaAlHaj.jpg",
+                "score": 217.2677001953125
+            }
+        ],
+        "exponential_score": 5.0
+    },
+    "Hunaina_AlMughairy_4.jpeg": {
+        "ground_truth": "hunainaalmughairy",
+        "top_results": [
+            {
+                "rank": 1,
+                "db_name": "hunainaalmughairy",
+                "image_path": "/fr/test_data/train/Hunaina_AlMughairy.jpg",
+                "score": 279.7846374511719
+            }
+        ],
+        "exponential_score": 5.0
+    },
+    "SalimAlRuzaiqi.jpg": {
+        "ground_truth": "salimalruzaiqi",
+        "top_results": [
+            {
+                "rank": 1,
+                "db_name": "salimalruzaiqi",
+                "image_path": "/fr/test_data/train/SalimAlRuzaiqi.jpg",
+                "score": 329.933349609375
+            }
+        ],
+        "exponential_score": 5.0
+    },
+    "Rahma_Almhroqi_4.jpg": {
+        "ground_truth": "rahmaalmhroqi",
+        "top_results": [
+            {
+                "rank": 1,
+                "db_name": "rahmaalmhroqi",
+                "image_path": "/fr/test_data/train/Rahma_Almhroqi.jpg",
+                "score": 172.0740966796875
+            }
+        ],
+        "exponential_score": 5.0
+    },
+    "Ahmed_Alsaiedi.jpeg": {
+        "ground_truth": "ahmedalsaiedi",
+        "top_results": [
+            {
+                "rank": 1,
+                "db_name": "mohdabdullahalhinai",
+                "image_path": "/fr/test_data/train/MohdAbdullahAlHinai.jpg",
+                "score": 513.8331909179688
+            },
+            {
+                "rank": 2,
+                "db_name": "",
+                "image_path": "/fr/Previous/dataset/6411/6411.jpg",
+                "score": 563.5612182617188
+            },
+            {
+                "rank": 3,
+                "db_name": "salimqattan",
+                "image_path": "/fr/test_data/train/SalimQattan.jpg",
+                "score": 563.7791748046875
+            },
+            {
+                "rank": 4,
+                "db_name": "alsayidkhalidalbusaidi",
+                "image_path": "/fr/test_data/train/Alsayid_khalid_Albusaidi.jpg",
+                "score": 565.2628784179688
+            },
+            {
+                "rank": 5,
+                "db_name": "ahmedalsaiedi",
+                "image_path": "/fr/test_data/train/Ahmed_Alsaiedi.jpg",
+                "score": 565.5821533203125
+            }
+        ],
+        "exponential_score": 0.6766764161830635
+    },
+    "HamoudFaisalAlBusaidi_3.jpeg": {
+        "ground_truth": "hamoudfaisalalbusaidi",
+        "top_results": [
+            {
+                "rank": 1,
+                "db_name": "hamoudfaisalalbusaidi",
+                "image_path": "/fr/test_data/train/HamoudFaisalAlBusaidi.jpg",
+                "score": 210.44708251953125
+            }
+        ],
+        "exponential_score": 5.0
+    },
+    "DrLamyaAlHaj.jpg": {
+        "ground_truth": "drlamyaalhaj",
+        "top_results": [
+            {
+                "rank": 1,
+                "db_name": "drlamyaalhaj",
+                "image_path": "/fr/test_data/train/DrLamyaAlHaj.jpg",
+                "score": 227.11175537109375
+            }
+        ],
+        "exponential_score": 5.0
+    },
+    "HamedSalimAlRawahi_1.jpg": {
+        "ground_truth": "hamedsalimalrawahi",
+        "top_results": [
+            {
+                "rank": 1,
+                "db_name": "hamedsalimalrawahi",
+                "image_path": "/fr/test_data/train/HamedSalimAlRawahi.jpg",
+                "score": 189.93649291992188
+            }
+        ],
+        "exponential_score": 5.0
+    },
+    "SalimQattan_2.jpg": {
+        "ground_truth": "salimqattan",
+        "top_results": [
+            {
+                "rank": 1,
+                "db_name": "salimqattan",
+                "image_path": "/fr/test_data/train/SalimQattan.jpg",
+                "score": 421.8838195800781
+            }
+        ],
+        "exponential_score": 5.0
+    },
+    "Muhammed_Almukaini_2.jpeg": {
+        "ground_truth": "muhammedalmukaini",
+        "top_results": [
+            {
+                "rank": 1,
+                "db_name": "muhammedalmukaini",
+                "image_path": "/fr/test_data/train/Muhammed_Almukaini.jpg",
+                "score": 318.55780029296875
+            }
+        ],
+        "exponential_score": 5.0
+    },
+    "Rahma_Almhroqi_2.jpg": {
+        "ground_truth": "rahmaalmhroqi",
+        "top_results": [
+            {
+                "rank": 1,
+                "db_name": "rahmaalmhroqi",
+                "image_path": "/fr/test_data/train/Rahma_Almhroqi.jpg",
+                "score": 172.0740966796875
+            }
+        ],
+        "exponential_score": 5.0
+    },
+    "FH2_Abdullah_Alsaiedi.jpeg": {
+        "ground_truth": "fh2abdullahalsaiedi",
+        "top_results": [
+            {
+                "rank": 1,
+                "db_name": "",
+                "image_path": "/fr/Previous/dataset/7488787389/7488787389.jpg",
+                "score": 370.7226257324219
+            },
+            {
+                "rank": 2,
+                "db_name": "",
+                "image_path": "/fr/Previous/dataset/4060420169/4060420169.jpg",
+                "score": 370.7226257324219
+            },
+            {
+                "rank": 3,
+                "db_name": "",
+                "image_path": "/fr/Previous/dataset/6806358867/6806358867.jpg",
+                "score": 370.7226257324219
+            },
+            {
+                "rank": 4,
+                "db_name": "",
+                "image_path": "/fr/Previous/dataset/7278/7278.jpg",
+                "score": 377.2183837890625
+            },
+            {
+                "rank": 5,
+                "db_name": "",
+                "image_path": "/fr/Previous/dataset/6606/6606.jpg",
+                "score": 415.53045654296875
+            },
+            {
+                "rank": "Not in top 10",
+                "db_name": null,
+                "image_path": null,
+                "score": 0
+            }
+        ],
+        "exponential_score": 0
+    },
+    "JokhaAlShukaili_4.jpg": {
+        "ground_truth": "jokhaalshukaili",
+        "top_results": [
+            {
+                "rank": 1,
+                "db_name": "jokhaalshukaili",
+                "image_path": "/fr/test_data/train/JokhaAlShukaili.jpg",
+                "score": 160.87428283691406
+            }
+        ],
+        "exponential_score": 5.0
+    },
+    "ZuwainaAlMaskari.jpg": {
+        "ground_truth": "zuwainaalmaskari",
+        "top_results": [
+            {
+                "rank": 1,
+                "db_name": "zuwainaalmaskari",
+                "image_path": "/fr/test_data/train/ZuwainaAlMaskari.jpg",
+                "score": 236.639404296875
+            }
+        ],
+        "exponential_score": 5.0
+    },
+    "Alsayid_khalid_Albusaidi.png": {
+        "ground_truth": "alsayidkhalidalbusaidi",
+        "top_results": [
+            {
+                "rank": 1,
+                "db_name": "alsayidkhalidalbusaidi",
+                "image_path": "/fr/test_data/train/Alsayid_khalid_Albusaidi.jpg",
+                "score": 258.4398498535156
+            }
+        ],
+        "exponential_score": 5.0
+    },
+    "SalimQattan_5.jpg": {
+        "ground_truth": "salimqattan",
+        "top_results": [
+            {
+                "rank": 1,
+                "db_name": "salimqattan",
+                "image_path": "/fr/test_data/train/SalimQattan.jpg",
+                "score": 195.81906127929688
+            }
+        ],
+        "exponential_score": 5.0
+    },
+    "Hassan_Alshuraiqi.jpeg": {
+        "ground_truth": "hassanalshuraiqi",
+        "top_results": [
+            {
+                "rank": 1,
+                "db_name": "hassanalshuraiqi",
+                "image_path": "/fr/test_data/train/Hassan_Alshuraiqi.png",
+                "score": 272.1126708984375
+            }
+        ],
+        "exponential_score": 5.0
+    },
+    "Saied_ALsaqrai_3.jpg": {
+        "ground_truth": "saiedalsaqrai",
+        "top_results": [
+            {
+                "rank": 1,
+                "db_name": "saiedalsaqrai",
+                "image_path": "/fr/test_data/train/Saied_ALsaqrai.jpg",
+                "score": 230.33843994140625
+            }
+        ],
+        "exponential_score": 5.0
+    },
+    "Tawakkol_Karman_2.jpg": {
+        "ground_truth": "tawakkolkarman",
+        "top_results": [
+            {
+                "rank": 1,
+                "db_name": "jokhaalshukaili",
+                "image_path": "/fr/test_data/train/JokhaAlShukaili.jpg",
+                "score": 445.95599365234375
+            },
+            {
+                "rank": 2,
+                "db_name": "tawakkolkarman",
+                "image_path": "/fr/test_data/train/Tawakkol_Karman.jpeg",
+                "score": 477.8883972167969
+            }
+        ],
+        "exponential_score": 3.032653298563167
+    },
+    "MohdAbdullahAlHinai.jpg": {
+        "ground_truth": "mohdabdullahalhinai",
+        "top_results": [
+            {
+                "rank": 1,
+                "db_name": "mohdabdullahalhinai",
+                "image_path": "/fr/test_data/train/MohdAbdullahAlHinai.jpg",
+                "score": 166.59912109375
+            }
+        ],
+        "exponential_score": 5.0
+    },
+    "obama.jpg": {
+        "ground_truth": "obama",
+        "top_results": [
+            {
+                "rank": 1,
+                "db_name": "",
+                "image_path": "/fr/Previous/dataset/6357/6357.jpg",
+                "score": 192.48367309570312
+            },
+            {
+                "rank": 2,
+                "db_name": "officialportraitofbarackobama",
+                "image_path": "/fr/Previous/dataset/Official_portrait_of_Barack_Obama/Official_portrait_of_Barack_Obama.jpg",
+                "score": 291.6058349609375
+            },
+            {
+                "rank": 3,
+                "db_name": "obama",
+                "image_path": "/fr/test_data/train/obama.jpeg",
+                "score": 317.11041259765625
+            }
+        ],
+        "exponential_score": 1.8393972058572117
+    },
+    "HamoudFaisalAlBusaidi_4.jpeg": {
+        "ground_truth": "hamoudfaisalalbusaidi",
+        "top_results": [
+            {
+                "rank": 1,
+                "db_name": "",
+                "image_path": "/fr/Previous/dataset/7532/7532.jpg",
+                "score": 411.5041809082031
+            },
+            {
+                "rank": 2,
+                "db_name": "hamoudfaisalalbusaidi",
+                "image_path": "/fr/test_data/train/HamoudFaisalAlBusaidi.jpg",
+                "score": 427.7662658691406
+            }
+        ],
+        "exponential_score": 3.032653298563167
+    },
+    "AliSoudAlBimani_4.jpg": {
+        "ground_truth": "alisoudalbimani",
+        "top_results": [
+            {
+                "rank": 1,
+                "db_name": "alisoudalbimani",
+                "image_path": "/fr/test_data/train/AliSoudAlBimani.jpg",
+                "score": 177.43051147460938
+            }
+        ],
+        "exponential_score": 5.0
+    },
+    "HamoudFaisalAlBusaidi_2.jpg": {
+        "ground_truth": "hamoudfaisalalbusaidi",
+        "top_results": [
+            {
+                "rank": 1,
+                "db_name": "hamoudfaisalalbusaidi",
+                "image_path": "/fr/test_data/train/HamoudFaisalAlBusaidi.jpg",
+                "score": 209.82521057128906
+            }
+        ],
+        "exponential_score": 5.0
+    },
+    "Abdullah_Alsaiedi_1.jpeg": {
+        "ground_truth": "abdullahalsaiedi",
+        "top_results": [
+            {
+                "rank": 1,
+                "db_name": "abdullahalsaiedi",
+                "image_path": "/fr/test_data/train/Abdullah_Alsaiedi.jpeg",
+                "score": 115.98377990722656
+            }
+        ],
+        "exponential_score": 5.0
+    },
+    "Sultan_Alhabsi_2.jpeg": {
+        "ground_truth": "sultanalhabsi",
+        "top_results": [
+            {
+                "rank": 1,
+                "db_name": "sultanalhabsi",
+                "image_path": "/fr/test_data/train/Sultan_Alhabsi.jpg",
+                "score": 301.80194091796875
+            }
+        ],
+        "exponential_score": 5.0
+    },
+    "Alsayid_Badar_Albusaidi_4.jpg": {
+        "ground_truth": "alsayidbadaralbusaidi",
+        "top_results": [
+            {
+                "rank": 1,
+                "db_name": "alsayidbadaralbusaidi",
+                "image_path": "/fr/test_data/train/Alsayid_Badar_Albusaidi.jpg",
+                "score": 90.55793762207031
+            }
+        ],
+        "exponential_score": 5.0
+    },
+    "Hassan_Alshuraiqi_4.jpg": {
+        "ground_truth": "hassanalshuraiqi",
+        "top_results": [
+            {
+                "rank": 1,
+                "db_name": "hassanalshuraiqi",
+                "image_path": "/fr/test_data/train/Hassan_Alshuraiqi.png",
+                "score": 297.78594970703125
+            }
+        ],
+        "exponential_score": 5.0
+    },
+    "Mohammedalbarwani_5.jpg": {
+        "ground_truth": "mohammedalbarwani",
+        "top_results": [
+            {
+                "rank": 1,
+                "db_name": "mohammedalbarwani",
+                "image_path": "/fr/test_data/train/Mohammedalbarwani.jpg",
+                "score": 229.2427215576172
+            }
+        ],
+        "exponential_score": 5.0
+    },
+    "Saied_ALsaqrai_5.jpg": {
+        "ground_truth": "saiedalsaqrai",
+        "top_results": [
+            {
+                "rank": 1,
+                "db_name": "saiedalsaqrai",
+                "image_path": "/fr/test_data/train/Saied_ALsaqrai.jpg",
+                "score": 331.79461669921875
+            }
+        ],
+        "exponential_score": 5.0
+    },
+    "Muhammed_Almukaini.jpg": {
+        "ground_truth": "muhammedalmukaini",
+        "top_results": [
+            {
+                "rank": 1,
+                "db_name": "muhammedalmukaini",
+                "image_path": "/fr/test_data/train/Muhammed_Almukaini.jpg",
+                "score": 405.1150207519531
+            }
+        ],
+        "exponential_score": 5.0
+    },
+    "Hassan_Alshuraiqi_3.jpeg": {
+        "ground_truth": "hassanalshuraiqi",
+        "top_results": [
+            {
+                "rank": 1,
+                "db_name": "hassanalshuraiqi",
+                "image_path": "/fr/test_data/train/Hassan_Alshuraiqi.png",
+                "score": 423.03265380859375
+            }
+        ],
+        "exponential_score": 5.0
+    },
+    "SalahAlZadjali_4.jpg": {
+        "ground_truth": "salahalzadjali",
+        "top_results": [
+            {
+                "rank": 1,
+                "db_name": "salahalzadjali",
+                "image_path": "/fr/test_data/train/SalahAlZadjali.jpg",
+                "score": 245.43345642089844
+            }
+        ],
+        "exponential_score": 5.0
+    },
+    "MohammedSalimAlBusaidi.jpg": {
+        "ground_truth": "mohammedsalimalbusaidi",
+        "top_results": [
+            {
+                "rank": 1,
+                "db_name": "mohammedsalimalbusaidi",
+                "image_path": "/fr/test_data/train/MohammedSalimAlBusaidi.jpg",
+                "score": 117.64945983886719
+            }
+        ],
+        "exponential_score": 5.0
+    },
+    "Madiha_Alshibanya_2.jpg": {
+        "ground_truth": "madihaalshibanya",
+        "top_results": [
+            {
+                "rank": 1,
+                "db_name": "madihaalshibanya",
+                "image_path": "/fr/test_data/train/Madiha_Alshibanya.jpg",
+                "score": 200.21983337402344
+            }
+        ],
+        "exponential_score": 5.0
+    },
+    "Muhammed_Almukaini_3.jpeg": {
+        "ground_truth": "muhammedalmukaini",
+        "top_results": [
+            {
+                "rank": 1,
+                "db_name": "muhammedalmukaini",
+                "image_path": "/fr/test_data/train/Muhammed_Almukaini.jpg",
+                "score": 320.4530944824219
+            }
+        ],
+        "exponential_score": 5.0
+    },
+    "Muhammed_Almukaini_1.jpeg": {
+        "ground_truth": "muhammedalmukaini",
+        "top_results": [
+            {
+                "rank": 1,
+                "db_name": "muhammedalmukaini",
+                "image_path": "/fr/test_data/train/Muhammed_Almukaini.jpg",
+                "score": 338.9276123046875
+            }
+        ],
+        "exponential_score": 5.0
+    },
+    "Tawakkol_Karman_5.jpg": {
+        "ground_truth": "tawakkolkarman",
+        "top_results": [
+            {
+                "rank": 1,
+                "db_name": "",
+                "image_path": "/fr/Previous/dataset/5419/5419.jpg",
+                "score": 454.05743408203125
+            },
+            {
+                "rank": 2,
+                "db_name": "rahmaalmhroqi",
+                "image_path": "/fr/test_data/train/Rahma_Almhroqi.jpg",
+                "score": 455.38629150390625
+            },
+            {
+                "rank": 3,
+                "db_name": "tawakkolkarman",
+                "image_path": "/fr/test_data/train/Tawakkol_Karman.jpeg",
+                "score": 465.643310546875
+            }
+        ],
+        "exponential_score": 1.8393972058572117
+    },
+    "YahyaMahfoodhAlMandhari.jpg": {
+        "ground_truth": "yahyamahfoodhalmandhari",
+        "top_results": [
+            {
+                "rank": 1,
+                "db_name": "ahmedalsaiedi",
+                "image_path": "/fr/test_data/train/Ahmed_Alsaiedi.jpg",
+                "score": 325.6572265625
+            },
+            {
+                "rank": 2,
+                "db_name": "yahyamahfoodhalmandhari",
+                "image_path": "/fr/test_data/train/YahyaMahfoodhAlMandhari.jpg",
+                "score": 340.92919921875
+            }
+        ],
+        "exponential_score": 3.032653298563167
+    },
+    "Khalfan_Alaisari_2.jpeg": {
+        "ground_truth": "khalfanalaisari",
+        "top_results": [
+            {
+                "rank": 1,
+                "db_name": "khalfanalaisari",
+                "image_path": "/fr/test_data/train/Khalfan_Alaisari.jpg",
+                "score": 329.86566162109375
+            }
+        ],
+        "exponential_score": 5.0
+    },
+    "SalahAlZadjali_5.jpg": {
+        "ground_truth": "salahalzadjali",
+        "top_results": [
+            {
+                "rank": 1,
+                "db_name": "",
+                "image_path": "/fr/Previous/dataset/6728/6728.jpg",
+                "score": 499.0613708496094
+            },
+            {
+                "rank": 2,
+                "db_name": "",
+                "image_path": "/fr/Previous/dataset/7094/7094.jpg",
+                "score": 523.0311279296875
+            },
+            {
+                "rank": 3,
+                "db_name": "",
+                "image_path": "/fr/Previous/dataset/7596/7596.jpg",
+                "score": 537.261474609375
+            },
+            {
+                "rank": 4,
+                "db_name": "",
+                "image_path": "/fr/Previous/dataset/5434/5434.jpg",
+                "score": 581.967041015625
+            },
+            {
+                "rank": 5,
+                "db_name": "",
+                "image_path": "/fr/Previous/dataset/7480/7480.jpg",
+                "score": 583.9754638671875
+            },
+            {
+                "rank": "Not in top 10",
+                "db_name": null,
+                "image_path": null,
+                "score": 0
+            }
+        ],
+        "exponential_score": 0
+    },
+    "JokhaAlShukaili.png": {
+        "ground_truth": "jokhaalshukaili",
+        "top_results": [
+            {
+                "rank": 1,
+                "db_name": "jokhaalshukaili",
+                "image_path": "/fr/test_data/train/JokhaAlShukaili.jpg",
+                "score": 167.28892517089844
+            }
+        ],
+        "exponential_score": 5.0
+    },
+    "Sultan_Alhabsi_4.jpg": {
+        "ground_truth": "sultanalhabsi",
+        "top_results": [
+            {
+                "rank": 1,
+                "db_name": "sultanalhabsi",
+                "image_path": "/fr/test_data/train/Sultan_Alhabsi.jpg",
+                "score": 196.17330932617188
+            }
+        ],
+        "exponential_score": 5.0
+    },
+    "Rahma_Almhroqi.jpg": {
+        "ground_truth": "rahmaalmhroqi",
+        "top_results": [
+            {
+                "rank": 1,
+                "db_name": "rahmaalmhroqi",
+                "image_path": "/fr/test_data/train/Rahma_Almhroqi.jpg",
+                "score": 105.08128356933594
+            }
+        ],
+        "exponential_score": 5.0
+    },
+    "SalimQattan.jpg": {
+        "ground_truth": "salimqattan",
+        "top_results": [
+            {
+                "rank": 1,
+                "db_name": "",
+                "image_path": "/fr/Previous/dataset/6022/6022.jpg",
+                "score": 377.4783935546875
+            },
+            {
+                "rank": 2,
+                "db_name": "salimqattan",
+                "image_path": "/fr/test_data/train/SalimQattan.jpg",
+                "score": 409.59832763671875
+            }
+        ],
+        "exponential_score": 3.032653298563167
+    },
+    "Alsyaied_the_alyazan_2.jpg": {
+        "ground_truth": "alsyaiedthealyazan",
+        "top_results": [
+            {
+                "rank": 1,
+                "db_name": "alsyaiedthealyazan",
+                "image_path": "/fr/test_data/train/Alsyaied_the_alyazan.jpeg",
+                "score": 158.49819946289062
+            }
+        ],
+        "exponential_score": 5.0
+    },
+    "Sultan_Elomani_2.jpg": {
+        "ground_truth": "sultanelomani",
+        "top_results": [
+            {
+                "rank": 1,
+                "db_name": "",
+                "image_path": "/fr/Previous/dataset/7384/7384.jpg",
+                "score": 387.90167236328125
+            },
+            {
+                "rank": 2,
+                "db_name": "sultanelomani",
+                "image_path": "/fr/test_data/train/Sultan_Elomani.jpeg",
+                "score": 423.6318664550781
+            }
+        ],
+        "exponential_score": 3.032653298563167
+    },
+    "AliSoudAlBimani_5.jpg": {
+        "ground_truth": "alisoudalbimani",
+        "top_results": [
+            {
+                "rank": 1,
+                "db_name": "alisoudalbimani",
+                "image_path": "/fr/test_data/train/AliSoudAlBimani.jpg",
+                "score": 168.2193145751953
+            }
+        ],
+        "exponential_score": 5.0
+    },
+    "SalimQattan_3.jpg": {
+        "ground_truth": "salimqattan",
+        "top_results": [
+            {
+                "rank": 1,
+                "db_name": "salimqattan",
+                "image_path": "/fr/test_data/train/SalimQattan.jpg",
+                "score": 84.92472076416016
+            }
+        ],
+        "exponential_score": 5.0
+    },
+    "SalahAlZadjali_2.jpg": {
+        "ground_truth": "salahalzadjali",
+        "top_results": [
+            {
+                "rank": 1,
+                "db_name": "salahalzadjali",
+                "image_path": "/fr/test_data/train/SalahAlZadjali.jpg",
+                "score": 448.9541320800781
+            }
+        ],
+        "exponential_score": 5.0
+    },
+    "SalahAlZadjali.jpg": {
+        "ground_truth": "salahalzadjali",
+        "top_results": [
+            {
+                "rank": 1,
+                "db_name": "salahalzadjali",
+                "image_path": "/fr/test_data/train/SalahAlZadjali.jpg",
+                "score": 288.1973876953125
+            }
+        ],
+        "exponential_score": 5.0
+    },
+    "Sultan_Alhabsi_3.jpeg": {
+        "ground_truth": "sultanalhabsi",
+        "top_results": [
+            {
+                "rank": 1,
+                "db_name": "sultanalhabsi",
+                "image_path": "/fr/test_data/train/Sultan_Alhabsi.jpg",
+                "score": 304.1737976074219
+            }
+        ],
+        "exponential_score": 5.0
+    },
+    "Saied_ALsaqrai.jpeg": {
+        "ground_truth": "saiedalsaqrai",
+        "top_results": [
+            {
+                "rank": 1,
+                "db_name": "saiedalsaqrai",
+                "image_path": "/fr/test_data/train/Saied_ALsaqrai.jpg",
+                "score": 157.03179931640625
+            }
+        ],
+        "exponential_score": 5.0
+    },
+    "Mishary_Alafasy_3.jpeg": {
+        "ground_truth": "misharyalafasy",
+        "top_results": [
+            {
+                "rank": 1,
+                "db_name": "misharyalafasy",
+                "image_path": "/fr/test_data/train/Mishary_Alafasy.jpeg",
+                "score": 262.4783935546875
+            }
+        ],
+        "exponential_score": 5.0
+    },
+    "obama_3.jpg": {
+        "ground_truth": "obama",
+        "top_results": [
+            {
+                "rank": 1,
+                "db_name": "obama",
+                "image_path": "/fr/test_data/train/obama.jpeg",
+                "score": 267.382080078125
+            }
+        ],
+        "exponential_score": 5.0
+    },
+    "Muhammed_Almukaini_5.jpeg": {
+        "ground_truth": "muhammedalmukaini",
+        "top_results": [
+            {
+                "rank": 1,
+                "db_name": "muhammedalmukaini",
+                "image_path": "/fr/test_data/train/Muhammed_Almukaini.jpg",
+                "score": 382.17529296875
+            }
+        ],
+        "exponential_score": 5.0
+    },
+    "Mohammedalbarwani_4.jpeg": {
+        "ground_truth": "mohammedalbarwani",
+        "top_results": [
+            {
+                "rank": 1,
+                "db_name": "mohammedalbarwani",
+                "image_path": "/fr/test_data/train/Mohammedalbarwani.jpg",
+                "score": 272.64581298828125
+            }
+        ],
+        "exponential_score": 5.0
+    },
+    "Alsyaied_the_alyazan_5.jpg": {
+        "ground_truth": "alsyaiedthealyazan",
+        "top_results": [
+            {
+                "rank": 1,
+                "db_name": "alsyaiedthealyazan",
+                "image_path": "/fr/test_data/train/Alsyaied_the_alyazan.jpeg",
+                "score": 209.24002075195312
+            }
+        ],
+        "exponential_score": 5.0
+    },
+    "SultanMajidAlAbri_3.jpeg": {
+        "ground_truth": "sultanmajidalabri",
+        "top_results": [
+            {
+                "rank": 1,
+                "db_name": "sultanmajidalabri",
+                "image_path": "/fr/test_data/train/SultanMajidAlAbri.jpg",
+                "score": 205.39935302734375
+            }
+        ],
+        "exponential_score": 5.0
+    },
+    "Khalfan_Alaisari_3.jpg": {
+        "ground_truth": "khalfanalaisari",
+        "top_results": [
+            {
+                "rank": 1,
+                "db_name": "khalfanalaisari",
+                "image_path": "/fr/test_data/train/Khalfan_Alaisari.jpg",
+                "score": 295.23101806640625
+            }
+        ],
+        "exponential_score": 5.0
+    },
+    "Ali_Alhabsi.jpg": {
+        "ground_truth": "alialhabsi",
+        "top_results": [
+            {
+                "rank": 1,
+                "db_name": "alialhabsi",
+                "image_path": "/fr/test_data/train/Ali_Alhabsi.jpg",
+                "score": 393.3597717285156
+            }
+        ],
+        "exponential_score": 5.0
+    },
+    "SalimAlRuzaiqi_3.jpg": {
+        "ground_truth": "salimalruzaiqi",
+        "top_results": [
+            {
+                "rank": 1,
+                "db_name": "salimalruzaiqi",
+                "image_path": "/fr/test_data/train/SalimAlRuzaiqi.jpg",
+                "score": 474.6229248046875
+            }
+        ],
+        "exponential_score": 5.0
+    },
+    "HamedSalimAlRawahi.jpg": {
+        "ground_truth": "hamedsalimalrawahi",
+        "top_results": [
+            {
+                "rank": 1,
+                "db_name": "hamedsalimalrawahi",
+                "image_path": "/fr/test_data/train/HamedSalimAlRawahi.jpg",
+                "score": 185.356201171875
+            }
+        ],
+        "exponential_score": 5.0
+    },
+    "Suod_Alhabsi_2.jpg": {
+        "ground_truth": "suodalhabsi",
+        "top_results": [
+            {
+                "rank": 1,
+                "db_name": "suodalhabsi.jpg",
+                "image_path": "/fr/test_data/train/Suod_Alhabsi.jpg.jpg",
+                "score": 208.02340698242188
+            },
+            {
+                "rank": 2,
+                "db_name": "",
+                "image_path": "/fr/Previous/dataset/6038/6038.jpg",
+                "score": 459.6529541015625
+            },
+            {
+                "rank": 3,
+                "db_name": "saiedalsaqrai",
+                "image_path": "/fr/test_data/train/Saied_ALsaqrai.jpg",
+                "score": 546.8836669921875
+            },
+            {
+                "rank": 4,
+                "db_name": "hamedsalimalrawahi",
+                "image_path": "/fr/test_data/train/HamedSalimAlRawahi.jpg",
+                "score": 564.4052734375
+            },
+            {
+                "rank": 5,
+                "db_name": "alsayidbadaralbusaidi",
+                "image_path": "/fr/test_data/train/Alsayid_Badar_Albusaidi.jpg",
+                "score": 593.542236328125
+            },
+            {
+                "rank": "Not in top 10",
+                "db_name": null,
+                "image_path": null,
+                "score": 0
+            }
+        ],
+        "exponential_score": 0
+    },
+    "obama_6.jpg": {
+        "ground_truth": "obama",
+        "top_results": [
+            {
+                "rank": 1,
+                "db_name": "obama",
+                "image_path": "/fr/test_data/train/obama.jpeg",
+                "score": 239.2332305908203
+            }
+        ],
+        "exponential_score": 5.0
+    },
+    "Alsayid_Badar_Albusaidi_1.jpeg": {
+        "ground_truth": "alsayidbadaralbusaidi",
+        "top_results": [
+            {
+                "rank": 1,
+                "db_name": "alsayidbadaralbusaidi",
+                "image_path": "/fr/test_data/train/Alsayid_Badar_Albusaidi.jpg",
+                "score": 160.2894744873047
+            }
+        ],
+        "exponential_score": 5.0
+    },
+    "Tawakkol_Karman_3.jpg": {
+        "ground_truth": "tawakkolkarman",
+        "top_results": [
+            {
+                "rank": 1,
+                "db_name": "tawakkolkarman",
+                "image_path": "/fr/test_data/train/Tawakkol_Karman.jpeg",
+                "score": 354.40545654296875
+            }
+        ],
+        "exponential_score": 5.0
+    },
+    "AliSoudAlBimani_2.jpg": {
+        "ground_truth": "alisoudalbimani",
+        "top_results": [
+            {
+                "rank": 1,
+                "db_name": "",
+                "image_path": "/fr/Previous/dataset/7573/7573.jpg",
+                "score": 437.5050048828125
+            },
+            {
+                "rank": 2,
+                "db_name": "",
+                "image_path": "/fr/Previous/dataset/6483/6483.jpg",
+                "score": 477.199951171875
+            },
+            {
+                "rank": 3,
+                "db_name": "",
+                "image_path": "/fr/Previous/dataset/6102/6102.jpg",
+                "score": 477.7579345703125
+            },
+            {
+                "rank": 4,
+                "db_name": "",
+                "image_path": "/fr/Previous/dataset/6352/6352.jpg",
+                "score": 494.8255615234375
+            },
+            {
+                "rank": 5,
+                "db_name": "",
+                "image_path": "/fr/Previous/dataset/6982/6982.jpg",
+                "score": 495.269775390625
+            },
+            {
+                "rank": "Not in top 10",
+                "db_name": null,
+                "image_path": null,
+                "score": 0
+            }
+        ],
+        "exponential_score": 0
+    },
+    "Alsayid_khalid_Albusaidi_2.jpeg": {
+        "ground_truth": "alsayidkhalidalbusaidi",
+        "top_results": [
+            {
+                "rank": 1,
+                "db_name": "alsayidkhalidalbusaidi",
+                "image_path": "/fr/test_data/train/Alsayid_khalid_Albusaidi.jpg",
+                "score": 197.56446838378906
+            }
+        ],
+        "exponential_score": 5.0
+    },
+    "obama_4.jpg": {
+        "ground_truth": "obama",
+        "top_results": [
+            {
+                "rank": 1,
+                "db_name": "obama",
+                "image_path": "/fr/test_data/train/obama.jpeg",
+                "score": 146.60433959960938
+            }
+        ],
+        "exponential_score": 5.0
+    },
+    "Alsyaied_the_alyazan_3.jpeg": {
+        "ground_truth": "alsyaiedthealyazan",
+        "top_results": [
+            {
+                "rank": 1,
+                "db_name": "alsyaiedthealyazan",
+                "image_path": "/fr/test_data/train/Alsyaied_the_alyazan.jpeg",
+                "score": 136.44223022460938
+            }
+        ],
+        "exponential_score": 5.0
+    },
+    "DrLamyaAlHaj_4.jpg": {
+        "ground_truth": "drlamyaalhaj",
+        "top_results": [
+            {
+                "rank": 1,
+                "db_name": "drlamyaalhaj",
+                "image_path": "/fr/test_data/train/DrLamyaAlHaj.jpg",
+                "score": 296.8604431152344
+            }
+        ],
+        "exponential_score": 5.0
+    },
+    "Suod_Alhabsi.jpg": {
+        "ground_truth": "suodalhabsi",
+        "top_results": [
+            {
+                "rank": 1,
+                "db_name": "suodalhabsi.jpg",
+                "image_path": "/fr/test_data/train/Suod_Alhabsi.jpg.jpg",
+                "score": 368.27349853515625
+            },
+            {
+                "rank": 2,
+                "db_name": "hamedsalimalrawahi",
+                "image_path": "/fr/test_data/train/HamedSalimAlRawahi.jpg",
+                "score": 490.21282958984375
+            },
+            {
+                "rank": 3,
+                "db_name": "",
+                "image_path": "/fr/Previous/dataset/6038/6038.jpg",
+                "score": 493.96923828125
+            },
+            {
+                "rank": 4,
+                "db_name": "saiedalsaqrai",
+                "image_path": "/fr/test_data/train/Saied_ALsaqrai.jpg",
+                "score": 525.7686767578125
+            },
+            {
+                "rank": 5,
+                "db_name": "",
+                "image_path": "/fr/Previous/dataset/6699471767/6699471767.jpg",
+                "score": 560.5172119140625
+            },
+            {
+                "rank": "Not in top 10",
+                "db_name": null,
+                "image_path": null,
+                "score": 0
+            }
+        ],
+        "exponential_score": 0
+    },
+    "Tawakkol_Karman_4.jpg": {
+        "ground_truth": "tawakkolkarman",
+        "top_results": [
+            {
+                "rank": 1,
+                "db_name": "rahmaalmhroqi",
+                "image_path": "/fr/test_data/train/Rahma_Almhroqi.jpg",
+                "score": 436.63055419921875
+            },
+            {
+                "rank": 2,
+                "db_name": "jokhaalshukaili",
+                "image_path": "/fr/test_data/train/JokhaAlShukaili.jpg",
+                "score": 466.70989990234375
+            },
+            {
+                "rank": 3,
+                "db_name": "",
+                "image_path": "/fr/Previous/dataset/6223/6223.jpg",
+                "score": 483.516845703125
+            },
+            {
+                "rank": 4,
+                "db_name": "",
+                "image_path": "/fr/Previous/dataset/6500/6500.jpg",
+                "score": 544.3926391601562
+            },
+            {
+                "rank": 5,
+                "db_name": "",
+                "image_path": "/fr/Previous/dataset/6231875566/6231875566.jpg",
+                "score": 545.3389892578125
+            }
+        ],
+        "exponential_score": 0.410424993119494
+    },
+    "Alsayid_Badar_Albusaidi.jpg": {
+        "ground_truth": "alsayidbadaralbusaidi",
+        "top_results": [
+            {
+                "rank": 1,
+                "db_name": "alsayidbadaralbusaidi",
+                "image_path": "/fr/test_data/train/Alsayid_Badar_Albusaidi.jpg",
+                "score": 175.9148406982422
+            }
+        ],
+        "exponential_score": 5.0
+    },
+    "Muhammed_Almukaini_6.jpeg": {
+        "ground_truth": "muhammedalmukaini",
+        "top_results": [
+            {
+                "rank": 1,
+                "db_name": "",
+                "image_path": "/fr/Previous/dataset/7210/7210.jpg",
+                "score": 421.69482421875
+            },
+            {
+                "rank": 2,
+                "db_name": "muhammedalmukaini",
+                "image_path": "/fr/test_data/train/Muhammed_Almukaini.jpg",
+                "score": 422.389404296875
+            }
+        ],
+        "exponential_score": 3.032653298563167
+    },
+    "Alsyaied_the_alyazan_4.jpg": {
+        "ground_truth": "alsyaiedthealyazan",
+        "top_results": [
+            {
+                "rank": 1,
+                "db_name": "alsyaiedthealyazan",
+                "image_path": "/fr/test_data/train/Alsyaied_the_alyazan.jpeg",
+                "score": 226.29132080078125
+            }
+        ],
+        "exponential_score": 5.0
+    },
+    "Khalfan_Alaisari_4.jpeg": {
+        "ground_truth": "khalfanalaisari",
+        "top_results": [
+            {
+                "rank": 1,
+                "db_name": "khalfanalaisari",
+                "image_path": "/fr/test_data/train/Khalfan_Alaisari.jpg",
+                "score": 257.4223327636719
+            }
+        ],
+        "exponential_score": 5.0
+    },
+    "Sultan_Alhabsi.jpg": {
+        "ground_truth": "sultanalhabsi",
+        "top_results": [
+            {
+                "rank": 1,
+                "db_name": "sultanalhabsi",
+                "image_path": "/fr/test_data/train/Sultan_Alhabsi.jpg",
+                "score": 367.1546936035156
+            }
+        ],
+        "exponential_score": 5.0
+    },
+    "AidaAlHajri.jpg": {
+        "ground_truth": "aidaalhajri",
+        "top_results": [
+            {
+                "rank": 1,
+                "db_name": "aidaalhajri",
+                "image_path": "/fr/test_data/train/AidaAlHajri.jpg",
+                "score": 153.26075744628906
+            }
+        ],
+        "exponential_score": 5.0
+    },
+    "obama_1.jpg": {
+        "ground_truth": "obama",
+        "top_results": [
+            {
+                "rank": 1,
+                "db_name": "obama",
+                "image_path": "/fr/test_data/train/obama.jpeg",
+                "score": 287.7630920410156
+            }
+        ],
+        "exponential_score": 5.0
+    },
+    "Alsyaied_the_alyazan_6.jpeg": {
+        "ground_truth": "alsyaiedthealyazan",
+        "top_results": [
+            {
+                "rank": 1,
+                "db_name": "alsyaiedthealyazan",
+                "image_path": "/fr/test_data/train/Alsyaied_the_alyazan.jpeg",
+                "score": 135.91445922851562
+            }
+        ],
+        "exponential_score": 5.0
+    },
+    "Alsyaied_the_alyazan.jpeg": {
+        "ground_truth": "alsyaiedthealyazan",
+        "top_results": [
+            {
+                "rank": 1,
+                "db_name": "alsyaiedthealyazan",
+                "image_path": "/fr/test_data/train/Alsyaied_the_alyazan.jpeg",
+                "score": 168.30735778808594
+            }
+        ],
+        "exponential_score": 5.0
+    },
+    "DrLamyaAlHaj_2.jpg": {
+        "ground_truth": "drlamyaalhaj",
+        "top_results": [
+            {
+                "rank": 1,
+                "db_name": "drlamyaalhaj",
+                "image_path": "/fr/test_data/train/DrLamyaAlHaj.jpg",
+                "score": 369.307861328125
+            }
+        ],
+        "exponential_score": 5.0
+    },
+    "Rahma_Almhroqi_5.jpg": {
+        "ground_truth": "rahmaalmhroqi",
+        "top_results": [
+            {
+                "rank": 1,
+                "db_name": "rahmaalmhroqi",
+                "image_path": "/fr/test_data/train/Rahma_Almhroqi.jpg",
+                "score": 147.9608154296875
+            }
+        ],
+        "exponential_score": 5.0
+    },
+    "Rahma_Almhroqi_2.jpeg": {
+        "ground_truth": "rahmaalmhroqi",
+        "top_results": [
+            {
+                "rank": 1,
+                "db_name": "rahmaalmhroqi",
+                "image_path": "/fr/test_data/train/Rahma_Almhroqi.jpg",
+                "score": 122.40817260742188
+            }
+        ],
+        "exponential_score": 5.0
+    },
+    "Madiha_Alshibanya_3.jpeg": {
+        "ground_truth": "madihaalshibanya",
+        "top_results": [
+            {
+                "rank": 1,
+                "db_name": "madihaalshibanya",
+                "image_path": "/fr/test_data/train/Madiha_Alshibanya.jpg",
+                "score": 350.20330810546875
+            }
+        ],
+        "exponential_score": 5.0
+    },
+    "TawfeeqAlLawati_2.jpeg": {
+        "ground_truth": "tawfeeqallawati",
+        "top_results": [
+            {
+                "rank": 1,
+                "db_name": "tawfeeqallawati",
+                "image_path": "/fr/test_data/train/TawfeeqAlLawati.jpg",
+                "score": 281.54345703125
+            }
+        ],
+        "exponential_score": 5.0
+    },
+    "Mishary_Alafasy_2.jpeg": {
+        "ground_truth": "misharyalafasy",
+        "top_results": [
+            {
+                "rank": 1,
+                "db_name": "misharyalafasy",
+                "image_path": "/fr/test_data/train/Mishary_Alafasy.jpeg",
+                "score": 205.69227600097656
+            }
+        ],
+        "exponential_score": 5.0
+    },
+    "Mohammedalbarwani_3.jpg": {
+        "ground_truth": "mohammedalbarwani",
+        "top_results": [
+            {
+                "rank": 1,
+                "db_name": "mohammedalbarwani",
+                "image_path": "/fr/test_data/train/Mohammedalbarwani.jpg",
+                "score": 190.1033477783203
+            }
+        ],
+        "exponential_score": 5.0
+    },
+    "SultanMajidAlAbri_2.jpg": {
+        "ground_truth": "sultanmajidalabri",
+        "top_results": [
+            {
+                "rank": 1,
+                "db_name": "abdullahalsaiedi",
+                "image_path": "/fr/test_data/train/Abdullah_Alsaiedi.jpeg",
+                "score": 386.16033935546875
+            },
+            {
+                "rank": 2,
+                "db_name": "alsayidkhalidalbusaidi",
+                "image_path": "/fr/test_data/train/Alsayid_khalid_Albusaidi.jpg",
+                "score": 439.851806640625
+            },
+            {
+                "rank": 3,
+                "db_name": "sultanmajidalabri",
+                "image_path": "/fr/test_data/train/SultanMajidAlAbri.jpg",
+                "score": 441.52593994140625
+            }
+        ],
+        "exponential_score": 1.8393972058572117
+    },
+    "Hunaina_AlMughairy.jpg": {
+        "ground_truth": "hunainaalmughairy",
+        "top_results": [
+            {
+                "rank": 1,
+                "db_name": "hunainaalmughairy",
+                "image_path": "/fr/test_data/train/Hunaina_AlMughairy.jpg",
+                "score": 209.41226196289062
+            }
+        ],
+        "exponential_score": 5.0
+    },
+    "JokhaAlShukaili_3.jpeg": {
+        "ground_truth": "jokhaalshukaili",
+        "top_results": [
+            {
+                "rank": 1,
+                "db_name": "jokhaalshukaili",
+                "image_path": "/fr/test_data/train/JokhaAlShukaili.jpg",
+                "score": 268.5220642089844
+            }
+        ],
+        "exponential_score": 5.0
+    },
+    "HamedSalimAlRawahi_2.jpg": {
+        "ground_truth": "hamedsalimalrawahi",
+        "top_results": [
+            {
+                "rank": 1,
+                "db_name": "hamedsalimalrawahi",
+                "image_path": "/fr/test_data/train/HamedSalimAlRawahi.jpg",
+                "score": 234.83355712890625
+            }
+        ],
+        "exponential_score": 5.0
+    },
+    "SalimAlRuzaiqi_2.jpg": {
+        "ground_truth": "salimalruzaiqi",
+        "top_results": [
+            {
+                "rank": 1,
+                "db_name": "",
+                "image_path": "/fr/Previous/dataset/7576/7576.jpg",
+                "score": 414.06304931640625
+            },
+            {
+                "rank": 2,
+                "db_name": "",
+                "image_path": "/fr/Previous/dataset/4191015355/4191015355.jpg",
+                "score": 425.95904541015625
+            },
+            {
+                "rank": 3,
+                "db_name": "",
+                "image_path": "/fr/Previous/dataset/4307156631/4307156631.jpg",
+                "score": 425.95904541015625
+            },
+            {
+                "rank": 4,
+                "db_name": "",
+                "image_path": "/fr/Previous/dataset/6279370333/6279370333.jpg",
+                "score": 425.95904541015625
+            },
+            {
+                "rank": 5,
+                "db_name": "",
+                "image_path": "/fr/Previous/dataset/7125/7125.jpg",
+                "score": 430.95404052734375
+            },
+            {
+                "rank": "Not in top 10",
+                "db_name": null,
+                "image_path": null,
+                "score": 0
+            }
+        ],
+        "exponential_score": 0
+    },
+    "Suod_Alhabsi_3.jpg": {
+        "ground_truth": "suodalhabsi",
+        "top_results": [
+            {
+                "rank": 1,
+                "db_name": "suodalhabsi.jpg",
+                "image_path": "/fr/test_data/train/Suod_Alhabsi.jpg.jpg",
+                "score": 218.96295166015625
+            },
+            {
+                "rank": 2,
+                "db_name": "hamedsalimalrawahi",
+                "image_path": "/fr/test_data/train/HamedSalimAlRawahi.jpg",
+                "score": 470.11480712890625
+            },
+            {
+                "rank": 3,
+                "db_name": "saiedalsaqrai",
+                "image_path": "/fr/test_data/train/Saied_ALsaqrai.jpg",
+                "score": 482.0843200683594
+            },
+            {
+                "rank": 4,
+                "db_name": "abdullahalbakri",
+                "image_path": "/fr/test_data/train/Abdullah_Albakri.jpg",
+                "score": 493.88427734375
+            },
+            {
+                "rank": 5,
+                "db_name": "alsayidkhalidalbusaidi",
+                "image_path": "/fr/test_data/train/Alsayid_khalid_Albusaidi.jpg",
+                "score": 525.6844482421875
+            },
+            {
+                "rank": "Not in top 10",
+                "db_name": null,
+                "image_path": null,
+                "score": 0
+            }
+        ],
+        "exponential_score": 0
+    },
+    "total_score": 613.0464301575198,
+    "max_possible_score": 705,
+    "accuracy_percentage": 86.95694044787516
+}

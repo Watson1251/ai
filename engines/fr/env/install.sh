@@ -10,3 +10,4 @@ pip install dlib
 pip install facenet-pytorch
 pip install mediapipe
 pip install ultralytics
+pip install tensorflow==2.13

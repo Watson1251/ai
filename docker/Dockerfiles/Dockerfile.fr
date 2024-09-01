@@ -1,13 +1,11 @@
 # Use the official Ubuntu 20.04 image as the base image
-FROM nvidia/cuda:12.2.2-cudnn8-devel-ubuntu20.04
+FROM nvidia/cuda:11.8.0-cudnn8-devel-ubuntu20.04
 
 # Set environment variables
 ENV DEBIAN_FRONTEND=noninteractive
 
 # Clean up and update the system, then install necessary packages
-RUN apt-get clean && \
-    rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* && \
-    apt-get update && \
+RUN apt-get update && \
     apt-get install -y \
     build-essential \
     curl \
@@ -19,7 +17,7 @@ RUN apt-get clean && \
     python3.8 \
     python3.8-dev \
     python3-pip \
-    libgl1-mesa-glx && \
+    libgl1-mesa-glx \
     cmake && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
@@ -39,7 +37,7 @@ COPY docker/DockerHelpers/engine-fr-services.sh /engine-fr-services.sh
 WORKDIR /fr
 
 # Create the conda environment
-RUN conda create -y --name fr python=3.12
+RUN conda create -y --name fr python=3.10
 
 # Install cuDNN
 # RUN wget https://developer.download.nvidia.com/compute/cudnn/9.3.0/local_installers/cudnn-local-repo-ubuntu2004-9.3.0_1.0-1_amd64.deb && \
@@ -53,11 +51,11 @@ RUN conda create -y --name fr python=3.12
 # Activate the environment and install Python packages
 RUN /bin/bash -c "source activate fr && bash /fr/env/install.sh"
 
+# Download all deepface's models
+# RUN /bin/bash -c "source activate fr && python env/download.py"
+
 # Ensure the "fr" environment is activated in every shell
 RUN echo "source /opt/conda/bin/activate fr" >> ~/.bashrc
-
-# Download all deepface's models
-RUN /bin/bash -c "python src/download.py"
 
 # Expose FastAPI application port
 EXPOSE 8000
