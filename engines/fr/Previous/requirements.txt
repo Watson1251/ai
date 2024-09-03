@@ -1,6 +1,0 @@
-facenet-pytorch
-numpy
-opencv-python-headless
-Pillow
-matplotlib
-tqdm

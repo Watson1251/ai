@@ -4,7 +4,7 @@ import numpy as np
 
 tf.config.experimental.enable_op_determinism()
 
-class FaceRecognition2:
+class FaceRecognition:
     def __init__(self, detector="retinaface", recognition_model='Facenet512', align=True):
         self.detector = detector
         self.recognition_model = recognition_model
