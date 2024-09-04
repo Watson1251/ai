@@ -1,7 +1,7 @@
 import os
 from milvus_manager import MilvusManager
 from face_recognition import FaceRecognition
-from data_loader import DataLoader
+from image_to_db import ImageToDB
 
 
 def search_face(milvus_manager, face_recognition, image_path, top_k=10):
@@ -40,9 +40,12 @@ def search_face(milvus_manager, face_recognition, image_path, top_k=10):
 def main():
 
     # model configuration
-    detector = "retinaface"
-    align = True
-    recognition_model = 'Facenet512'
+    model_params = {
+        "detector": "retinaface",
+        "recognition_model": 'Facenet512',
+        "is_align": True
+    }
+
     embedding_dim = 512
     similarity_metric = "L2"
     # similarity_metric = "IP" # Use Inner Product (Cosine Similarity) for similarity search
@@ -61,8 +64,8 @@ def main():
 
     # Initialize components
     milvus_manager = MilvusManager(index_params=index_params, search_params=search_params, model_dim=embedding_dim)
-    face_recognition = FaceRecognition(detector=detector, recognition_model=recognition_model, align=align)
-    data_loader = DataLoader(milvus_manager, face_recognition)
+    face_recognition = FaceRecognition()
+    data_loader = ImageToDB(milvus_manager)
 
     # Example usage
     dataset_path = '/fr/dataset'

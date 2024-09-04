@@ -5,10 +5,10 @@ import numpy as np
 tf.config.experimental.enable_op_determinism()
 
 class FaceRecognition:
-    def __init__(self, detector="retinaface", recognition_model='Facenet512', align=True):
-        self.detector = detector
-        self.recognition_model = recognition_model
-        self.align = align
+    def __init__(self, model_params={"detector": "retinaface", "recognition_model": 'Facenet512', "is_align": True}):
+        self.detector = model_params["detector"]
+        self.recognition_model = model_params["recognition_model"]
+        self.align = model_params["is_align"]
 
     def extract_embedding(self, image_path):
         embedding = None
@@ -21,6 +21,8 @@ class FaceRecognition:
             
             # Convert to list if needed
             embedding = embedding.tolist()
+
+            tf.keras.backend.clear_session()
         except Exception as e:
             pass
         return embedding
