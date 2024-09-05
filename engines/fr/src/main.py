@@ -69,6 +69,7 @@ def main():
 
     # Example usage
     dataset_path = '/fr/dataset'
+    dataset_path = '/fr/large_dataset'
     img1 = '/fr/obama.jpg'
     img2 = '/fr/lookalike.jpg'
 
