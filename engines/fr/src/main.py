@@ -2,6 +2,7 @@ import os
 from milvus_manager import MilvusManager
 from face_recognition import FaceRecognition
 from image_to_db import ImageToDB
+from rabbit_mq import RabbitMQ
 
 
 def search_face(milvus_manager, face_recognition, image_path, top_k=10):
@@ -37,7 +38,7 @@ def search_face(milvus_manager, face_recognition, image_path, top_k=10):
             index += 1  # Increment the index for each row
 
 
-def main():
+def main(rabbit_mq):
 
     # model configuration
     model_params = {
@@ -65,7 +66,7 @@ def main():
     # Initialize components
     milvus_manager = MilvusManager(index_params=index_params, search_params=search_params, model_dim=embedding_dim)
     face_recognition = FaceRecognition()
-    data_loader = ImageToDB(milvus_manager)
+    data_loader = ImageToDB(milvus_manager, rabbit_mq)
 
     # Example usage
     dataset_path = '/fr/dataset'
@@ -79,5 +80,17 @@ def main():
     # Search for a face
     # search_face(milvus_manager, face_recognition, img2, top_k=50)
 
+    # close connection
+
 if __name__ == "__main__":
-    main()
+
+    # Initialize RabbitMQ
+    rabbit_mq = RabbitMQ()
+    if rabbit_mq is None:
+        print("Cannot connect to RabbitMQ")
+    else:
+        # Start the main function
+        main(rabbit_mq)
+
+        # close connection
+        rabbit_mq.close_connection()

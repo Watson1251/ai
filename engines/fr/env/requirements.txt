@@ -1,6 +1,12 @@
-facenet-pytorch
-numpy
-opencv-python-headless
-Pillow
+deepface
+tf_keras
 matplotlib
-tqdm
+pymilvus
+torch
+torchvision
+dlib
+facenet-pytorch
+mediapipe
+ultralytics
+pika
+tensorflow==2.13
