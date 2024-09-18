@@ -28,8 +28,11 @@ class RabbitMQ:
             try:
                 self.connection = pika.BlockingConnection(parameters)
                 self.channel = self.connection.channel()
+
                 # Declare queues once connected
                 self.channel.queue_declare(queue='image_paths', durable=True)
+                self.channel.queue_declare(queue='corrupt_image_paths', durable=True)
+
                 print("Connected to RabbitMQ")
                 break
             except pika.exceptions.AMQPConnectionError as e:

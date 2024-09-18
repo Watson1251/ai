@@ -1,10 +1,11 @@
 from pymilvus import connections, FieldSchema, CollectionSchema, DataType, Collection, utility
 
 class MilvusData:
-    def __init__(self, person_id, image_path, embedding):
+    def __init__(self, person_id, image_path, tag, embedding):
         self.person_id = str(person_id)  # Ensure person_id is a string
         self.image_path = image_path
         self.embedding = embedding
+        self.tag = tag
 
 class MilvusManager:
     def __init__(self, host="standalone", port="19530", collection_name="faces", model_dim=512, index_params=None, search_params=None):

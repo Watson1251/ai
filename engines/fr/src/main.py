@@ -66,16 +66,16 @@ def main(rabbit_mq):
     # Initialize components
     milvus_manager = MilvusManager(index_params=index_params, search_params=search_params, model_dim=embedding_dim)
     face_recognition = FaceRecognition()
-    data_loader = ImageToDB(milvus_manager, rabbit_mq)
+    data_loader = ImageToDB(milvus_manager, face_recognition, rabbit_mq)
 
     # Example usage
     dataset_path = '/fr/dataset'
-    dataset_path = '/fr/large_dataset'
-    img1 = '/fr/obama.jpg'
-    img2 = '/fr/lookalike.jpg'
+    # dataset_path = '/fr/large_dataset'
+
+    do_publish = True
 
     # Ingest the dataset
-    data_loader.process_dataset(dataset_path)
+    data_loader.process_dataset(dataset_path, do_publish)
 
     # Search for a face
     # search_face(milvus_manager, face_recognition, img2, top_k=50)
