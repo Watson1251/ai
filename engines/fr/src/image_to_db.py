@@ -13,18 +13,26 @@ def get_embedding(rabbit_data):
     if fr_global is None:
         raise Exception("Face recognition model is not initialized")
     
-    embedding = fr_global.extract_embedding(image_path)
+    faces = fr_global.extract_embedding(image_path)
 
     # Get the base name (filename with extension), then strip the extension, then make sure to handle underscores
     base_name = os.path.basename(image_path)
     label = os.path.splitext(base_name)[0]
     id = label.split('_')[0]
 
+    # only process face with highest confidence
+    if len(faces) > 1:
+        faces = [max(faces, key=lambda x: x.face_confidence)]
+    target_face = faces[0]
+
+    embedding = target_face.embedding
+    facial_area = target_face.facial_area
     record: MilvusData = MilvusData(
                         person_id=id,
                         image_path=image_path,
                         tag=rabbit_data['tag'],
-                        embedding=embedding
+                        embedding=embedding,
+                        facial_area=facial_area
                     )
     
     return record
@@ -106,15 +114,14 @@ class ImageToDB:
     
     def process_records(self, records):
         processed_records = []
-
         for record in records:
             if record.embedding is not None:
+                print(f"[+] Extracted embedding from {record.image_path}")
                 processed_records.append(record)
             else:
                 # publish to corrupt_image_paths queue, and ack message
                 self.rabbit_mq.publish(message=record.image_path, queue=self.corrupt_queue)
                 self.rabbit_mq.ack_message(record.tag)
-        
         return processed_records
 
     def process_dataset(self, dataset_path, do_publish=False, targeted_workers=12):
@@ -138,7 +145,7 @@ class ImageToDB:
             processed_records = self.process_records(records)
 
             # insert to db
-            self.insert_to_db(processed_records, False)
+            self.insert_to_db(processed_records, load_collection=False)
         
 
 

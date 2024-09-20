@@ -1,10 +1,11 @@
 from pymilvus import connections, FieldSchema, CollectionSchema, DataType, Collection, utility
 
 class MilvusData:
-    def __init__(self, person_id, image_path, tag, embedding):
+    def __init__(self, person_id, image_path, tag, embedding, facial_area):
         self.person_id = str(person_id)  # Ensure person_id is a string
         self.image_path = image_path
         self.embedding = embedding
+        self.facial_area = facial_area
         self.tag = tag
 
 class MilvusManager:
@@ -18,6 +19,7 @@ class MilvusManager:
             FieldSchema(name="record_id", dtype=DataType.INT64, is_primary=True, auto_id=True),
             FieldSchema(name="person_id", dtype=DataType.VARCHAR, max_length=100),  # person_id as string
             FieldSchema(name="Facenet512", dtype=DataType.FLOAT_VECTOR, dim=self.model_dim),
+            FieldSchema(name="facial_area", dtype=DataType.VARCHAR, max_length=100),# 8 items: [x, y, w, h, left_eye_x, left_eye_y, right_eye_x, right_eye_y]
             FieldSchema(name="image_path", dtype=DataType.VARCHAR, max_length=100),
         ]
 
@@ -39,6 +41,7 @@ class MilvusManager:
         entities = [
             [record.person_id for record in records],
             [record.embedding for record in records],
+            [record.facial_area for record in records],
             [record.image_path for record in records]
         ]
         
@@ -50,7 +53,7 @@ class MilvusManager:
             self.collection.load()
     
     def search(self, embedding, top_k):
-        return self.collection.search([embedding], "Facenet512", self.search_params, top_k)
+        return self.collection.search([embedding], "Facenet512", self.search_params, top_k) # type: ignore
 
     def get_image_path(self, record_id):
         return self.collection.query(expr=f"record_id == {record_id}", output_fields=["image_path"])[0]["image_path"]

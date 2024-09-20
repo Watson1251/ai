@@ -5,6 +5,48 @@ from image_to_db import ImageToDB
 from rabbit_mq import RabbitMQ
 
 
+# Example usage
+dataset_path = '/fr/dataset'
+# dataset_path = '/fr/large_dataset'
+
+targeted_workers = 12
+do_publish = True
+
+embedding_dim = 512
+similarity_metric = "L2"
+# similarity_metric = "IP" # Use Inner Product (Cosine Similarity) for similarity search
+
+# model configuration
+model_params = {
+    "detector": "retinaface",
+    "recognition_model": 'Facenet512',
+    "is_align": True
+}
+
+# Set up index and search parameters
+index_params = {
+    "index_type": "IVF_PQ",
+    "params": {"nlist": 32768, "m": 64},
+    "metric_type": similarity_metric
+}
+
+search_params = {
+    "metric_type": similarity_metric,
+    "params": {"nprobe": 128}
+}
+
+# Initialize RabbitMQ
+rabbit_mq = RabbitMQ()
+if rabbit_mq is None:
+    print("Cannot connect to RabbitMQ")
+    exit()
+
+# Initialize components
+milvus_manager = MilvusManager(index_params=index_params, search_params=search_params, model_dim=embedding_dim)
+face_recognition = FaceRecognition(model_params)
+data_loader = ImageToDB(milvus_manager, face_recognition, rabbit_mq)
+
+
 def search_face(milvus_manager, face_recognition, image_path, top_k=10):
     embedding = face_recognition.extract_embedding(image_path)
     if embedding is None:
@@ -38,59 +80,25 @@ def search_face(milvus_manager, face_recognition, image_path, top_k=10):
             index += 1  # Increment the index for each row
 
 
+def injest():
+    # Ingest the dataset
+    data_loader.process_dataset(dataset_path, do_publish, targeted_workers)
+
+
 def main(rabbit_mq):
 
-    # model configuration
-    model_params = {
-        "detector": "retinaface",
-        "recognition_model": 'Facenet512',
-        "is_align": True
-    }
-
-    embedding_dim = 512
-    similarity_metric = "L2"
-    # similarity_metric = "IP" # Use Inner Product (Cosine Similarity) for similarity search
-
-    # Set up index and search parameters
-    index_params = {
-        "index_type": "IVF_PQ",
-        "params": {"nlist": 32768, "m": 64},
-        "metric_type": similarity_metric
-    }
-
-    search_params = {
-        "metric_type": similarity_metric,
-        "params": {"nprobe": 128}
-    }
-
-    # Initialize components
-    milvus_manager = MilvusManager(index_params=index_params, search_params=search_params, model_dim=embedding_dim)
-    face_recognition = FaceRecognition(model_params)
-    data_loader = ImageToDB(milvus_manager, face_recognition, rabbit_mq)
-
-    # Example usage
-    dataset_path = '/fr/dataset'
-    # dataset_path = '/fr/large_dataset'
-
-    do_publish = True
-
     # Ingest the dataset
-    data_loader.process_dataset(dataset_path, do_publish)
+    injest()
 
     # Search for a face
     # search_face(milvus_manager, face_recognition, img2, top_k=50)
 
-    # close connection
 
 if __name__ == "__main__":
 
-    # Initialize RabbitMQ
-    rabbit_mq = RabbitMQ()
-    if rabbit_mq is None:
-        print("Cannot connect to RabbitMQ")
-    else:
-        # Start the main function
-        main(rabbit_mq)
+    # Start the main function
+    main(rabbit_mq)
 
-        # close connection
+    # close connection
+    if rabbit_mq is not None:
         rabbit_mq.close_connection()
