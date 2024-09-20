@@ -3,7 +3,10 @@
 # Activate the conda environment
 source /opt/conda/bin/activate fr
 
-# Run the deepfake processing script
+# download all models
+python /fr/env/download.py
+
+# Run the fr processing script
 cd /fr
 # bash ./run.sh
 

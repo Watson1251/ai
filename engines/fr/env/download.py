@@ -40,6 +40,9 @@ def download_models():
 
     test_image = '/fr/env/test_image.jpg'
 
+    # start with default models
+    embeddings = DeepFace.represent(img_path=test_image, model_name="Facenet512", detector_backend="retinaface")
+
     # download fr models
     for model in fr_models:
         print(f"[+] {model}")

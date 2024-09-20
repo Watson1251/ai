@@ -12,6 +12,9 @@ class RabbitMQ:
         self.connection = None
         self.channel = None
         self.connect()
+    
+    def get_channel(self):
+        return self.channel
 
     def connect(self):
         credentials = pika.PlainCredentials(self.username, self.password)

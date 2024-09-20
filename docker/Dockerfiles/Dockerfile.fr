@@ -48,14 +48,6 @@ RUN conda create -y --name fr python=3.10
 #     apt-get clean && \
 #     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
-
-# Install cuDNN
-# RUN tar -xJvf cudnn-linux-x86_64-8.4.1.50_cuda11.6-archive.tar.xz && \
-#     cd cudnn-linux-x86_64-8.4.1.50_cuda11.6-archive && \
-#     cp include/cudnn*.h /usr/local/cuda/include && \
-#     cp lib/libcudnn* /usr/local/cuda/lib64/ && \
-#     chmod a+r /usr/local/cuda/include/cudnn*.h /usr/local/cuda/lib64/libcudnn*
-
 # Activate the environment and install Python packages
 RUN /bin/bash -c "source activate fr && bash /fr/env/install.sh"
 
