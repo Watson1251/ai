@@ -10,7 +10,7 @@ dataset_path = '/fr/dataset'
 # dataset_path = '/fr/large_dataset'
 
 targeted_workers = 12
-do_publish = True
+do_publish = False
 
 embedding_dim = 512
 similarity_metric = "L2"

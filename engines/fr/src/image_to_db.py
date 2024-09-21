@@ -20,13 +20,20 @@ def get_embedding(rabbit_data):
     label = os.path.splitext(base_name)[0]
     id = label.split('_')[0]
 
+
     # only process face with highest confidence
     if len(faces) > 1:
         faces = [max(faces, key=lambda x: x.face_confidence)]
-    target_face = faces[0]
+    
+    target_face = None
+    embedding = None
+    facial_area = None
+    if len(faces) > 0:
+        target_face = faces[0]
 
-    embedding = target_face.embedding
-    facial_area = target_face.facial_area
+        embedding = target_face.embedding
+        facial_area = target_face.facial_area
+    
     record: MilvusData = MilvusData(
                         person_id=id,
                         image_path=image_path,
