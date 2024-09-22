@@ -32,6 +32,7 @@ export const MENU_ITEMS: NbMenuItem[] = [
       {
         title: 'التعرف على الوجوه',
         icon: 'person-outline',
+        link: '/pages/fr/search',
       },
       {
         title: 'التشابه بين الوجوه',

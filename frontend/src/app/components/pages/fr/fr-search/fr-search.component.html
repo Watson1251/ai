@@ -1,0 +1,124 @@
+<div class="row">
+  <div class="col-md col-lg">
+    <nb-card>
+      
+      <nb-card-header>
+        تجربة جديدة
+      </nb-card-header>
+      <nb-card-body>
+  
+        <ngx-dropzone (change)="onSelect($event)" class="upload-zone" [expandable]="true" [disabled]="isAnalyzing" accept="video/*">
+          <ngx-dropzone-label>اسحب الملف أو انقر هُنا</ngx-dropzone-label>
+          
+          <div class="upload-video-container" *ngFor="let f of filePreviews">
+            <ngx-dropzone-video-preview class="upload-video-preview" ngProjectAs="ngx-dropzone-preview" [file]="f.file" [removable]="true" (removed)="onRemove(f)">
+            </ngx-dropzone-video-preview>
+            <ngx-dropzone-label class="upload-label">{{ f.file.name }}</ngx-dropzone-label>
+            <div class="progress-bar">
+              <div class="progress" [style.width.%]="f.progress"></div>
+            </div>
+          </div>
+          
+        </ngx-dropzone>
+  
+      </nb-card-body>
+
+      <nb-card-footer *ngIf="filePreviews.length > 0">
+        <nb-actions [size]="actionSize" fullWidth>
+          <nb-action class="nb-action-hover" matRipple (click)="analyzeFiles()" [disabled]="isAnalyzing">
+            <nb-icon icon="activity-outline" pack="eva"></nb-icon>
+            تحليل
+          </nb-action>
+          <nb-action class="nb-action-hover" matRipple (click)="clearFiles()" [disabled]="isAnalyzing">
+            <nb-icon icon="trash-2-outline" pack="eva"></nb-icon>
+            مسح
+          </nb-action>
+        </nb-actions>
+      </nb-card-footer>
+    </nb-card>
+  </div>
+</div>
+
+<div class="row" *ngIf="currentExperiments.length > 0">
+<!-- <div class="row"> -->
+
+  <div class="col-md col-lg">
+    <nb-card class="preview-card">
+      <nb-card-header>التجربة الحالية</nb-card-header>
+    
+      <nb-card-body>    
+        <div class="display: flex;">
+    
+          <div *ngIf="isAllowed('view')">
+            <table
+              mat-table
+              [dataSource]="currentDataSource"
+            >
+
+              <!-- ID Column -->
+              <ng-container matColumnDef="id">
+                <th mat-sort-row *matHeaderCellDef>ت</th>
+                <td mat-cell *matCellDef="let row">{{ Helper.enToAr(row.id) }}</td>
+              </ng-container>
+    
+              <!-- filePreview Column -->
+              <ng-container matColumnDef="filePreview">
+                <th mat-sort-row *matHeaderCellDef>معاينة الملف</th>
+                <td mat-cell *matCellDef="let row">
+                  <video #videoPlayer controls [style.width.px]="250" [style.height.px]="200">
+                    <source [src]="row.filePreview.url" type="video/mp4">
+                  </video>
+                </td>
+              </ng-container>
+    
+              <!-- filename Column -->
+              <ng-container matColumnDef="filename">
+                <th mat-sort-row *matHeaderCellDef>اسم الملف</th>
+                <td mat-cell *matCellDef="let row">{{ row.filename }}</td>
+              </ng-container>
+    
+              <!-- status Column -->
+              <ng-container matColumnDef="status">
+                <th mat-sort-row *matHeaderCellDef>الحالة</th>
+                <td mat-cell *matCellDef="let row">
+                  <mat-progress-spinner *ngIf="row.filePreview.progress < 100 && !row.filePreview.isUploaded" class="small-spinner" mode="determinate" [value]="row.filePreview.progress"></mat-progress-spinner>
+                  {{ row.filePreview.status }}
+                </td>
+              </ng-container>
+    
+              <!-- accuracy Column -->
+              <ng-container matColumnDef="accuracy">
+                <th mat-sort-row *matHeaderCellDef>نسبة التزييف</th>
+                <td mat-cell *matCellDef="let row">
+                  <mat-spinner *ngIf="!row.filePreview.isAnalyzed" class="small-spinner"></mat-spinner>
+                  <!-- <div style="white-space: pre-wrap;">{{ results[row.filename].accuracy }}</div> -->
+                  <div style="white-space: pre-wrap;">{{ row.filePreview.accuracy }}</div>
+                </td>
+              </ng-container>
+    
+              <!-- result Column -->
+              <ng-container matColumnDef="result">
+                <th mat-sort-row *matHeaderCellDef>النتيجة</th>
+                <td mat-cell *matCellDef="let row" [ngClass]="{'fake': row.filePreview.result === 'مزيف', 'real': row.filePreview.result === 'حقيقي'}">
+                  <mat-spinner *ngIf="!row.filePreview.isAnalyzed" class="small-spinner"></mat-spinner>
+                  {{ row.filePreview.result }}
+                </td>
+              </ng-container>
+    
+              <tr mat-header-row *matHeaderRowDef="currentDisplayedColumns; sticky: true"></tr>
+              <tr
+                mat-row
+                matRipple
+                *matRowDef="let row; columns: currentDisplayedColumns"
+                (click)="isSelected(row)"
+              ></tr>
+            </table>
+            
+            <!-- <ngx-paginator [dataSource]="currentDataSource"></ngx-paginator> -->
+          </div>
+        </div>
+      </nb-card-body>
+    </nb-card>
+  </div>
+  
+</div>

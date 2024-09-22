@@ -16,6 +16,11 @@ const routes: Routes = [{
         .then(m => m.DeepfakeModule),
     },
     {
+      path: 'fr',
+      loadChildren: () => import('./fr/fr.module')
+        .then(m => m.FrModule),
+    },
+    {
       path: 'users',
       component: UsersComponent,
     },
