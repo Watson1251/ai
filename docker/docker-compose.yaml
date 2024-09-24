@@ -72,8 +72,8 @@ services:
     image: rabbitmq:3-management
     container_name: rabbitmq
     ports:
-      - "5672:5672"  # RabbitMQ default port for messaging
-      - "15672:15672"  # RabbitMQ management UI port for accessing the dashboard
+      - "5673:5672"  # RabbitMQ default port for messaging
+      - "15673:15672"  # RabbitMQ management UI port for accessing the dashboard
     volumes:
       - ../db/rabbitmq:/var/lib/rabbitmq  # Persistent storage for RabbitMQ data
     environment:

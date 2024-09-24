@@ -6,4 +6,18 @@
   .menu-sidebar ::ng-deep .scrollable {
     padding-top: nb-theme(layout-padding-top);
   }
+
+  .fixed-column {
+    position: fixed;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    background-color: #f7f9fc;
+  }
+  
+  nb-layout-column {
+    &:first-child {
+      margin-left: 300px; /* Adjust based on the width of the fixed column */
+    }
+  }
 }

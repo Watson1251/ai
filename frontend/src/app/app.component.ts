@@ -6,18 +6,16 @@
 import { Component, OnInit } from '@angular/core';
 import { NbSpinnerService } from '@nebular/theme';
 import { AuthService } from './services/auth.services';
+import { MENU_ITEMS } from './components/pages/pages-menu';
 
 @Component({
   selector: 'ngx-app',
-  template: `
-    <nb-layout windowMode>
-      <nb-layout-column>
-      <router-outlet></router-outlet>
-      </nb-layout-column>
-    </nb-layout>
-  `,
+  templateUrl: './app.component.html',
 })
 export class AppComponent implements OnInit {
+
+
+  menu = MENU_ITEMS;
 
   constructor(
     private authService: AuthService,
