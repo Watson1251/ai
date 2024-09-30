@@ -1,0 +1,18 @@
+<div class="slideshow-container">
+  <div class="image-container">
+    <img [src]="images[currentImageIndex]" class="main-image" />
+  </div>
+
+  <div class="thumbnails-container">
+    <img
+      *ngFor="let img of images; let i = index"
+      [src]="img"
+      [class.active]="i === currentImageIndex"
+      (click)="showImage(i)"
+      class="thumbnail"
+    />
+  </div>
+
+  <button class="prev" (click)="prevImage()">❮</button>
+  <button class="next" (click)="nextImage()">❯</button>
+</div>

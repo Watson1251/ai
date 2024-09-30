@@ -1,5 +1,5 @@
-import { NgModule } from '@angular/core';
-import { NbActionsModule, NbAlertModule, NbCardModule, NbIconModule, NbInputModule, NbPopoverModule, NbSearchModule, NbTreeGridModule } from '@nebular/theme';
+import { NgModule, NO_ERRORS_SCHEMA } from '@angular/core';
+import { NbLayoutModule, NbSidebarModule, NbActionsModule, NbAlertModule, NbCardModule, NbIconModule, NbInputModule, NbPopoverModule, NbSearchModule, NbTreeGridModule } from '@nebular/theme';
 
 import { ThemeModule } from '../../../@theme/theme.module';
 import { FrRoutingModule } from './fr-routing.module';
@@ -17,6 +17,8 @@ const components = [
 
 @NgModule({
   imports: [
+    NbLayoutModule,
+    NbSidebarModule,
     NbCardModule,
     NbPopoverModule,
     NbSearchModule,
@@ -33,6 +35,6 @@ const components = [
   ],
   declarations: [
     ...components,
-  ],
+  ]
 })
 export class FrModule { }

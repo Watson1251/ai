@@ -1,184 +1,79 @@
-<nb-card>
-          
-  <nb-card-header>
-    تجربة جديدة
-  </nb-card-header>
-  <nb-card-body>
+<!-- Dragging effect -->
+<div *ngIf="!isAnalyzing" [ngClass]="{ 'page-drag-over': isDragOver }"></div>
 
-    <ngx-dropzone (change)="onSelect($event)" class="upload-zone" [expandable]="true" [disabled]="isAnalyzing" accept="video/*">
-      <ngx-dropzone-label>اسحب الملف أو انقر هُنا</ngx-dropzone-label>
-      
-      <div class="upload-video-container" *ngFor="let f of filePreviews">
-        <ngx-dropzone-video-preview class="upload-video-preview" ngProjectAs="ngx-dropzone-preview" [file]="f.file" [removable]="true" (removed)="onRemove(f)">
-        </ngx-dropzone-video-preview>
-        <ngx-dropzone-label class="upload-label">{{ f.file.name }}</ngx-dropzone-label>
-        <div class="progress-bar">
-          <div class="progress" [style.width.%]="f.progress"></div>
+<!-- Content -->
+<nb-layout-column
+  class="small"
+  [ngStyle]="{ 'margin-left.px': fixedColumnWidth }"
+>
+  <h1 class="page-title">تطبيق التعرف على الوجوه</h1>
+
+  <!-- Centered Image -->
+  <div class="image-container">
+    <img src="assets/images/fr-icon.png" class="fr-icon" />
+  </div>
+
+  <nb-card class="full-height">
+    <nb-card-header> تجربة جديدة </nb-card-header>
+    <nb-card-body>
+      <ngx-dropzone
+        (change)="addingFiles($event.addedFiles)"
+        class="upload-zone"
+        [expandable]="true"
+        [disabled]="isAnalyzing"
+        accept="image/*"
+      >
+        <ngx-dropzone-label>اسحب الملف أو انقر هُنا</ngx-dropzone-label>
+
+        <div class="upload-video-container" *ngFor="let f of filePreviews">
+          <ngx-dropzone-image-preview
+            class="upload-video-preview"
+            ngProjectAs="ngx-dropzone-preview"
+            [file]="f.file"
+            [removable]="true"
+            (removed)="onRemove(f)"
+          >
+          </ngx-dropzone-image-preview>
+          <ngx-dropzone-label class="upload-label">{{
+            f.file.name
+          }}</ngx-dropzone-label>
+          <div class="progress-bar">
+            <div class="progress" [style.width.%]="f.progress"></div>
+          </div>
         </div>
-      </div>
-      
-    </ngx-dropzone>
+      </ngx-dropzone>
+    </nb-card-body>
 
-  </nb-card-body>
+    <nb-card-footer *ngIf="filePreviews.length > 0">
+      <nb-actions [size]="actionSize" fullWidth>
+        <nb-action
+          class="nb-action-hover"
+          matRipple
+          (click)="analyzeFiles()"
+          [disabled]="isAnalyzing"
+        >
+          <nb-icon icon="activity-outline" pack="eva"></nb-icon>
+          تحليل
+        </nb-action>
+        <nb-action
+          class="nb-action-hover"
+          matRipple
+          (click)="clearFiles()"
+          [disabled]="isAnalyzing"
+        >
+          <nb-icon icon="trash-2-outline" pack="eva"></nb-icon>
+          مسح
+        </nb-action>
+      </nb-actions>
+    </nb-card-footer>
+  </nb-card>
+</nb-layout-column>
 
-  <nb-card-footer *ngIf="filePreviews.length > 0">
-    <nb-actions [size]="actionSize" fullWidth>
-      <nb-action class="nb-action-hover" matRipple (click)="analyzeFiles()" [disabled]="isAnalyzing">
-        <nb-icon icon="activity-outline" pack="eva"></nb-icon>
-        تحليل
-      </nb-action>
-      <nb-action class="nb-action-hover" matRipple (click)="clearFiles()" [disabled]="isAnalyzing">
-        <nb-icon icon="trash-2-outline" pack="eva"></nb-icon>
-        مسح
-      </nb-action>
-    </nb-actions>
-  </nb-card-footer>
-</nb-card>
-
-<nb-card>
-      
-  <nb-card-header>
-    تجربة جديدة
-  </nb-card-header>
-  <nb-card-body>
-
-    <ngx-dropzone (change)="onSelect($event)" class="upload-zone" [expandable]="true" [disabled]="isAnalyzing" accept="video/*">
-      <ngx-dropzone-label>اسحب الملف أو انقر هُنا</ngx-dropzone-label>
-      
-      <div class="upload-video-container" *ngFor="let f of filePreviews">
-        <ngx-dropzone-video-preview class="upload-video-preview" ngProjectAs="ngx-dropzone-preview" [file]="f.file" [removable]="true" (removed)="onRemove(f)">
-        </ngx-dropzone-video-preview>
-        <ngx-dropzone-label class="upload-label">{{ f.file.name }}</ngx-dropzone-label>
-        <div class="progress-bar">
-          <div class="progress" [style.width.%]="f.progress"></div>
-        </div>
-      </div>
-      
-    </ngx-dropzone>
-
-  </nb-card-body>
-
-  <nb-card-footer *ngIf="filePreviews.length > 0">
-    <nb-actions [size]="actionSize" fullWidth>
-      <nb-action class="nb-action-hover" matRipple (click)="analyzeFiles()" [disabled]="isAnalyzing">
-        <nb-icon icon="activity-outline" pack="eva"></nb-icon>
-        تحليل
-      </nb-action>
-      <nb-action class="nb-action-hover" matRipple (click)="clearFiles()" [disabled]="isAnalyzing">
-        <nb-icon icon="trash-2-outline" pack="eva"></nb-icon>
-        مسح
-      </nb-action>
-    </nb-actions>
-  </nb-card-footer>
-</nb-card>
-
-<nb-card>
-      
-  <nb-card-header>
-    تجربة جديدة
-  </nb-card-header>
-  <nb-card-body>
-
-    <ngx-dropzone (change)="onSelect($event)" class="upload-zone" [expandable]="true" [disabled]="isAnalyzing" accept="video/*">
-      <ngx-dropzone-label>اسحب الملف أو انقر هُنا</ngx-dropzone-label>
-      
-      <div class="upload-video-container" *ngFor="let f of filePreviews">
-        <ngx-dropzone-video-preview class="upload-video-preview" ngProjectAs="ngx-dropzone-preview" [file]="f.file" [removable]="true" (removed)="onRemove(f)">
-        </ngx-dropzone-video-preview>
-        <ngx-dropzone-label class="upload-label">{{ f.file.name }}</ngx-dropzone-label>
-        <div class="progress-bar">
-          <div class="progress" [style.width.%]="f.progress"></div>
-        </div>
-      </div>
-      
-    </ngx-dropzone>
-
-  </nb-card-body>
-
-  <nb-card-footer *ngIf="filePreviews.length > 0">
-    <nb-actions [size]="actionSize" fullWidth>
-      <nb-action class="nb-action-hover" matRipple (click)="analyzeFiles()" [disabled]="isAnalyzing">
-        <nb-icon icon="activity-outline" pack="eva"></nb-icon>
-        تحليل
-      </nb-action>
-      <nb-action class="nb-action-hover" matRipple (click)="clearFiles()" [disabled]="isAnalyzing">
-        <nb-icon icon="trash-2-outline" pack="eva"></nb-icon>
-        مسح
-      </nb-action>
-    </nb-actions>
-  </nb-card-footer>
-</nb-card>
-
-<nb-card>
-      
-  <nb-card-header>
-    تجربة جديدة
-  </nb-card-header>
-  <nb-card-body>
-
-    <ngx-dropzone (change)="onSelect($event)" class="upload-zone" [expandable]="true" [disabled]="isAnalyzing" accept="video/*">
-      <ngx-dropzone-label>اسحب الملف أو انقر هُنا</ngx-dropzone-label>
-      
-      <div class="upload-video-container" *ngFor="let f of filePreviews">
-        <ngx-dropzone-video-preview class="upload-video-preview" ngProjectAs="ngx-dropzone-preview" [file]="f.file" [removable]="true" (removed)="onRemove(f)">
-        </ngx-dropzone-video-preview>
-        <ngx-dropzone-label class="upload-label">{{ f.file.name }}</ngx-dropzone-label>
-        <div class="progress-bar">
-          <div class="progress" [style.width.%]="f.progress"></div>
-        </div>
-      </div>
-      
-    </ngx-dropzone>
-
-  </nb-card-body>
-
-  <nb-card-footer *ngIf="filePreviews.length > 0">
-    <nb-actions [size]="actionSize" fullWidth>
-      <nb-action class="nb-action-hover" matRipple (click)="analyzeFiles()" [disabled]="isAnalyzing">
-        <nb-icon icon="activity-outline" pack="eva"></nb-icon>
-        تحليل
-      </nb-action>
-      <nb-action class="nb-action-hover" matRipple (click)="clearFiles()" [disabled]="isAnalyzing">
-        <nb-icon icon="trash-2-outline" pack="eva"></nb-icon>
-        مسح
-      </nb-action>
-    </nb-actions>
-  </nb-card-footer>
-</nb-card>
-
-<nb-card>
-      
-  <nb-card-header>
-    تجربة جديدة
-  </nb-card-header>
-  <nb-card-body>
-
-    <ngx-dropzone (change)="onSelect($event)" class="upload-zone" [expandable]="true" [disabled]="isAnalyzing" accept="video/*">
-      <ngx-dropzone-label>اسحب الملف أو انقر هُنا</ngx-dropzone-label>
-      
-      <div class="upload-video-container" *ngFor="let f of filePreviews">
-        <ngx-dropzone-video-preview class="upload-video-preview" ngProjectAs="ngx-dropzone-preview" [file]="f.file" [removable]="true" (removed)="onRemove(f)">
-        </ngx-dropzone-video-preview>
-        <ngx-dropzone-label class="upload-label">{{ f.file.name }}</ngx-dropzone-label>
-        <div class="progress-bar">
-          <div class="progress" [style.width.%]="f.progress"></div>
-        </div>
-      </div>
-      
-    </ngx-dropzone>
-
-  </nb-card-body>
-
-  <nb-card-footer *ngIf="filePreviews.length > 0">
-    <nb-actions [size]="actionSize" fullWidth>
-      <nb-action class="nb-action-hover" matRipple (click)="analyzeFiles()" [disabled]="isAnalyzing">
-        <nb-icon icon="activity-outline" pack="eva"></nb-icon>
-        تحليل
-      </nb-action>
-      <nb-action class="nb-action-hover" matRipple (click)="clearFiles()" [disabled]="isAnalyzing">
-        <nb-icon icon="trash-2-outline" pack="eva"></nb-icon>
-        مسح
-      </nb-action>
-    </nb-actions>
-  </nb-card-footer>
-</nb-card>
+<!-- Fixed Column Left-->
+<nb-layout-column
+  *ngIf="fixedColumnWidth > 0"
+  class="fixed-column"
+  [ngStyle]="{ 'width.px': fixedColumnWidth }"
+>
+  <h1>Fixed Column</h1>
+</nb-layout-column>

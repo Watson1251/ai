@@ -14,8 +14,9 @@ import { MENU_ITEMS } from './components/pages/pages-menu';
 })
 export class AppComponent implements OnInit {
 
-
   menu = MENU_ITEMS;
+
+  isAuth: boolean = false;
 
   constructor(
     private authService: AuthService,
@@ -25,5 +26,7 @@ export class AppComponent implements OnInit {
   ngOnInit(): void {
     // this.spinner$.load();
     this.authService.autoAuthUser();
+    this.isAuth = this.authService.getIsAuth();
+    console.log(this.isAuth);
   }
 }

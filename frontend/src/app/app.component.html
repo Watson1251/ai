@@ -1,4 +1,7 @@
+<nb-layout *ngIf="!isAuth" windowMode>
+    <nb-layout-column>
+        <router-outlet></router-outlet>
+    </nb-layout-column>
+</nb-layout>
 
-<nb-layout-column>
-    <router-outlet></router-outlet>
-</nb-layout-column>
+<router-outlet *ngIf="isAuth"></router-outlet>

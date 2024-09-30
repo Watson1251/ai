@@ -17,7 +17,6 @@ export const MENU_ITEMS: NbMenuItem[] = [
         title: 'الكشف',
         icon: 'search-outline',
         link: '/pages/deepfake/detection',
-        home: true,
       },
       {
         title: 'التوليد',
@@ -33,6 +32,7 @@ export const MENU_ITEMS: NbMenuItem[] = [
         title: 'التعرف على الوجوه',
         icon: 'person-outline',
         link: '/pages/fr/search',
+        home: true,
       },
       {
         title: 'التشابه بين الوجوه',

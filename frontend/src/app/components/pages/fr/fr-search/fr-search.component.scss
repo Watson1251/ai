@@ -3,6 +3,68 @@
 @import 'bootstrap/scss/mixins/breakpoints';
 
 @include nb-install-component() {
+  // .full-height {
+  //   height: calc(100vh - 280px);
+  //   min-height: 270px;
+  // }
+  
+
+  .page-drag-over {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.2);
+    z-index: 9999;
+    pointer-events: none;
+    box-shadow: inset 0 0 0 5px rgba(255, 255, 255, 0.5);
+    animation: fadeBorder 2s ease-in-out infinite;
+  }
+  
+  @keyframes fadeBorder {
+    0% {
+      box-shadow: inset 0 0 0 20px rgba(255, 255, 255, 0.2);
+    }
+    50% {
+      box-shadow: inset 0 0 0 40px rgba(255, 255, 255, 0.5);
+    }
+    100% {
+      box-shadow: inset 0 0 0 20px rgba(255, 255, 255, 0.2);
+    }
+  }
+
+  .page-title {
+    text-align: center;
+    // font-size: 24px;
+    font-family: var(--arabic-font);
+  }
+  
+  .image-container {
+    display: flex;
+    justify-content: center;  /* Center horizontally */
+    align-items: center;      /* Center vertically */
+    margin-bottom: 40px;      /* Add space between image and other elements */
+  }
+  
+  .fr-icon {
+    width: 150px;  /* Adjust the size as necessary */
+    height: auto;  /* Maintain aspect ratio */
+  }
+
+  .fixed-column {
+    position: fixed;
+    left: 0;
+    top: 80px;
+    bottom: 0;
+    background-color: #f7f9fc;
+  }
+
+  .small {
+    display: block;
+    margin-left: 300px;
+    padding: 0px !important;
+  }
   
   nb-icon {
     margin: 1rem;
@@ -118,6 +180,10 @@ nb-card-header, ngx-dropzone-label {
   height: 100%;
   width: 100%;
 }
+
+// ngx-dropzone {
+//   height: 100% !important;
+// }
 
 .upload-video-container {
   display: flex;

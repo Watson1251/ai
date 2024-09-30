@@ -17,13 +17,8 @@ import { Component, HostListener } from '@angular/core';
       </nb-sidebar>
 
       <!-- Content -->
-      <nb-layout-column class="small" fixed [ngStyle]="{'margin-left.px': fixedColumnWidth}">
+      <nb-layout-column class="small" fixed>
         <ng-content select="router-outlet"></ng-content>
-      </nb-layout-column>
-
-      <!-- Fixed Column Left-->
-      <nb-layout-column class="fixed-column" [ngStyle]="{'width.px': fixedColumnWidth}">
-        <h1>Fixed Column</h1>
       </nb-layout-column>
 
       <!-- Footer -->
@@ -35,7 +30,4 @@ import { Component, HostListener } from '@angular/core';
   `,
 })
 export class TwoColumnsLayoutComponent {
-
-  fixedColumnWidth = 300;
-
 }

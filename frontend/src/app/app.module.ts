@@ -43,7 +43,7 @@ import { AuthGuard } from './auth.guard';
     CoreModule.forRoot(),
     ThemeModule.forRoot(),
     AngularMaterialModule,
-    NbLayoutModule,
+    NbLayoutModule
   ],
   providers: [
     AuthGuard,
