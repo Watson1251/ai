@@ -25,6 +25,24 @@ services:
       - DF_URL=http://python-app:5000/
     networks:
       - app-network
+
+  # frontend:
+  #   build:
+  #     context: ..
+  #     dockerfile: docker/Dockerfiles/Dockerfile.frontend
+  #   ports:
+  #     - "4200:4200"
+  #   depends_on:
+  #     - backend
+  #     # - engine-df-video
+  #   volumes:
+  #     - ../backend:/backend
+  #     - ../frontend:/frontend
+  #   # environment:
+  #   #   - MONGODB_URL=mongodb://db:27017
+  #   #   - DF_URL=http://python-app:5000/
+  #   networks:
+  #     - app-network
   
   fr-engine:
     build:
@@ -33,6 +51,7 @@ services:
     shm_size: '10gb'
     volumes:
       - ../engines/fr:/fr
+      #- /media/developer/ai/dataset1:/dataset
     deploy:
       resources:
         reservations:
