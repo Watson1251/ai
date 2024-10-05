@@ -1,5 +1,5 @@
 import { NgModule, NO_ERRORS_SCHEMA } from '@angular/core';
-import { NbLayoutModule, NbSidebarModule, NbActionsModule, NbAlertModule, NbCardModule, NbIconModule, NbInputModule, NbPopoverModule, NbSearchModule, NbTreeGridModule } from '@nebular/theme';
+import { NbLayoutModule, NbSidebarModule, NbActionsModule, NbAlertModule, NbCardModule, NbIconModule, NbInputModule, NbPopoverModule, NbSearchModule, NbTreeGridModule, NbThemeModule, NbTooltipModule, NbTabsetModule } from '@nebular/theme';
 
 import { ThemeModule } from '../../../@theme/theme.module';
 import { FrRoutingModule } from './fr-routing.module';
@@ -31,7 +31,9 @@ const components = [
     NbTreeGridModule,
     NbInputModule,
     AngularMaterialModule,
-    PaginatorModule
+    PaginatorModule,
+    NbTooltipModule,
+    NbTabsetModule,
   ],
   declarations: [
     ...components,

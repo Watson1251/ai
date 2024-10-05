@@ -3,70 +3,72 @@
 
 <!-- Content -->
 <nb-layout-column
-  class="small"
+  class="fr-content"
   [ngStyle]="{ 'margin-left.px': fixedColumnWidth }"
 >
-  <h1 class="page-title">تطبيق التعرف على الوجوه</h1>
+  <!-- <h1 class="page-title">تطبيق التعرف على الوجوه</h1>
 
-  <!-- Centered Image -->
+
   <div class="image-container">
     <img src="assets/images/fr-icon.png" class="fr-icon" />
-  </div>
-
-  <nb-card class="full-height">
-    <nb-card-header> تجربة جديدة </nb-card-header>
+  </div> -->
+  
+  <nb-card>
+    <nb-card-header style="display: flex; justify-content: space-between; align-items: center;">
+      <span>تجربة جديدة</span>
+      
+      <nb-actions *ngIf="showImagePreview">
+        <nb-action nbRipple class="hover-action" nbTooltip="إضافة " nbTooltipPlacement="top">
+          <nb-icon icon="star-outline" pack="eva"></nb-icon>
+        </nb-action>
+        <nb-action nbRipple class="hover-action">
+          <nb-icon icon="trash-2-outline" pack="eva"></nb-icon>
+        </nb-action>
+        <nb-action nbRipple class="hover-action">
+          <nb-icon icon="settings-outline" pack="eva"></nb-icon>
+        </nb-action>
+      </nb-actions>      
+      
+    </nb-card-header>
+  
     <nb-card-body>
+      
+      <!-- Show when no images are uploaded -->
       <ngx-dropzone
         (change)="addingFiles($event.addedFiles)"
         class="upload-zone"
         [expandable]="true"
         [disabled]="isAnalyzing"
         accept="image/*"
-      >
-        <ngx-dropzone-label>اسحب الملف أو انقر هُنا</ngx-dropzone-label>
+        >
+        <ngx-dropzone-label *ngIf="!showImagePreview">اسحب الملف أو انقر هُنا</ngx-dropzone-label>
 
-        <div class="upload-video-container" *ngFor="let f of filePreviews">
-          <ngx-dropzone-image-preview
-            class="upload-video-preview"
-            ngProjectAs="ngx-dropzone-preview"
-            [file]="f.file"
-            [removable]="true"
-            (removed)="onRemove(f)"
-          >
-          </ngx-dropzone-image-preview>
-          <ngx-dropzone-label class="upload-label">{{
-            f.file.name
-          }}</ngx-dropzone-label>
-          <div class="progress-bar">
-            <div class="progress" [style.width.%]="f.progress"></div>
+        <div class="upload-video-container">
+
+          <!-- Image Preview -->
+          <img *ngIf="showImagePreview" [src]="selectedFilePreview?.url" alt="Preview Image" style="width: auto; max-height: 300px;">
+          
+          <!-- Image Label -->
+          <ngx-dropzone-label *ngIf="showImagePreview" class="upload-label">{{selectedFilePreview.file.name}}</ngx-dropzone-label>
+
+          <!-- Progress Bar -->
+          <div class="progress-bar" *ngIf="showImagePreview">
+            <div class="progress" [style.width.%]="selectedFilePreview.progress"></div>
           </div>
         </div>
       </ngx-dropzone>
-    </nb-card-body>
 
-    <nb-card-footer *ngIf="filePreviews.length > 0">
-      <nb-actions [size]="actionSize" fullWidth>
-        <nb-action
-          class="nb-action-hover"
-          matRipple
-          (click)="analyzeFiles()"
-          [disabled]="isAnalyzing"
-        >
-          <nb-icon icon="activity-outline" pack="eva"></nb-icon>
-          تحليل
-        </nb-action>
-        <nb-action
-          class="nb-action-hover"
-          matRipple
-          (click)="clearFiles()"
-          [disabled]="isAnalyzing"
-        >
-          <nb-icon icon="trash-2-outline" pack="eva"></nb-icon>
-          مسح
+    </nb-card-body>
+  
+    <nb-card-footer *ngIf="filePreviews.length > 1" style="overflow-x: auto; white-space: nowrap;">
+      <nb-actions size="large" fullWidth>
+        <nb-action matRipple *ngFor="let f of filePreviews" (click)="selectFilePreview(f)">
+          <img [src]="f.url" alt="Thumbnail" style="width: auto; max-height: 100px; object-fit: cover; padding: 10px;">
         </nb-action>
       </nb-actions>
     </nb-card-footer>
   </nb-card>
+  
 </nb-layout-column>
 
 <!-- Fixed Column Left-->

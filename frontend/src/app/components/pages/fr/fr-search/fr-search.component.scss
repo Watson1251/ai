@@ -6,7 +6,31 @@
   // .full-height {
   //   height: calc(100vh - 280px);
   //   min-height: 270px;
-  // }
+  // }..
+
+  nb-card-header {
+    display: flex;
+    align-items: center;
+    padding-top: 0.625rem;
+    padding-bottom: 0.625rem;
+  }
+
+  .header-button {
+    .nb-square {
+      font-size: 1rem;
+    }
+
+    @include nb-ltr {
+      margin-left: auto;
+      border-top-right-radius: 0;
+      border-bottom-right-radius: 0;
+    }
+    @include nb-rtl {
+      margin-right: auto;
+      border-top-left-radius: 0;
+      border-bottom-left-radius: 0;
+    }
+  }
   
   .page-drag-over {
     position: fixed;
@@ -59,7 +83,7 @@
     background-color: #f7f9fc;
   }
 
-  .small {
+  .fr-content {
     display: block;
     margin-left: 300px;
     padding: 0px !important;
@@ -176,6 +200,9 @@ nb-card-header, ngx-dropzone-label {
 }
 
 .upload-zone {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   height: 100%;
   width: 100%;
 }
@@ -184,10 +211,20 @@ nb-card-header, ngx-dropzone-label {
 //   height: 100% !important;
 // }
 
+.hover-action nb-icon {
+  transition: color 0.3s ease;
+}
+
+.hover-action:hover nb-icon {
+  color: var(--nb-primary-focus); /* Or any color you'd like for the hover effect */
+  transform: scale(1.2);
+}
+
 .upload-video-container {
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin-top: 20px;
   margin-bottom: 10px;
 }
 

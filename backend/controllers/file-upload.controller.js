@@ -17,7 +17,7 @@ const storage = multer.diskStorage({
   destination: (req, file, cb) => {
     const fileType = file.mimetype.split('/')[0];  // Extract file type (e.g., 'image', 'video')
     const userId = req.body.uploadedBy;            // Assume userId is sent in the body
-    const uploadPath = path.join(__dirname, '..', 'uploads', fileType, userId);
+    const uploadPath = path.join('/db', 'uploads', fileType, userId);
     ensureDirectoryExistence(uploadPath);
     cb(null, uploadPath);
   },

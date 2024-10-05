@@ -8,7 +8,7 @@ python /fr/env/download.py
 
 # Run the fr processing script
 cd /fr
-# bash ./run.sh
+bash ./run.sh
 
 # Keep the script running
 tail -f /dev/null

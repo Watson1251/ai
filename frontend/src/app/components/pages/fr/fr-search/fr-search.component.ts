@@ -15,6 +15,7 @@ import { Role } from "../../../../models/role.model";
 import { User } from "../../../../models/user.model";
 import { Subscription } from "rxjs";
 import { DeepfakeService } from "../../../../services/deepfake.services";
+import { FrService } from "../../../../services/fr.services";
 
 interface FilePreview {
   file: File;
@@ -35,6 +36,9 @@ interface FilePreview {
   templateUrl: "./fr-search.component.html",
 })
 export class FrSearchComponent {
+
+  imageSrc: string = 'assets/images/fr-icon.png';
+
   fixedColumnWidth = 300;
 
   Helper = Helper;
@@ -55,6 +59,7 @@ export class FrSearchComponent {
     public rolesService: RolesService,
     public usersService: UsersService,
     public deepfakeService: DeepfakeService,
+    public frService: FrService,
     private snackbarService: SnackbarService
   ) {}
 
@@ -64,6 +69,9 @@ export class FrSearchComponent {
   isAnalyzing: boolean = false;
 
   isDragOver: boolean = false;
+  showImagePreview = false;
+
+  selectedFilePreview: FilePreview = undefined;
 
   ngOnInit() {
     // Add event listeners to handle drag and drop anywhere on the page
@@ -165,6 +173,19 @@ export class FrSearchComponent {
         );
       }
     });
+
+    this.showImagePreview = this.filePreviews.length > 0;
+
+
+    if (this.showImagePreview) {
+      this.selectedFilePreview = this.filePreviews[this.filePreviews.length - 1];
+    }
+
+    this.analyzeFiles();
+  }
+
+  selectFilePreview(filePreview: FilePreview) {
+    this.selectedFilePreview = filePreview;
   }
 
   onRemove(event: any) {
@@ -208,13 +229,29 @@ export class FrSearchComponent {
     if (
       this.filePreviews.some(
         (preview) => preview.file.name === filePreview.file.name
+      ) && !this.currentExperiments.some(
+        (preview) => preview.file.name === filePreview.file.name
       )
     ) {
-      this.filePreviews.splice(this.filePreviews.indexOf(filePreview), 1);
+
+      console.log(filePreview.status, filePreview.file.name, ' => ', fileId);
+      // this.filePreviews.splice(this.filePreviews.indexOf(filePreview), 1);
       this.currentExperiments.push(filePreview);
 
-      // this.analyzeFile(filePreview, fileId);
+      this.analyzeFile(filePreview, fileId);
     }
+  }
+  
+  analyzeFile(filePreview: any, fileId: string) {
+    filePreview.status = "جاري تحليل الملف...";
+    this.frService.predict(fileId).subscribe(response => {
+      if (response.status === 200 || response.status === 201) {
+        if (response.body.result) {
+          console.log(response.body.result);
+          // this.onFileAnalyzed(filePreview, response.body.result);
+        }
+      }
+    });
   }
 
   clearFiles() {
