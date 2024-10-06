@@ -7,45 +7,58 @@ import { User } from "../models/user.model";
 import { catchError } from "rxjs/operators";
 import { SnackbarService } from "./snackbar.service";
 
-const BACKEND_URL = environment.apiUrl + '/fr/';
+const BACKEND_URL = environment.apiUrl + "/fr/";
 
 @Injectable({ providedIn: "root" })
 export class FrService {
-
-  private users: User[] = [];
-  private usersUpdated = new Subject<any>();
-
   constructor(
     private http: HttpClient,
     private snackbarService: SnackbarService
   ) {}
 
-  predict(fileId: string) {
+  extractFaces(fileId: string) {
     return this.http
       .post<any>(
-        BACKEND_URL + 'predict/',
+        BACKEND_URL + "extract-faces/",
         {
-          fileId: fileId
+          fileId: fileId,
         },
-        {observe: 'response'}
+        { observe: "response" }
       )
       .pipe(
         catchError((error: HttpErrorResponse) => {
-            return this.handleError(error);
+          return this.handleError(error);
+        })
+      );
+  }
+
+  searchFace(fileId: string) {
+    console.log(fileId);
+    return this.http
+      .post<any>(
+        BACKEND_URL + "search-face/",
+        {
+          fileId: fileId,
+        },
+        { observe: "response" }
+      )
+      .pipe(
+        catchError((error: HttpErrorResponse) => {
+          return this.handleError(error);
         })
       );
   }
 
   handleError(error: HttpErrorResponse) {
-    var message = '';
-    
+    var message = "";
+
     // Client-side error occurred
     if (error.error instanceof ErrorEvent) {
-      message = 'حدث خطأ في العميل.';
-    
-    // Server-side error occurred
+      message = "حدث خطأ في العميل.";
+
+      // Server-side error occurred
     } else {
-      message = 'حدث خطأ في المزود.';
+      message = "حدث خطأ في المزود.";
     }
 
     if (error.error.message) {
@@ -53,12 +66,7 @@ export class FrService {
       message += error.error.message;
     }
 
-    this.snackbarService.openSnackBar(message, 'failure');
+    this.snackbarService.openSnackBar(message, "failure");
     return throwError(message);
   }
-
-  getUsersUpdateListener() {
-    return this.usersUpdated.asObservable();
-  }
-
 }

@@ -1,201 +1,200 @@
-version: "3.8"  # Specify the Docker Compose version
+version: "3.8" # Specify the Docker Compose version
 
 services:
+    db:
+        build:
+            context: ..
+            dockerfile: docker/Dockerfiles/Dockerfile.db
+        ports:
+            - "27018:27017"
+        networks:
+            - ai-platform-network
 
-  db:
-    build:
-      context: ..
-      dockerfile: docker/Dockerfiles/Dockerfile.db
-    ports:
-      - "27018:27017"
-    networks:
-      - ai-platform-network
+    backend:
+        build:
+            context: ..
+            dockerfile: docker/Dockerfiles/Dockerfile.backend
+        ports:
+            - "3000:3000"
+        depends_on:
+            - db
+            # - engine-df-video
+        volumes:
+            - ../backend:/backend
+            - ../db:/db
+        environment:
+            - MONGODB_URL=mongodb://db:27017
+            - FR_URL=http://fr-engine:8000/
+        networks:
+            - ai-platform-network
 
-  backend:
-    build:
-      context: ..
-      dockerfile: docker/Dockerfiles/Dockerfile.backend
-    ports:
-      - "3000:3000"
-    depends_on:
-      - db
-      # - engine-df-video
-    volumes:
-      - ../backend:/backend
-      - ../db:/db
-    environment:
-      - MONGODB_URL=mongodb://db:27017
-      - DF_URL=http://python-app:5000/
-      - FR_URL=http://fr-engine:8000/
-    networks:
-      - ai-platform-network
+    # frontend:
+    #   build:
+    #     context: ..
+    #     dockerfile: docker/Dockerfiles/Dockerfile.frontend
+    #   ports:
+    #     - "4200:4200"
+    #   depends_on:
+    #     - backend
+    #     # - engine-df-video
+    #   volumes:
+    #     - ../backend:/backend
+    #     - ../frontend:/frontend
+    #   # environment:
+    #   #   - MONGODB_URL=mongodb://db:27017
+    #   #   - DF_URL=http://python-app:5000/
+    #   networks:
+    #     - ai-platform-network
 
-  # frontend:
-  #   build:
-  #     context: ..
-  #     dockerfile: docker/Dockerfiles/Dockerfile.frontend
-  #   ports:
-  #     - "4200:4200"
-  #   depends_on:
-  #     - backend
-  #     # - engine-df-video
-  #   volumes:
-  #     - ../backend:/backend
-  #     - ../frontend:/frontend
-  #   # environment:
-  #   #   - MONGODB_URL=mongodb://db:27017
-  #   #   - DF_URL=http://python-app:5000/
-  #   networks:
-  #     - ai-platform-network
-  
-  fr-engine:
-    build:
-      context: ..
-      dockerfile: docker/Dockerfiles/Dockerfile.fr
-    shm_size: '10gb'
-    volumes:
-      - ../engines/fr:/fr
-      - ../db:/db
-      #- /media/developer/ai/dataset1:/dataset
-    deploy:
-      resources:
-        reservations:
-          devices:
-            - driver: nvidia
-              capabilities: [gpu]
-    runtime: nvidia
-    environment:
-      - NVIDIA_VISIBLE_DEVICES=all
-      - NVIDIA_DRIVER_CAPABILITIES=compute,utility
-    depends_on:
-      - rabbitmq
-    networks:
-      - ai-platform-network
+    fr-engine:
+        build:
+            context: ..
+            dockerfile: docker/Dockerfiles/Dockerfile.fr
+        shm_size: "10gb"
+        volumes:
+            - ../engines/fr:/fr
+            - ../db:/db
+            #- /media/developer/ai/dataset1:/dataset
+        deploy:
+            resources:
+                reservations:
+                    devices:
+                        - driver: nvidia
+                          capabilities: [gpu]
+        runtime: nvidia
+        environment:
+            - NVIDIA_VISIBLE_DEVICES=all
+            - NVIDIA_DRIVER_CAPABILITIES=compute,utility
+        depends_on:
+            - rabbitmq
+        networks:
+            - ai-platform-network
 
-  engine-df-video:
-    build:
-      context: ..
-      dockerfile: docker/Dockerfiles/Dockerfile.engine-df-video
-    ports:
-      - "8000:8000"
-    # depends_on:
-    #   - db
-    # environment:
-    #   - MONGODB_URL=mongodb://db:27017
-    #   - DF_URL=http://python-app:5000/
-    runtime: nvidia
-    deploy:
-      resources:
-        reservations:
-          devices:
-            - capabilities: [gpu]
-    networks:
-      - ai-platform-network
+    # engine-df-video:
+    #     build:
+    #         context: ..
+    #         dockerfile: docker/Dockerfiles/Dockerfile.engine-df-video
+    #     ports:
+    #         - "8000:8000"
+    #     # depends_on:
+    #     #   - db
+    #     # environment:
+    #     #   - MONGODB_URL=mongodb://db:27017
+    #     #   - DF_URL=http://python-app:5000/
+    #     runtime: nvidia
+    #     deploy:
+    #         resources:
+    #             reservations:
+    #                 devices:
+    #                     - capabilities: [gpu]
+    #     networks:
+    #         - ai-platform-network
 
-  rabbitmq:
-    image: rabbitmq:3-management
-    container_name: rabbitmq
-    ports:
-      - "5673:5672"  # RabbitMQ default port for messaging
-      - "15673:15672"  # RabbitMQ management UI port for accessing the dashboard
-    volumes:
-      - ../db/rabbitmq:/var/lib/rabbitmq  # Persistent storage for RabbitMQ data
-    environment:
-      RABBITMQ_DEFAULT_USER: user      # Default username for RabbitMQ
-      RABBITMQ_DEFAULT_PASS: password  # Default password for RabbitMQ
-    restart: unless-stopped
-    healthcheck:
-      test: ["CMD", "rabbitmqctl", "status"]
-      interval: 30s
-      timeout: 10s
-      retries: 3
-    networks:
-      - ai-platform-network
+    rabbitmq:
+        image: rabbitmq:3-management
+        container_name: rabbitmq
+        ports:
+            - "5673:5672" # RabbitMQ default port for messaging
+            - "15673:15672" # RabbitMQ management UI port for accessing the dashboard
+        volumes:
+            - ../db/rabbitmq:/var/lib/rabbitmq # Persistent storage for RabbitMQ data
+        environment:
+            RABBITMQ_DEFAULT_USER: user # Default username for RabbitMQ
+            RABBITMQ_DEFAULT_PASS: password # Default password for RabbitMQ
+        restart: unless-stopped
+        healthcheck:
+            test: ["CMD", "rabbitmqctl", "status"]
+            interval: 30s
+            timeout: 10s
+            retries: 3
+        networks:
+            - ai-platform-network
 
-  # ======================================== The Following Are Milvus DB services =====================================================
+    # ======================================== The Following Are Milvus DB services =====================================================
 
-  etcd:
-    image: quay.io/coreos/etcd:v3.5.5
-    environment:
-      - ETCD_AUTO_COMPACTION_MODE=revision
-      - ETCD_AUTO_COMPACTION_RETENTION=1000
-      - ETCD_QUOTA_BACKEND_BYTES=4294967296
-      - ETCD_SNAPSHOT_COUNT=50000
-    volumes:
-      - ../db/milvus/etcd:/etcd
-    command: etcd -advertise-client-urls=http://127.0.0.1:2379 -listen-client-urls http://0.0.0.0:2379 --data-dir /etcd
-    healthcheck:
-      test: ["CMD", "etcdctl", "endpoint", "health"]
-      interval: 30s
-      timeout: 20s
-      retries: 3
-    networks:
-      - ai-platform-network
+    etcd:
+        image: quay.io/coreos/etcd:v3.5.5
+        environment:
+            - ETCD_AUTO_COMPACTION_MODE=revision
+            - ETCD_AUTO_COMPACTION_RETENTION=1000
+            - ETCD_QUOTA_BACKEND_BYTES=4294967296
+            - ETCD_SNAPSHOT_COUNT=50000
+        volumes:
+            - ../db/milvus/etcd:/etcd
+        command: etcd -advertise-client-urls=http://127.0.0.1:2379 -listen-client-urls http://0.0.0.0:2379 --data-dir /etcd
+        healthcheck:
+            test: ["CMD", "etcdctl", "endpoint", "health"]
+            interval: 30s
+            timeout: 20s
+            retries: 3
+        networks:
+            - ai-platform-network
 
-  minio:
-    image: minio/minio:RELEASE.2023-03-20T20-16-18Z
-    environment:
-      MINIO_ACCESS_KEY: minioadmin
-      MINIO_SECRET_KEY: minioadmin
-    ports:
-      - "9001:9001"
-      - "9000:9000"
-    volumes:
-      - ../db/milvus/minio:/minio_data
-    command: minio server /minio_data --console-address ":9001"
-    healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:9000/minio/health/live"]
-      interval: 30s
-      timeout: 20s
-      retries: 3
-    networks:
-      - ai-platform-network
+    minio:
+        image: minio/minio:RELEASE.2023-03-20T20-16-18Z
+        environment:
+            MINIO_ACCESS_KEY: minioadmin
+            MINIO_SECRET_KEY: minioadmin
+        ports:
+            - "9001:9001"
+            - "9000:9000"
+        volumes:
+            - ../db/milvus/minio:/minio_data
+        command: minio server /minio_data --console-address ":9001"
+        healthcheck:
+            test:
+                ["CMD", "curl", "-f", "http://localhost:9000/minio/health/live"]
+            interval: 30s
+            timeout: 20s
+            retries: 3
+        networks:
+            - ai-platform-network
 
-  standalone:
-    image: milvusdb/milvus:v2.4.6
-    command: ["milvus", "run", "standalone"]
-    security_opt:
-      - seccomp:unconfined
-    environment:
-      ETCD_ENDPOINTS: etcd:2379
-      MINIO_ADDRESS: minio:9000
-    volumes:
-      - ../db/milvus/milvus:/var/lib/milvus
-    healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:9091/healthz"]
-      interval: 30s
-      start_period: 90s
-      timeout: 20s
-      retries: 3
-    ports:
-      - "19530:19530"
-      - "9091:9091"
-    depends_on:
-      - "etcd"
-      - "minio"
-    networks:
-      - ai-platform-network
-    deploy:
-      resources:
-        limits:
-          cpus: "8"   # Limit the number of CPU cores to 8
-          memory: "32G"  # Limit memory usage to 16GB
-        reservations:
-          cpus: "4"   # Ensure that at least 4 cores are always available
-  
-  attu:
-    image: zilliz/attu:latest
-    environment:
-      MILVUS_ADDRESS: standalone:19530
-    ports:
-      - "3050:3000"
-    depends_on:
-      - "standalone"
-    networks:
-      - ai-platform-network
+    standalone:
+        image: milvusdb/milvus:v2.4.6
+        command: ["milvus", "run", "standalone"]
+        security_opt:
+            - seccomp:unconfined
+        environment:
+            ETCD_ENDPOINTS: etcd:2379
+            MINIO_ADDRESS: minio:9000
+        volumes:
+            - ../db/milvus/milvus:/var/lib/milvus
+        healthcheck:
+            test: ["CMD", "curl", "-f", "http://localhost:9091/healthz"]
+            interval: 30s
+            start_period: 90s
+            timeout: 20s
+            retries: 3
+        ports:
+            - "19530:19530"
+            - "9091:9091"
+        depends_on:
+            - "etcd"
+            - "minio"
+        networks:
+            - ai-platform-network
+        deploy:
+            resources:
+                limits:
+                    cpus: "8" # Limit the number of CPU cores to 8
+                    memory: "32G" # Limit memory usage to 16GB
+                reservations:
+                    cpus: "4" # Ensure that at least 4 cores are always available
 
-  # ======================================== Networks & Volumes =====================================================
+    attu:
+        image: zilliz/attu:latest
+        environment:
+            MILVUS_ADDRESS: standalone:19530
+        ports:
+            - "3050:3000"
+        depends_on:
+            - "standalone"
+        networks:
+            - ai-platform-network
+
+    # ======================================== Networks & Volumes =====================================================
 
 networks:
-  ai-platform-network:
-    driver: bridge
+    ai-platform-network:
+        driver: bridge

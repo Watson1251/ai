@@ -1,4 +1,4 @@
-@import '~material-design-icons/iconfont/material-icons.css';
+@import "~material-design-icons/iconfont/material-icons.css";
 
 @font-face {
   font-family: "traditional-arabic";
@@ -36,10 +36,11 @@
 .mat-mdc-snack-bar-container .mdc-snackbar__label {
   font-family: var(--arabic-font) !important;
 }
-.mat-mdc-snack-bar-container .mat-mdc-button.mat-mdc-snack-bar-action:not(:disabled) {
+.mat-mdc-snack-bar-container
+  .mat-mdc-button.mat-mdc-snack-bar-action:not(:disabled) {
   font-family: var(--arabic-font) !important;
   font-weight: bolder !important;
-  color: rgb(255, 255, 255) !important;;
+  color: rgb(255, 255, 255) !important;
 }
 .mat-mdc-snack-bar-container {
   &.success {

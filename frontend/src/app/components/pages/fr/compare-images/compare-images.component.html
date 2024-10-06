@@ -1,0 +1,27 @@
+<div class="dialog-content">
+  <nb-card>
+    <nb-card-header>الوجه محل المقارنة</nb-card-header>
+    <nb-card-body>
+      <!-- Display the selected face -->
+      <img
+        *ngIf="clickedFace?.url"
+        [src]="clickedFace.url"
+        alt="Clicked Face"
+        style="width: 100%; height: auto"
+      />
+    </nb-card-body>
+  </nb-card>
+
+  <nb-card>
+    <nb-card-body>
+      <nb-card-header>الوجه محل البحث</nb-card-header>
+      <!-- Display the clicked face -->
+      <img
+        *ngIf="selectedFace?.url"
+        [src]="selectedFace.url"
+        alt="Selected Face"
+        style="width: 100%; height: auto"
+      />
+    </nb-card-body>
+  </nb-card>
+</div>

@@ -57,5 +57,5 @@ def download_models():
     objs = DeepFace.analyze(img_path=test_image, actions=other_models,)
 
 if __name__ == "__main__":
-    # download_models()
+    download_models()
     pass

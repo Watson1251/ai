@@ -199,6 +199,19 @@ nb-card-header, ngx-dropzone-label {
   font-family: var(--arabic-font);
 }
 
+span {
+  font-family: var(--arabic-font);
+  text-align: center;
+}
+
+.faces-title {
+  font-family: var(--arabic-font);
+  font-size: 1.5rem;
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: space-evenly;
+}
+
 .upload-zone {
   display: flex;
   justify-content: center;
@@ -206,6 +219,110 @@ nb-card-header, ngx-dropzone-label {
   height: 100%;
   width: 100%;
 }
+
+.faces-card-body {
+  max-height: 400px; /* Adjust height based on available space */
+  overflow-y: auto;  /* Enable vertical scrolling */
+  padding: 10px;
+  display: flex;
+  flex-direction: column; /* Stack faces vertically */
+  gap: 10px;  /* Add spacing between faces */
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  grid-gap: 12px;
+  justify-items: center;
+  align-items: center;
+}
+
+.face-card {
+  width: auto;
+  max-width: 300px;
+  max-height: 300px;
+  margin: 0 auto; /* Ensure the card is centered */
+
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+  transform: scale(1); /* Default scale */
+}
+
+.face-card:hover {
+  transform: scale(1.05); /* Slightly increase the size on hover */
+}
+
+/* Nationality smooth transition */
+.hidden-info {
+  opacity: 0;
+  transform: translateY(5px); /* Start slightly below */
+  transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out; /* Smooth transition */
+}
+
+.hidden-info.visible {
+  opacity: 1; /* Fade in */
+  transform: translateY(0); /* Move to its normal position */
+}
+
+.hidden-info.hidden {
+  opacity: 0; /* Fade out */
+  transform: translateY(5px); /* Move slightly below */
+}
+
+.face-image {
+  width: auto;
+  height: 200px;
+  object-fit:cover; /* Ensures the image maintains its aspect ratio */
+  border-radius: 8px; /* Add some rounding to make it look better */
+}
+
+.face-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.face-info span {
+  transition: opacity 0.3s ease-in-out; /* Smooth transition */
+}
+
+nb-card-body {
+  display: flex;
+}
+
+.face-row {
+  display: flex;
+  flex-direction: column-reverse;
+  flex-wrap: nowrap;
+  align-content: center;
+  justify-content: space-evenly;
+  align-items: center;
+  padding: 10px;
+  overflow: hidden; /* To avoid overflow when scaling */
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
+}
+
+.face-row img {
+  width: 100%;
+  height: auto;
+}
+
+.face-row:hover {
+  transform: scale(1.1); /* Increase the size by 10% on hover */
+}
+
+.image-face {
+  border-radius: 5px;
+  border: 1px solid #ddd;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+  width: 100px;  /* Set a consistent width for the face thumbnails */
+  height: auto;
+}
+
+
 
 // ngx-dropzone {
 //   height: 100% !important;

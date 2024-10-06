@@ -1,0 +1,16 @@
+.dialog-content {
+    display: flex;
+    justify-content: space-around;
+    gap: 20px;
+  }
+  
+  nb-card {
+    flex: 1 1 45%; /* Each card takes 45% of the dialog width */
+    min-width: 300px;
+  }
+  
+  nb-card-header {
+    font-family: var(--arabic-font);
+    font-size: 1rem;
+    margin-bottom: 20px;
+  }

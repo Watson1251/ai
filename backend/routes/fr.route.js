@@ -5,6 +5,7 @@ const FrController = require("../controllers/fr.controller");
 
 const router = express.Router();
 
-router.post("/predict", checkAuth, FrController.predictVideo);
+router.post("/extract-faces", checkAuth, FrController.extractFaces);
+router.post("/search-face", checkAuth, FrController.searchFace);
 
 module.exports = router;

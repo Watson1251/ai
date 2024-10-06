@@ -3,6 +3,7 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 const dotenv = require("dotenv");
+const cors = require('cors');
 
 dotenv.config(); // Load environment variables from .env file
 
@@ -15,6 +16,8 @@ const fileUploadRoutes = require("./routes/file-upload.route");
 const authRoutes = require("./routes/auth.route");
 
 const app = express();
+
+// app.use(cors());
 
 const mongoUrl = process.env.MONGODB_URL || "mongodb://localhost:27017";
 
