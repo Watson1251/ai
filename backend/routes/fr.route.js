@@ -7,5 +7,6 @@ const router = express.Router();
 
 router.post("/extract-faces", checkAuth, FrController.extractFaces);
 router.post("/search-face", checkAuth, FrController.searchFace);
+router.post("/enhance", checkAuth, FrController.enhance);
 
 module.exports = router;

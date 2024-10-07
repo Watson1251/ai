@@ -1,0 +1,62 @@
+# Use the official Ubuntu 20.04 image as the base image
+FROM nvidia/cuda:11.8.0-cudnn8-devel-ubuntu20.04
+
+# Set environment variables
+ENV DEBIAN_FRONTEND=noninteractive
+
+# Clean up and update the system, then install necessary packages
+RUN apt-get update && \
+    apt-get install -y \
+    build-essential \
+    curl \
+    wget \
+    git \
+    lsb-release \
+    gnupg2 \
+    software-properties-common \
+    python3.8 \
+    python3.8-dev \
+    python3-pip \
+    libgl1-mesa-glx \
+    cmake && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+
+# Install the latest Miniconda (flexible with Python version)
+RUN wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh -O /tmp/miniconda.sh && \
+    bash /tmp/miniconda.sh -b -p /opt/conda && \
+    rm /tmp/miniconda.sh
+
+# Set PATH to include conda
+ENV PATH=/opt/conda/bin:$PATH
+
+# Copy the platform directory to the Docker image
+COPY engines/gfpgan /gfpgan
+COPY docker/DockerHelpers/engine-gfpgan-services.sh /engine-gfpgan-services.sh
+
+WORKDIR /gfpgan
+
+# clone repo
+RUN /bin/bash -c "cd /gfpgan/ && [ ! -d GFPGAN ] && git clone https://github.com/TencentARC/GFPGAN.git || echo 'GFPGAN already cloned.'"
+RUN /bin/bash -c "cd /gfpgan/GFPGAN/ && wget https://github.com/TencentARC/GFPGAN/releases/download/v1.3.0/GFPGANv1.3.pth -P experiments/pretrained_models"
+
+# Create the conda environment
+RUN conda create -y --name gfpgan python=3.10
+
+# Activate the environment and install Python packages
+RUN /bin/bash -c "source activate gfpgan && bash /gfpgan/env/install.sh"
+
+# Ensure the "gfpgan" environment is activated in every shell
+RUN echo "source /opt/conda/bin/activate gfpgan" >> ~/.bashrc
+
+# There might be some errors due to basicsr's package issues, just run the following to fix
+RUN /bin/bash -c "sed -i 's/from torchvision.transforms.functional_tensor import rgb_to_grayscale/from torchvision.transforms.functional import rgb_to_grayscale/' /opt/conda/envs/gfpgan/lib/python3.10/site-packages/basicsr/data/degradations.py"
+
+# Download needed models by running the base script
+RUN /bin/bash -c "source activate gfpgan && cd /gfpgan/GFPGAN/ && python inference_gfpgan.py -i inputs/whole_imgs -o results -v 1.3 -s 2"
+
+# Expose FastAPI application port
+EXPOSE 8000
+
+# Set the default command
+CMD ["/engine-gfpgan-services.sh", "/bin/bash"]

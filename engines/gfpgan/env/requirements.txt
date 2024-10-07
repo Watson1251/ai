@@ -1,0 +1,5 @@
+basicsr
+facexlib
+realesrgan
+flask
+gunicorn

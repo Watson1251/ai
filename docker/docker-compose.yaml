@@ -25,6 +25,7 @@ services:
         environment:
             - MONGODB_URL=mongodb://db:27017
             - FR_URL=http://fr-engine:8000/
+            - GFPGAN_URL=http://gfpgan-engine:8000/
         networks:
             - ai-platform-network
 
@@ -67,6 +68,29 @@ services:
             - NVIDIA_DRIVER_CAPABILITIES=compute,utility
         depends_on:
             - rabbitmq
+        networks:
+            - ai-platform-network
+
+    gfpgan-engine:
+        build:
+            context: ..
+            dockerfile: docker/Dockerfiles/Dockerfile.gfpgan
+        # image: gfpgan
+        shm_size: "10gb"
+        volumes:
+            - ../engines/gfpgan:/gfpgan
+            - ../db:/db
+            #- /media/developer/ai/dataset1:/dataset
+        deploy:
+            resources:
+                reservations:
+                    devices:
+                        - driver: nvidia
+                          capabilities: [gpu]
+        runtime: nvidia
+        environment:
+            - NVIDIA_VISIBLE_DEVICES=all
+            - NVIDIA_DRIVER_CAPABILITIES=compute,utility
         networks:
             - ai-platform-network
 

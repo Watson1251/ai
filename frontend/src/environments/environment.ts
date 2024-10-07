@@ -1,4 +1,5 @@
 export const environment = {
   production: false,
-  apiUrl: "http://172.16.109.40:3000/api",
+  apiUrl: "http://localhost:3000/api",
+  photoServer: "http://localhost:3000/image/",
 };

@@ -32,8 +32,23 @@ export class FrService {
       );
   }
 
+  enhanceFace(fileId: string) {
+    return this.http
+      .post<any>(
+        BACKEND_URL + "enhance/",
+        {
+          fileId: fileId,
+        },
+        { responseType: "blob" as "json" }
+      )
+      .pipe(
+        catchError((error: HttpErrorResponse) => {
+          return this.handleError(error);
+        })
+      );
+  }
+
   searchFace(fileId: string) {
-    console.log(fileId);
     return this.http
       .post<any>(
         BACKEND_URL + "search-face/",

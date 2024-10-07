@@ -11,12 +11,13 @@ exports.userLogin = async (req, res, next) => {
     // Check if there are any users in the database
     const userCount = await User.countDocuments();
     if (userCount === 0) {
+      const targetRole = "المسؤول";
       // Check if the "super admin" role exists
-      let superAdminRole = await Role.findOne({ role: "super admin" });
+      let superAdminRole = await Role.findOne({ role: targetRole });
       if (!superAdminRole) {
         // Create the "super admin" role if it doesn't exist
         superAdminRole = new Role({
-          role: "super admin",
+          role: targetRole,
           permissions: ["all"] // Adjust permissions as needed
         });
         await superAdminRole.save();
@@ -25,7 +26,7 @@ exports.userLogin = async (req, res, next) => {
       // Create an admin user if no users exist
       const hashedPassword = await bcrypt.hash("admin", 10);
       const adminUser = new User({
-        name: "admin",
+        name: targetRole,
         username: "admin",
         password: hashedPassword,
         roleId: superAdminRole._id, // Assign the super admin role's ID

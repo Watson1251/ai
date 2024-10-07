@@ -14,6 +14,7 @@ import {
   NbTooltipModule,
   NbTabsetModule,
   NbDialogModule,
+  NbSpinnerModule,
 } from "@nebular/theme";
 
 import { ThemeModule } from "../../../@theme/theme.module";
@@ -48,6 +49,7 @@ const components = [FrComponent, FrSearchComponent, CompareImagesComponent];
     NbTooltipModule,
     NbTabsetModule,
     NbDialogModule.forRoot(),
+    NbSpinnerModule,
   ],
   declarations: [...components],
 })

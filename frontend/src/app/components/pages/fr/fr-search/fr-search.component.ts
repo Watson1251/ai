@@ -1,10 +1,4 @@
-import { basename, extname } from "path";
-import {
-  ChangeDetectionStrategy,
-  Component,
-  ElementRef,
-  ViewChild,
-} from "@angular/core";
+import { Component, ElementRef, ViewChild } from "@angular/core";
 import {
   NbComponentSize,
   NbDialogService,
@@ -24,9 +18,12 @@ import { Subscription } from "rxjs";
 import { DeepfakeService } from "../../../../services/deepfake.services";
 import { FrService } from "../../../../services/fr.services";
 import { CompareImagesComponent } from "../compare-images/compare-images.component";
+import { environment } from "../../../../../environments/environment";
+
+const IS_DEV = true;
+const PHOTOSERVER_URL = environment.photoServer;
 
 interface FilePreview {
-  status: string;
   file: File;
   url: URL;
   progress: number;
@@ -64,12 +61,12 @@ interface Record {
   templateUrl: "./fr-search.component.html",
 })
 export class FrSearchComponent {
-  imageSrc: string = "assets/images/fr-icon.png";
-
   targetFixedColumnWidth = 330;
   fixedColumnWidth = 0;
 
   Helper = Helper;
+
+  isProcessing: boolean = false;
 
   private rolesSub?: Subscription;
   private usersSub?: Subscription;
@@ -204,7 +201,6 @@ export class FrSearchComponent {
           progress: 0,
           faces: [],
           selectedFace: undefined,
-          status: "",
           filsId: "",
         };
         this.filePreviews.push(preview);
@@ -237,7 +233,49 @@ export class FrSearchComponent {
   adjustSelectedFace(face: Face) {
     this.selectedFilePreview.selectedFace = face;
     this.onImageLoad(null);
-    this.searchFace(this.selectedFilePreview, this.selectedFilePreview.filsId);
+    // Wait for the face cropping process to finish before searching the face
+    this.cropSelectedFace(this.selectedFilePreview, face).then(() => {
+      this.searchFace(this.selectedFilePreview, face);
+    });
+  }
+
+  cropSelectedFace(filePreview: FilePreview, face: Face): Promise<void> {
+    return new Promise<void>((resolve) => {
+      const img = new Image();
+      img.src = filePreview.url.toString();
+
+      img.onload = () => {
+        const canvas = document.createElement("canvas");
+        const context = canvas.getContext("2d");
+
+        // Set canvas dimensions to the face's width and height
+        canvas.width = face.width;
+        canvas.height = face.height;
+
+        // Draw the cropped face onto the canvas
+        context?.drawImage(
+          img,
+          face.x,
+          face.y,
+          face.width,
+          face.height, // Source coordinates and dimensions
+          0,
+          0,
+          face.width,
+          face.height // Destination coordinates and dimensions
+        );
+
+        // Convert the canvas to a base64 URL and store it in face.url
+        const croppedImageUrl = canvas.toDataURL();
+        face.url = croppedImageUrl;
+
+        // Trigger change detection after cropping the face
+        this.onImageLoad(null);
+
+        // Resolve the promise to indicate that cropping is complete
+        resolve();
+      };
+    });
   }
 
   getFileNameAndCounter(filePath: string): { name: string; counter: number } {
@@ -264,40 +302,59 @@ export class FrSearchComponent {
     }
   }
 
-  searchFace(filePreview: FilePreview, fileId: string) {
-    filePreview.status = "جاري تحليل الملف...";
-    this.frService.searchFace(fileId).subscribe((response) => {
-      if (response.status === 200 || response.status === 201) {
-        if (response.body.results) {
-          filePreview.status = "تم تحليل الملف!";
-          const results = response.body.results;
+  searchFace(filePreview: FilePreview, face: Face) {
+    // convert the face's base64 URL to a file and give it a unique file name
+    // generate a unique string as a filename
+    const uniqueId = Date.now().toString();
+    const file = this.base64ToFile(face.url, uniqueId + "_face.jpg");
 
-          filePreview.selectedFace.results = [];
+    this.isProcessing = true;
+    this.uploadFileService.upload(file).subscribe((fileuploadData: any) => {
+      if (fileuploadData.result.id) {
+        const fileId = fileuploadData.result.id;
 
-          for (let i = 0; i < results.length; i++) {
-            const tempRecord = results[i];
+        this.frService.searchFace(fileId).subscribe((response) => {
+          if (response.status === 200 || response.status === 201) {
+            if (response.body.results) {
+              console.log("Searching...");
+              const results = response.body.results;
 
-            var _,
-              counter = this.getFileNameAndCounter(tempRecord.image_path);
-            var photoServer = "http://172.16.109.91:3000/image/";
-            const url = photoServer + tempRecord.image_id + "/" + counter;
-            const record: Record = {
-              image_id: tempRecord.image_id,
-              image_path: tempRecord.image_path,
-              nameAr: tempRecord.nameAr,
-              nameEn: tempRecord.nameEn,
-              nationality: tempRecord.nationality,
-              birthdate: tempRecord.birthdate,
-              index: tempRecord.index,
-              score: tempRecord.similarity_score,
-              isHovered: false,
-              url: url,
-            };
+              filePreview.selectedFace.results = [];
 
-            filePreview.selectedFace.results.push(record);
+              for (let i = 0; i < results.length; i++) {
+                const tempRecord = results[i];
+
+                var nameAndCounter = this.getFileNameAndCounter(
+                  tempRecord.image_path
+                );
+
+                var name = nameAndCounter.name;
+                var counter = nameAndCounter.counter;
+                var url = PHOTOSERVER_URL + tempRecord.image_id + "/" + counter;
+                if (IS_DEV) {
+                  url = this.selectedFilePreview.url.toString();
+                }
+
+                const record: Record = {
+                  image_id: tempRecord.image_id,
+                  image_path: tempRecord.image_path,
+                  nameAr: tempRecord.nameAr,
+                  nameEn: tempRecord.nameEn,
+                  nationality: tempRecord.nationality,
+                  birthdate: tempRecord.birthdate,
+                  index: tempRecord.index,
+                  score: tempRecord.similarity_score,
+                  isHovered: false,
+                  url: url,
+                };
+
+                filePreview.selectedFace.results.push(record);
+              }
+              this.showResults(filePreview);
+            }
           }
-          this.showResults(filePreview);
-        }
+          this.isProcessing = false;
+        });
       }
     });
   }
@@ -336,11 +393,13 @@ export class FrSearchComponent {
   }
 
   analyzeFiles() {
+    this.isProcessing = true;
     this.filePreviews.forEach((filePreview) => {
       if (filePreview.file) {
         this.uploadAndAnalyzeFile(filePreview);
       }
     });
+    this.isProcessing = false;
   }
 
   uploadAndAnalyzeFile(filePreview: any) {
@@ -382,11 +441,10 @@ export class FrSearchComponent {
   }
 
   extractFaces(filePreview: FilePreview, fileId: string) {
-    filePreview.status = "جاري تحليل الملف...";
-    this.frService.extractFaces(fileId).subscribe((response) => {
+    this.isProcessing = true;
+    this.frService.extractFaces(fileId).subscribe(async (response) => {
       if (response.status === 200 || response.status === 201) {
         if (response.body.result) {
-          filePreview.status = "تم تحليل الملف!";
           const faces = response.body.result;
 
           if (faces.length > 0) {
@@ -409,27 +467,137 @@ export class FrSearchComponent {
             }
 
             // Now that faces have been detected, crop them
-            this.cropFaces(filePreview);
+            await this.cropFaces(filePreview);
 
-            // first face is to be set as selected face
+            // First face is to be set as selected face
             filePreview.selectedFace = filePreview.faces[0];
 
-            this.searchFace(filePreview, fileId);
+            // After cropping all faces, start searching the first face
+            this.searchFace(filePreview, filePreview.selectedFace);
           } else {
-            // remove image preview if no faces detected
+            // Remove image preview if no faces detected
             this.onRemove(filePreview);
             this.snackbarService.openSnackBar(
               "لم يتم العثور على وجوه في الصورة: " + filePreview.file.name,
               "failure"
             );
           }
-          // this.onFileAnalyzed(filePreview, response.body.result);
+
+          this.isProcessing = false;
         }
       }
     });
   }
 
-  // Draws the image and rectangles once the image is loaded
+  cropFaces(filePreview: FilePreview): Promise<void> {
+    const img = new Image();
+    img.src = filePreview.url.toString();
+
+    return new Promise<void>((resolve) => {
+      img.onload = () => {
+        filePreview.faces.forEach((face) => {
+          const canvas = document.createElement("canvas");
+          const context = canvas.getContext("2d");
+
+          // Set canvas dimensions to the face's width and height
+          canvas.width = face.width;
+          canvas.height = face.height;
+
+          // Draw the cropped face onto the canvas
+          context?.drawImage(
+            img,
+            face.x,
+            face.y,
+            face.width,
+            face.height, // Source coordinates and dimensions
+            0,
+            0,
+            face.width,
+            face.height // Destination coordinates and dimensions
+          );
+
+          // Convert the canvas to a base64 URL and store it in face.url
+          const croppedImageUrl = canvas.toDataURL();
+          face.url = croppedImageUrl;
+
+          // Trigger change detection after each face is cropped
+          this.onImageLoad(null);
+        });
+
+        // Final change detection to ensure the view is updated after all faces are cropped
+        this.onImageLoad(null);
+        resolve(); // Resolve when all faces are cropped
+      };
+    });
+  }
+
+  enhanceImage(face: Face) {
+    const uniqueId = Date.now().toString();
+    const file = this.base64ToFile(face.url, uniqueId + "_face.jpg");
+
+    this.isProcessing = true;
+    this.uploadFileService.upload(file).subscribe((fileuploadData: any) => {
+      if (fileuploadData.result.id) {
+        this.frService
+          .enhanceFace(fileuploadData.result.id)
+          .subscribe((imageBlob) => {
+            const reader = new FileReader();
+            reader.onloadend = () => {
+              face.url = reader.result as string;
+
+              this.isProcessing = false;
+
+              this.searchFace(this.selectedFilePreview, face);
+            };
+            reader.readAsDataURL(imageBlob);
+          });
+      }
+    });
+  }
+
+  base64ToFile(base64Data: string, fileName: string): File | null {
+    if (
+      !base64Data ||
+      typeof base64Data !== "string" ||
+      !base64Data.includes(",")
+    ) {
+      console.error("Invalid base64Data:", base64Data);
+      return null; // Handle invalid base64 input gracefully
+    }
+
+    // Split the base64 string to remove the metadata
+    const arr = base64Data.split(",");
+
+    // Ensure there is valid data after the comma
+    if (arr.length < 2) {
+      console.error("Invalid base64 data:", base64Data);
+      return null;
+    }
+
+    // Extract the MIME type and base64-encoded string
+    const mimeTypeMatch = arr[0].match(/:(.*?);/);
+    const base64String = arr[1];
+
+    // Ensure mimeType is correctly matched
+    if (!mimeTypeMatch || mimeTypeMatch.length < 2) {
+      console.error("Invalid MIME type in base64Data:", base64Data);
+      return null;
+    }
+
+    const mimeType = mimeTypeMatch[1]; // Get the MIME type
+    const bstr = atob(base64String); // Decode Base64 into a binary string
+    let n = bstr.length;
+    const u8arr = new Uint8Array(n);
+
+    // Convert the binary string into a byte array
+    while (n--) {
+      u8arr[n] = bstr.charCodeAt(n);
+    }
+
+    // Create a File from the byte array
+    return new File([u8arr], fileName, { type: mimeType });
+  }
+
   onImageLoad(event: Event): void {
     const image = this.imageElement.nativeElement;
     const canvas = this.canvasElement.nativeElement;
@@ -464,45 +632,6 @@ export class FrSearchComponent {
         context.stroke();
       });
     }
-  }
-
-  cropFaces(filePreview: FilePreview) {
-    const img = new Image();
-    img.src = filePreview.url.toString();
-
-    img.onload = () => {
-      filePreview.faces.forEach((face) => {
-        const canvas = document.createElement("canvas");
-        const context = canvas.getContext("2d");
-
-        // Set canvas dimensions to the face's width and height
-        canvas.width = face.width;
-        canvas.height = face.height;
-
-        // Draw the cropped face onto the canvas
-        context?.drawImage(
-          img,
-          face.x,
-          face.y,
-          face.width,
-          face.height, // Source coordinates and dimensions
-          0,
-          0,
-          face.width,
-          face.height // Destination coordinates and dimensions
-        );
-
-        // Convert the canvas to a base64 URL and store it in face.url
-        const croppedImageUrl = canvas.toDataURL();
-        face.url = croppedImageUrl;
-
-        // Trigger change detection after each face is cropped
-        this.onImageLoad(null);
-      });
-
-      // Final change detection to ensure the view is updated after all faces are cropped
-      this.onImageLoad(null);
-    };
   }
 
   clearFiles() {

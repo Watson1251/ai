@@ -1,3 +1,8 @@
+<!-- Spinner overlay -->
+<div class="overlay" *ngIf="isProcessing">
+  <nb-spinner [status]="'info'" [size]="'giant'" [message]="''"></nb-spinner>
+</div>
+
 <!-- Dragging effect -->
 <div *ngIf="!isAnalyzing" [ngClass]="{ 'page-drag-over': isDragOver }"></div>
 
@@ -22,21 +27,18 @@
         "
       >
         <span>تجربة جديدة</span>
-
         <nb-actions *ngIf="showImagePreview">
           <nb-action
             nbRipple
             class="hover-action"
-            nbTooltip="إضافة "
+            nbTooltip="إضافة"
             nbTooltipPlacement="top"
           >
             <nb-icon icon="star-outline" pack="eva"></nb-icon>
           </nb-action>
-
           <nb-action nbRipple class="hover-action">
             <nb-icon icon="settings-outline" pack="eva"></nb-icon>
           </nb-action>
-
           <nb-action
             nbRipple
             class="hover-action"
@@ -75,19 +77,16 @@
                 style="width: auto; max-height: 300px; display: block"
                 (load)="onImageLoad($event)"
               />
-
               <!-- Canvas overlay for rectangles -->
               <canvas
                 #canvasElement
                 style="position: absolute; top: 0; left: 0"
               ></canvas>
             </div>
-
             <!-- Image Label -->
             <ngx-dropzone-label *ngIf="showImagePreview" class="upload-label">{{
               selectedFilePreview.file.name
             }}</ngx-dropzone-label>
-
             <!-- Progress Bar -->
             <div class="progress-bar" *ngIf="showImagePreview">
               <div
@@ -174,27 +173,25 @@
       size="small"
       class="face-card"
       (click)="openDialog(record)"
+      (mouseenter)="record.isHovered = true"
+      (mouseleave)="record.isHovered = false"
     >
-      <div
-        style="display: flex; justify-content: center; align-items: center"
-        (mouseenter)="record.isHovered = true"
-        (mouseleave)="record.isHovered = false"
-      >
+      <div class="image-container">
         <img [src]="record.url" alt="Cropped Face Image" class="face-image" />
       </div>
       <div class="face-info">
-        <span>{{ record.score | number : "1.2-2" }}%</span>
-        <span>({{ record.image_id }})</span>
-        <span
-          >{{ record.index }}.
+        <span>{{ Helper.enToAr(record.score | number : "1.2-2") }}%</span>
+        <span>({{ Helper.enToAr(record.image_id) }})</span>
+        <span style="font-weight: bold">
+          {{ Helper.enToAr(record.index) }}.
           {{
             record.nameAr
               ? record.nameAr
               : record.nameEn
               ? record.nameEn
               : "بدون اسم"
-          }}
-        </span>
+          }}</span
+        >
         <span
           [ngClass]="{ visible: record.isHovered, hidden: !record.isHovered }"
           class="hidden-info"
@@ -223,13 +220,29 @@
     "
   >
     <nb-card-header
-      >الوجه محل البحث
-      {{
-        selectedFilePreview.faces.length > 1
-          ? "(" + selectedFilePreview.selectedFace.name + ")"
-          : ""
-      }}</nb-card-header
+      style="display: flex; justify-content: space-between; align-items: center"
     >
+      <span
+        >الوجه محل البحث
+        {{
+          selectedFilePreview.faces.length > 1
+            ? "(" + selectedFilePreview.selectedFace.name + ")"
+            : ""
+        }}</span
+      >
+      <nb-actions>
+        <nb-action
+          nbRipple
+          class="hover-action"
+          nbTooltip="تحسين الصورة"
+          nbTooltipPlacement="top"
+          style="padding: 0px"
+          (click)="enhanceImage(selectedFilePreview.selectedFace)"
+        >
+          <nb-icon icon="bulb-outline" pack="eva"></nb-icon>
+        </nb-action>
+      </nb-actions>
+    </nb-card-header>
     <nb-card-body
       style="display: flex; justify-content: center; align-items: center"
     >
