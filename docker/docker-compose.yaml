@@ -55,6 +55,7 @@ services:
         volumes:
             - ../engines/fr:/fr
             - ../db:/db
+            - /media/developer/ai/results:/dataset
             #- /media/developer/ai/dataset1:/dataset
         deploy:
             resources:

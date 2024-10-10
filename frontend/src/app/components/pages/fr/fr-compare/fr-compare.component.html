@@ -1,0 +1,109 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-5" style="background-color: transparent">
+      <nb-card>
+        <nb-card-header
+          style="overflow-x: auto; white-space: nowrap; max-height: 120px"
+        >
+          <span *ngIf="filePreviews.length == 0">الوجه محل البحث</span>
+
+          <nb-actions
+            style="width: 100%; justify-content: space-between"
+            size="large"
+            fullWidth
+          >
+            <nb-action
+              matRipple
+              *ngFor="let f of filePreviews"
+              (click)="selectFilePreview(f)"
+            >
+              <img
+                [src]="f.url"
+                alt="Thumbnail"
+                style="
+                  width: auto;
+                  max-height: 100px;
+                  object-fit: cover;
+                  padding: 10px;
+                "
+              />
+            </nb-action>
+          </nb-actions>
+        </nb-card-header>
+        <nb-card-body>
+          <!-- Show when no images are uploaded -->
+          <ngx-dropzone
+            (change)="addingFiles($event.addedFiles)"
+            class="upload-zone"
+            [expandable]="true"
+            accept="image/*"
+          >
+            <ngx-dropzone-label *ngIf="!showImagePreview"
+              >اسحب الملف أو انقر هُنا</ngx-dropzone-label
+            >
+
+            <div class="upload-video-container">
+              <!-- Image -->
+              <img
+                *ngIf="showImagePreview"
+                #imageElement
+                [src]="getSelectedImage()"
+                class="upload-image"
+                alt="Preview Image"
+              />
+              <!-- <canvas #canvasElement style="position: absolute"></canvas> -->
+            </div>
+          </ngx-dropzone>
+          <!-- Display the selected face -->
+          <!-- <img
+            [src]="'assets/images/alan.png'"
+            alt="Clicked Face"
+            style="width: 100%; height: auto"
+          /> -->
+        </nb-card-body>
+
+        <nb-card-footer
+          style="overflow-x: auto; white-space: nowrap; max-height: 120px"
+        >
+          <nb-actions size="large" fullWidth>
+            <nb-action
+              matRipple
+              *ngFor="let f of selectedFaces"
+              (click)="selectFilePreview(f)"
+            >
+              <img
+                [src]="f.url"
+                alt="Thumbnail"
+                style="
+                  width: auto;
+                  max-height: 100px;
+                  object-fit: cover;
+                  padding: 10px;
+                "
+              />
+            </nb-action>
+          </nb-actions>
+        </nb-card-footer>
+      </nb-card>
+    </div>
+
+    <div class="col-md-5" style="background-color: transparent; max-width: 50%">
+      <nb-card>
+        <nb-card-header>الوجه محل المقارنة</nb-card-header>
+        <nb-card-body>
+          <!-- Display the selected face -->
+          <img
+            [src]="'assets/images/alan.png'"
+            alt="Clicked Face"
+            style="width: 100%; height: auto"
+          />
+        </nb-card-body>
+      </nb-card>
+    </div>
+
+    <div
+      class="col-md-2"
+      style="background-color: transparent; max-width: 33.33%"
+    ></div>
+  </div>
+</div>

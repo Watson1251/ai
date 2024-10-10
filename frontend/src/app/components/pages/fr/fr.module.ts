@@ -26,8 +26,14 @@ import { NgxDropzoneModule } from "ngx-dropzone";
 import { AngularMaterialModule } from "../../../angular-material.module";
 import { PaginatorModule } from "../../shared/paginator/paginator.module";
 import { CompareImagesComponent } from "./compare-images/compare-images.component";
+import { FrCompareComponent } from "./fr-compare/fr-compare.component";
 
-const components = [FrComponent, FrSearchComponent, CompareImagesComponent];
+const components = [
+  FrComponent,
+  FrSearchComponent,
+  FrCompareComponent,
+  CompareImagesComponent,
+];
 
 @NgModule({
   imports: [

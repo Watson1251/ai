@@ -1,0 +1,194 @@
+@import '../../../../@theme/styles/themes';
+@import '@nebular/theme/styles/global/breakpoints';
+@import 'bootstrap/scss/mixins/breakpoints';
+
+@include nb-install-component() {
+
+  .container-fluid {
+    height: 80vh;
+  }
+
+  .row {
+    height: 100%;
+    display: flex;
+  }
+
+  nb-card {
+    width: 100%;
+    max-width: 100%; /* Ensure nb-card doesn't exceed its container */
+    height: 100%;
+  }   
+
+  nb-card-header, ngx-dropzone-label {
+    font-family: var(--arabic-font);
+  }
+
+  nb-card-body {
+    display: flex;
+  }
+
+  nb-card-header {
+    display: flex;
+    align-items: center;
+    padding-top: 0.625rem;
+    padding-bottom: 0.625rem;
+  }
+
+  .upload-zone {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+  }
+
+  .upload-video-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+  }
+
+  .upload-image {
+    // max-width: 90%;
+    max-height: 80%;
+    // display: block;
+  }
+  
+  .upload-video-preview {
+    margin-bottom: 5px;
+  }
+
+  .canvas-overlay {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 100%;
+    max-width: 100%;
+  }
+
+  .upload-label {
+    text-align: center;
+    font-size: small;
+    margin: 0;
+    direction: ltr;
+  }
+  
+
+  .header-button {
+    .nb-square {
+      font-size: 1rem;
+    }
+
+    @include nb-ltr {
+      margin-left: auto;
+      border-top-right-radius: 0;
+      border-bottom-right-radius: 0;
+    }
+    @include nb-rtl {
+      margin-right: auto;
+      border-top-left-radius: 0;
+      border-bottom-left-radius: 0;
+    }
+  }
+
+  nb-action {
+    cursor: pointer;
+    border-radius: 2px;
+
+    nb-icon {
+      @include nb-ltr(margin-right, 0.5rem);
+      @include nb-rtl(margin-left, 0.5rem);
+    }
+
+    ::ng-deep svg {
+      vertical-align: top;
+    }
+  }
+
+  .preview-card {
+    transform: translate3d(0, 0, 0);
+  }
+
+  .mat-icon {
+    font-size: 20px !important;
+    width: 20px;
+    height: 20px;
+  }
+
+  .mat-mdc-icon-button.mat-mdc-button-base {
+    top: 5px;
+  }
+
+  .mat-mdc-fab.mat-accent,
+  .mat-mdc-mini-fab.mat-accent {
+    --mdc-fab-container-color: var(--main-color);
+    --mdc-fab-icon-color: #fff;
+    --mat-mdc-fab-color: #fff;
+    font-family: var(--arabic-font);
+  }
+
+  .add-button {
+    color: green;
+  }
+
+  .edit-button {
+    color: blue;
+  }
+
+  .delete-button {
+    color: red;
+  }
+
+  .search-field {
+    width: 100%;
+  }
+
+  .no-items-container {
+    display: grid;
+    justify-content: center;
+    align-content: center;
+  }
+
+  .no-items-label {
+    color: grey;
+    font-family: var(--arabic-font);
+    margin-bottom: 20px;
+  }
+
+  th {
+    font-family: var(--arabic-font);
+    font-weight: bold;
+  }
+
+  td {
+    padding-bottom: 20px;
+  }
+
+  td,
+  mat-label,
+  mat-paginator {
+    font-family: var(--arabic-font);
+  }
+
+  .mat-mdc-checkbox.mat-accent {
+    --mdc-checkbox-selected-focus-icon-color: var(--main-color);
+    --mdc-checkbox-selected-hover-icon-color: var(--main-color);
+    --mdc-checkbox-selected-icon-color: var(--main-color);
+    --mdc-checkbox-selected-pressed-icon-color: var(--main-color);
+  }
+
+  .mat-column-select {
+    width: 80px;
+    max-width: 80px;
+  }
+}
+
+@include media-breakpoint-down(xl) {
+  nb-action {
+    padding: 0;
+  }
+}

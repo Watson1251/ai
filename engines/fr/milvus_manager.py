@@ -1,7 +1,7 @@
 from pymilvus import connections, FieldSchema, CollectionSchema, DataType, Collection, utility
 
 class MilvusData:
-    def __init__(self, person_id, image_path, tag, embedding, facial_area, nameAr, nameEn, nationality, birthdate):
+    def __init__(self, person_id, image_path, embedding, facial_area, nameAr, nameEn, nationality, birthdate):
         """
         Class representing the structure of a single data record for Milvus.
         """
@@ -12,7 +12,7 @@ class MilvusData:
         self.nameAr = nameAr
         self.nameEn = nameEn
         self.nationality = nationality
-        self.birthdate = birthdate
+        self.birthdate = birthdate  # Now an int64 representing Unix timestamp
 
 class MilvusManager:
     def __init__(self, host="standalone", port="19530", collection_name="faces", model_dim=512, index_params=None, search_params=None):
@@ -34,7 +34,7 @@ class MilvusManager:
             FieldSchema(name="nameAr", dtype=DataType.VARCHAR, max_length=100),
             FieldSchema(name="nameEn", dtype=DataType.VARCHAR, max_length=100),
             FieldSchema(name="nationality", dtype=DataType.VARCHAR, max_length=100),
-            FieldSchema(name="birthdate", dtype=DataType.VARCHAR, max_length=100),
+            FieldSchema(name="birthdate", dtype=DataType.INT64),  # Store birthdate as Unix timestamp
         ]
 
         # Connect to Milvus and create or load the collection
@@ -76,7 +76,7 @@ class MilvusManager:
             [record.nameAr for record in records],      # name in Arabic
             [record.nameEn for record in records],      # name in English
             [record.nationality for record in records], # nationality
-            [record.birthdate for record in records],   # birthdate
+            [record.birthdate for record in records],   # birthdate (Unix timestamp)
         ]
         
         # Insert the records into the collection
