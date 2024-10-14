@@ -52,7 +52,7 @@ RUN conda create -y --name fr python=3.10
 RUN /bin/bash -c "source activate fr && bash /fr/env/install.sh"
 
 # Download all deepface's models
-# RUN /bin/bash -c "source activate fr && python env/download.py"
+RUN /bin/bash -c "source activate fr && python env/download.py"
 
 # Ensure the "fr" environment is activated in every shell
 RUN echo "source /opt/conda/bin/activate fr" >> ~/.bashrc

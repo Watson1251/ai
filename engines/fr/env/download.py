@@ -1,6 +1,9 @@
 import os
 from deepface import DeepFace
 
+# Set environment variable to specify the DeepFace model home
+os.environ['DEEPFACE_HOME'] = "/fr/models"  # You can adjust this path if necessary
+
 # List of all available models in DeepFace
 fr_models = [
     "VGG-Face", 
